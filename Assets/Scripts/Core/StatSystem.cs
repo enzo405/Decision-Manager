@@ -28,7 +28,8 @@ public class StatSystem : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject); return;
+            Destroy(gameObject);
+            return;
         }
         Instance = this;
     }
