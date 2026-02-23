@@ -40,25 +40,37 @@ public class GameManager : MonoBehaviour
         var defeat = StatSystem.Instance.CheckDefeatConditions();
         if (defeat != DefeatReason.None)
         {
-            EndGame(false, defeat);
+            PreloadEndGame(false, defeat);
             return;
         }
 
         if (CurrentWeek >= totalWeeks)
         {
-            EndGame(true, DefeatReason.None);
+            PreloadEndGame(true, DefeatReason.None);
         }
     }
 
     public void OnNextTurn()
     {
+        if (IsGameOver)
+        {
+            EndGame();
+            return;
+        }
+
         CurrentWeek++;
         StartTurn();
     }
 
-    private void EndGame(bool isVictory, DefeatReason reason)
+    private void PreloadEndGame(bool isVictory, DefeatReason reason)
     {
         IsGameOver = true;
-        OnGameEnded?.Invoke(isVictory, reason);
+        GameOverData.IsVictory = isVictory;
+        GameOverData.Reason = reason;
+    }
+
+    private void EndGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
     }
 }

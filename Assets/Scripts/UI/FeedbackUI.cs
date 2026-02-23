@@ -54,6 +54,11 @@ public class FeedbackUI : MonoBehaviour
 
         // Continue button closes popup and triggers next turn
         continueButton.onClick.RemoveAllListeners();
+
+        if (GameManager.Instance.IsGameOver)
+        {
+            continueButton.GetComponentInChildren<TextMeshProUGUI>().text = "Terminer partie";
+        }
         continueButton.onClick.AddListener(() =>
         {
             gameObject.SetActive(false);
