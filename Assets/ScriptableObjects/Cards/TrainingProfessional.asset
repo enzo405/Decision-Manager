@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
+  m_Name: TrainingProfessional
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: Formation professionnelle
+  description: "Proposer une formation pour d\xE9velopper les comp\xE9tences de l'\xE9quipe."
+  requiredLevel: 1
+  successProbability: 0.7
+  motivationEffect: 5
+  stressEffect: 3
+  performanceEffect: 8
+  turnoverEffect: -4
+  motivationEffectOnFailure: -2
+  stressEffectOnFailure: 6
+  performanceEffectOnFailure: 1
+  turnoverEffectOnFailure: 0
+  riskLevel: 1
+  successMessage: "La formation a \xE9t\xE9 bien accueillie. Les comp\xE9tences progressent
+    et l'\xE9quipe se sent valoris\xE9e."
+  failureMessage: "La formation est arriv\xE9e au mauvais moment. L'\xE9quipe d\xE9j\xE0
+    stress\xE9e l'a v\xE9cu comme une charge suppl\xE9mentaire."
