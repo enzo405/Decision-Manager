@@ -54,7 +54,11 @@ public class FeedbackUI : MonoBehaviour
 
         // Continue button closes popup and triggers next turn
         continueButton.onClick.RemoveAllListeners();
-        continueButton.onClick.AddListener(() => gameObject.SetActive(false));
+        continueButton.onClick.AddListener(() =>
+        {
+            gameObject.SetActive(false);
+            GameManager.Instance.OnNextTurn();
+        });
     }
 
     private string Signed(int val) => val >= 0 ? $"+{val}" : $"{val}";

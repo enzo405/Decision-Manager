@@ -47,9 +47,11 @@ public class GameManager : MonoBehaviour
         if (CurrentWeek >= totalWeeks)
         {
             EndGame(true, DefeatReason.None);
-            return;
         }
+    }
 
+    public void OnNextTurn()
+    {
         CurrentWeek++;
         StartTurn();
     }
