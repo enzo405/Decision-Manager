@@ -24,7 +24,7 @@ public class StatSystem : MonoBehaviour
     public int maxTurnover = 80;
     public int minPerformance = 15;
 
-    void Awake()
+    public void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -32,9 +32,10 @@ public class StatSystem : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+    public void Start()
     {
         Motivation = initialMotivation;
         Stress = initialStress;
@@ -56,6 +57,15 @@ public class StatSystem : MonoBehaviour
         OnStatsChanged?.Invoke();
     }
 
+
+    public DefeatReason CheckDefeatConditions()
+    {
+        if (Stress >= maxStress) return DefeatReason.Burnout;
+        if (Turnover >= maxTurnover) return DefeatReason.MassiveDepartures;
+        if (Performance <= minPerformance) return DefeatReason.PoorPerformance;
+        return DefeatReason.None;
+    }
+
     private void ApplyInterdependencies()
     {
         // High stress slowly degrades motivation
@@ -65,14 +75,6 @@ public class StatSystem : MonoBehaviour
         // High stress increases turnover risk
         if (Stress > 80)
             Turnover = Mathf.Clamp(Turnover + 3, 0, 100);
-    }
-
-    public DefeatReason CheckDefeatConditions()
-    {
-        if (Stress >= maxStress) return DefeatReason.Burnout;
-        if (Turnover >= maxTurnover) return DefeatReason.MassiveDepartures;
-        if (Performance <= minPerformance) return DefeatReason.PoorPerformance;
-        return DefeatReason.None;
     }
 }
 
