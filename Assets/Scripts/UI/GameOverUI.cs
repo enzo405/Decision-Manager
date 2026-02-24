@@ -10,7 +10,7 @@ public class GameOverUI : MonoBehaviour
     public TextMeshProUGUI statsText;
     public Button replayButton;
 
-    void Start()
+    public void Start()
     {
         // Récupère les données passées depuis GameManager
         bool isVictory = GameOverData.IsVictory;
@@ -26,6 +26,11 @@ public class GameOverUI : MonoBehaviour
             _ => "Tu as maintenu l'équilibre sur 12 semaines. Bien joué !"
         };
 
-        replayButton.onClick.AddListener(() => SceneManager.LoadScene("MainGame"));
+        replayButton.onClick.AddListener(() =>
+        {
+            StatSystem.Instance.Start();
+            SceneManager.LoadScene("MainGame");
+        }
+    );
     }
 }

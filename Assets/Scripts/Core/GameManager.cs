@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver { get; private set; } = false;
 
     public event Action OnTurnStarted;
-    public event Action<bool, DefeatReason> OnGameEnded; // bool = isVictory
 
     void Awake()
     {
@@ -22,6 +21,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -69,8 +69,10 @@ public class GameManager : MonoBehaviour
         GameOverData.Reason = reason;
     }
 
-    private void EndGame()
+    private static void EndGame()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+        Instance.CurrentWeek = 1;
+        Instance.IsGameOver = false;
     }
 }
