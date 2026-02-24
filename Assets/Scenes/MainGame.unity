@@ -3253,11 +3253,16 @@ MonoBehaviour:
     effectsText: {fileID: 1798891669}
     cardButton: {fileID: 1937883720}
   availableCards:
-  - {fileID: 11400000, guid: 9a6448f426fc07d4dadfebbeee379c7a, type: 2}
-  - {fileID: 11400000, guid: e020a0bbfd6d8234789ca4e365527c72, type: 2}
-  - {fileID: 11400000, guid: 12e8ddc527175524aab2f340992b7563, type: 2}
+  - {fileID: 11400000, guid: 48748efd494c7324aa41fc7cc1e902a1, type: 2}
   - {fileID: 11400000, guid: 0158796becd3bb84993e512da07f3dd0, type: 2}
+  - {fileID: 11400000, guid: cf88664b5d25e2745ab53d7d0b0fafb3, type: 2}
   - {fileID: 11400000, guid: c07a9ac79eb530e4bbd750011ed6aafe, type: 2}
+  - {fileID: 11400000, guid: 9a6448f426fc07d4dadfebbeee379c7a, type: 2}
+  - {fileID: 11400000, guid: 942912fe55d28b542a67998c4d01fe7e, type: 2}
+  - {fileID: 11400000, guid: db5f17b00ec5637438689ea8de98057e, type: 2}
+  - {fileID: 11400000, guid: e020a0bbfd6d8234789ca4e365527c72, type: 2}
+  - {fileID: 11400000, guid: 067b35afa5db3e044b61719718748c7a, type: 2}
+  - {fileID: 11400000, guid: 12e8ddc527175524aab2f340992b7563, type: 2}
 --- !u!1 &1435361556
 GameObject:
   m_ObjectHideFlags: 0
