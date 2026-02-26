@@ -23,20 +23,20 @@ public class MainMenuUI : MonoBehaviour
         quitButton.onClick.AddListener(() => Application.Quit());
 
         howToPlayText.text =
-            "<b>🎯 Objectif</b>\n" +
+            "Objectif\n" +
             "Maintenir l'équilibre de ton équipe sur 12 semaines.\n\n" +
-            "<b>📊 Les 4 stats</b>\n" +
+            "Les 4 stats\n" +
             "• Motivation — l'engagement de l'équipe\n" +
             "• Stress — la pression ressentie\n" +
             "• Performance — la productivité\n" +
             "• Turnover — le risque de départs\n\n" +
-            "<b>🃏 Les cartes</b>\n" +
+            "Les cartes\n" +
             "Chaque tour, choisis une carte parmi 3.\n" +
             "Chaque carte a une probabilité de succès.\n" +
             "Le hasard simule l'imprévisibilité du monde professionnel.\n\n" +
-            "<b>🏆 Victoire</b>\n" +
+            "Victoire\n" +
             "Survivre 12 semaines sans burn-out ni départs massifs.\n\n" +
-            "<b>💀 Défaite</b>\n" +
+            "Défaite\n" +
             "Stress trop élevé, trop de départs, ou performance effondrée.";
 
         howToPlayPanel.SetActive(false);

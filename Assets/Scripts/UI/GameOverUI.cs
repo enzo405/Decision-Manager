@@ -26,11 +26,6 @@ public class GameOverUI : MonoBehaviour
             _ => "Tu as maintenu l'équilibre sur 12 semaines. Bien joué !"
         };
 
-        replayButton.onClick.AddListener(() =>
-        {
-            StatSystem.Instance.Start();
-            SceneManager.LoadScene("MainGame");
-        }
-    );
+        replayButton.onClick.AddListener(() => GameManager.Instance.ResetGame());
     }
 }

@@ -40,6 +40,14 @@ public class CardManager : MonoBehaviour
         }
 
         StatSystem.Instance.ApplyEffects(motiv, stress, perf, turnover);
+        GameHistoryData.Record(
+            card.cardName, success,
+            motiv, stress, perf, turnover,
+            StatSystem.Instance.Motivation,
+            StatSystem.Instance.Stress,
+            StatSystem.Instance.Performance,
+            StatSystem.Instance.Turnover
+        );
         OnCardResolved?.Invoke(card, success, motiv, stress, perf, turnover);
         GameManager.Instance.OnCardPlayed();
     }
