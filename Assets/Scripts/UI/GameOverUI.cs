@@ -16,7 +16,7 @@ public class GameOverUI : MonoBehaviour
         bool isVictory = GameOverData.IsVictory;
         DefeatReason reason = GameOverData.Reason;
 
-        titleText.text = isVictory ? "🏆 Victoire !" : "💀 Défaite";
+        titleText.text = isVictory ? "Victoire !" : "Défaite";
 
         reasonText.text = reason switch
         {
