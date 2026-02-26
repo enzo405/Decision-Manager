@@ -48,7 +48,8 @@ public class CardManager : MonoBehaviour
             StatSystem.Instance.Performance,
             StatSystem.Instance.Turnover
         );
-        OnCardResolved?.Invoke(card, success, motiv, stress, perf, turnover);
+
         GameManager.Instance.OnCardPlayed();
+        OnCardResolved?.Invoke(card, success, motiv, stress, perf, turnover);
     }
 }

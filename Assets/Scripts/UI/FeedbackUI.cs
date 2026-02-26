@@ -61,8 +61,15 @@ public class FeedbackUI : MonoBehaviour
         }
         continueButton.onClick.AddListener(() =>
         {
-            gameObject.SetActive(false);
-            GameManager.Instance.OnNextTurn();
+            if (GameManager.Instance.IsGameOver)
+            {
+                GameManager.EndGame();
+            }
+            else
+            {
+                gameObject.SetActive(false);
+                GameManager.Instance.OnNextTurn();
+            }
         });
     }
 

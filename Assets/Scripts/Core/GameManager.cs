@@ -53,14 +53,11 @@ public class GameManager : MonoBehaviour
 
     public void OnNextTurn()
     {
-        if (IsGameOver)
+        if (!IsGameOver)
         {
-            EndGame();
-            return;
+            CurrentWeek++;
+            StartTurn();
         }
-
-        CurrentWeek++;
-        StartTurn();
     }
 
     public void ResetGame()
@@ -71,16 +68,17 @@ public class GameManager : MonoBehaviour
         StatSystem.Instance.Start();
         SceneManager.LoadScene("MainGame");
     }
+    public static void EndGame()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
 
     private void PreloadEndGame(bool isVictory, DefeatReason reason)
     {
+        Debug.Log("Preloading end game. Victory: " + isVictory + ", Reason: " + reason);
         IsGameOver = true;
         GameOverData.IsVictory = isVictory;
         GameOverData.Reason = reason;
     }
 
-    private static void EndGame()
-    {
-        SceneManager.LoadScene("GameOver");
-    }
 }
