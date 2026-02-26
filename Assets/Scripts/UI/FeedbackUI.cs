@@ -41,7 +41,7 @@ public class FeedbackUI : MonoBehaviour
         gameObject.SetActive(true);
 
         // Success or failure title
-        resultText.text = wasSuccess ? "✔ Succès" : "⚠ Échec";
+        resultText.text = wasSuccess ? "Succès" : "Échec";
 
         // The explanatory message from the card
         messageText.text = wasSuccess ? card.successMessage : card.failureMessage;
@@ -61,8 +61,15 @@ public class FeedbackUI : MonoBehaviour
         }
         continueButton.onClick.AddListener(() =>
         {
-            gameObject.SetActive(false);
-            GameManager.Instance.OnNextTurn();
+            if (GameManager.Instance.IsGameOver)
+            {
+                GameManager.EndGame();
+            }
+            else
+            {
+                gameObject.SetActive(false);
+                GameManager.Instance.OnNextTurn();
+            }
         });
     }
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,27 +53,32 @@ public class GameManager : MonoBehaviour
 
     public void OnNextTurn()
     {
-        if (IsGameOver)
+        if (!IsGameOver)
         {
-            EndGame();
-            return;
+            CurrentWeek++;
+            StartTurn();
         }
+    }
 
-        CurrentWeek++;
-        StartTurn();
+    public void ResetGame()
+    {
+        CurrentWeek = 1;
+        IsGameOver = false;
+        GameHistoryData.Clear();
+        StatSystem.Instance.Start();
+        SceneManager.LoadScene("MainGame");
+    }
+    public static void EndGame()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 
     private void PreloadEndGame(bool isVictory, DefeatReason reason)
     {
+        Debug.Log("Preloading end game. Victory: " + isVictory + ", Reason: " + reason);
         IsGameOver = true;
         GameOverData.IsVictory = isVictory;
         GameOverData.Reason = reason;
     }
 
-    private static void EndGame()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
-        Instance.CurrentWeek = 1;
-        Instance.IsGameOver = false;
-    }
 }
