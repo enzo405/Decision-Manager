@@ -8,9 +8,14 @@ public class PlayerProgressionSystem : MonoBehaviour
     // XP Settings
     private const int XP_PER_TURN = 50;
     private const int XP_BONUS_GOOD_DECISION = 25;
-
-    // Level thresholds
-    private static readonly int[] XP_THRESHOLDS = { 0, 3000, 7000, 12000 };
+    private const int MAX_LEVEL = 20;
+    private const int BASE_XP = 1000;
+    private const float EXPONENT = 1.5f;
+    private int XPThreshold(int level)
+    {
+        if (level <= 1) return 0;
+        return Mathf.RoundToInt(BASE_XP * Mathf.Pow(level - 1, EXPONENT));
+    }
 
     public int CurrentXP { get; private set; }
     public int CurrentLevel { get; private set; }
@@ -40,11 +45,11 @@ public class PlayerProgressionSystem : MonoBehaviour
 
     private void CheckLevelUp()
     {
-        for (int i = XP_THRESHOLDS.Length - 1; i >= 0; i--)
+        for (int i = MAX_LEVEL; i >= 1; i--)
         {
-            if (CurrentXP >= XP_THRESHOLDS[i])
+            if (CurrentXP >= XPThreshold(i))
             {
-                CurrentLevel = i + 1;
+                CurrentLevel = i;
                 break;
             }
         }
@@ -52,15 +57,15 @@ public class PlayerProgressionSystem : MonoBehaviour
 
     public int XPForNextLevel()
     {
-        if (CurrentLevel >= XP_THRESHOLDS.Length) return -1; // max level
-        return XP_THRESHOLDS[CurrentLevel] - CurrentXP;
+        if (CurrentLevel >= MAX_LEVEL) return -1;
+        return XPThreshold(CurrentLevel + 1) - CurrentXP;
     }
 
     public float XPProgress()
     {
-        if (CurrentLevel >= XP_THRESHOLDS.Length) return 1f;
-        int levelStart = XP_THRESHOLDS[CurrentLevel - 1];
-        int levelEnd = XP_THRESHOLDS[CurrentLevel];
+        if (CurrentLevel >= MAX_LEVEL) return 1f;
+        int levelStart = XPThreshold(CurrentLevel);
+        int levelEnd = XPThreshold(CurrentLevel + 1);
         return (float)(CurrentXP - levelStart) / (levelEnd - levelStart);
     }
 
@@ -81,9 +86,12 @@ public class PlayerProgressionSystem : MonoBehaviour
         return CurrentLevel switch
         {
             1 => "Manager Junior",
-            2 => "Manager",
-            3 => "Manager Senior",
-            _ => "Directeur"
+            2 or 3 => "Manager",
+            4 or 5 => "Manager Confirmé",
+            6 or 7 => "Manager Senior",
+            8 or 9 or 10 => "Directeur",
+            >= 11 => "Directeur Exécutif",
+            _ => "Manager Junior"
         };
     }
 }
