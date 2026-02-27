@@ -51,5 +51,9 @@ public class CardManager : MonoBehaviour
 
         GameManager.Instance.OnCardPlayed();
         OnCardResolved?.Invoke(card, success, motiv, stress, perf, turnover);
+
+        bool wasGood = GameHistoryData.History.Count > 0 &&
+                       GameHistoryData.History[^1].wasGoodDecision;
+        PlayerProgressionSystem.Instance.AddXP(wasGood);
     }
 }
