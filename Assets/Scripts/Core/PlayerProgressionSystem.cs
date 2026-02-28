@@ -12,15 +12,10 @@ public class PlayerProgressionSystem : MonoBehaviour
     private const int BASE_XP = 1000;
     private const float EXPONENT = 2.0f;
 
-    private static int XPThreshold(int level)
-    {
-        if (level <= 1) return 0;
-        return Mathf.RoundToInt(BASE_XP * Mathf.Pow(level - 1, EXPONENT));
-    }
-
     public int CurrentXP { get; private set; }
     public int CurrentLevel { get; private set; }
-    public int XPEarnedThisGame { get; private set; } = 0;
+    public int XPEarnedThisGame { get; private set; }
+    public int LevelThisGame { get; private set; }
 
     public event Action OnProgressionChanged;
 
@@ -34,7 +29,12 @@ public class PlayerProgressionSystem : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        Load();
+    }
+
+    public void Start()
+    {
+        // Valeur initiale
+        NewGame();
     }
 
     public void AddXP(bool wasGoodDecision)
@@ -47,9 +47,12 @@ public class PlayerProgressionSystem : MonoBehaviour
         OnProgressionChanged?.Invoke();
     }
 
-    public void ResetGame()
+    public void NewGame()
     {
+        CurrentXP = PlayerPrefs.GetInt("PlayerXP", 0);
+        CheckLevelUp();
         XPEarnedThisGame = 0;
+        LevelThisGame = CurrentLevel;
     }
 
     public void AbandonCurrentGameProgression()
@@ -59,7 +62,6 @@ public class PlayerProgressionSystem : MonoBehaviour
         CheckLevelUp();
         Save();
         OnProgressionChanged?.Invoke();
-        XPEarnedThisGame = 0;
     }
 
     private void CheckLevelUp()
@@ -88,11 +90,12 @@ public class PlayerProgressionSystem : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private void Load()
+    private static int XPThreshold(int level)
     {
-        CurrentXP = PlayerPrefs.GetInt("PlayerXP", 0);
-        CheckLevelUp();
+        if (level <= 1) return 0;
+        return Mathf.RoundToInt(BASE_XP * Mathf.Pow(level - 1, EXPONENT));
     }
+
 
     public string LevelTitle()
     {

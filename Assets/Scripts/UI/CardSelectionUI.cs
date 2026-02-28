@@ -54,7 +54,7 @@ public class CardSelectionUI : MonoBehaviour
     public CardData[] PickRandomCards(int count)
     {
         var unlocked = Array.FindAll(availableCards,
-            card => card.requiredLevel <= PlayerProgressionSystem.Instance.CurrentLevel);
+            card => card.requiredLevel <= PlayerProgressionSystem.Instance.LevelThisGame);
 
         CardData[] shuffled = (CardData[])unlocked.Clone();
 

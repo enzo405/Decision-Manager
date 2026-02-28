@@ -20,7 +20,7 @@ public class RandomEventSystem : MonoBehaviour
 
     public void RollForEvent()
     {
-        int level = PlayerProgressionSystem.Instance.CurrentLevel;
+        int level = PlayerProgressionSystem.Instance.LevelThisGame;
         float eventChance = Mathf.Min(0.05f + (level * 0.02f), 0.30f); // 5% + 2% par niveau, max 30%
 
         RandomEvent randomEvent = null;

@@ -18,7 +18,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void Start()
     {
-        playButton.onClick.AddListener(() => SceneManager.LoadScene("MainGame"));
+        playButton.onClick.AddListener(() => GameManager.Instance.NewGame());
         collectionButton.onClick.AddListener(() => SceneManager.LoadScene("Collection"));
         howToPlayButton.onClick.AddListener(() => howToPlayPanel.SetActive(true));
         closeButton.onClick.AddListener(() => howToPlayPanel.SetActive(false));
