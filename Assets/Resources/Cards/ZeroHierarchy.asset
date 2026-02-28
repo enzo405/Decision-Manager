@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ZeroHierarchy
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "Organisation horizontale"
-  description: "Exp\xE9rimenter une structure sans hi\xE9rarchie stricte bas\xE9e sur l'autogestion."
+  description: "Expérimenter une structure sans hiérarchie stricte basée sur l'autogestion."
   requiredLevel: 4
   successProbability: 0.42
   motivationEffect: 18
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -12
   turnoverEffectOnFailure: 18
   riskLevel: 2
-  successMessage: "L'autogestion a lib\xE9r\xE9 les \xE9nergies. L'\xE9quipe est plus engag\xE9e et responsable."
-  failureMessage: "L'absence de structure a cr\xE9\xE9 le chaos. Personne ne sait qui d\xE9cide quoi."
+  successMessage: "L'autogestion a libéré les énergies. L'équipe est plus engagée et responsable."
+  failureMessage: "L'absence de structure a créé le chaos. Personne ne sait qui décide quoi."

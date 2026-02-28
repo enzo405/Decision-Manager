@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MentoringSession
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Session de mentorat
-  description: "Mettre en place un programme de mentorat entre membres exp\xE9riment\xE9s et juniors."
+  description: "Mettre en place un programme de mentorat entre membres expérimentés et juniors."
   requiredLevel: 2
   successProbability: 0.75
   motivationEffect: 8
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: 1
   turnoverEffectOnFailure: 2
   riskLevel: 1
-  successMessage: "Le mentorat a renforc\xE9 les comp\xE9tences et cr\xE9\xE9 des liens solides."
+  successMessage: "Le mentorat a renforcé les compétences et créé des liens solides."
   failureMessage: "Les bin\xF4mes ne fonctionnent pas bien. Des tensions sont apparues."

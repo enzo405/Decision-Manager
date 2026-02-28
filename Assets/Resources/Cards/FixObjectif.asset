@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FixObjectif
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Objectifs ambitieux
-  description: "Fixer des objectifs \xE9lev\xE9s pour booster la productivit\xE9
-    de l'\xE9quipe."
+  description: "Fixer des objectifs élevés pour booster la productivité
+    de l'équipe."
   requiredLevel: 1
   successProbability: 0.6
   motivationEffect: 3
@@ -26,7 +26,7 @@ MonoBehaviour:
   performanceEffectOnFailure: -2
   turnoverEffectOnFailure: 5
   riskLevel: 2
-  successMessage: "Les objectifs ont dop\xE9 la productivit\xE9, mais la pression
-    se fait sentir. Attention \xE0 la dur\xE9e."
-  failureMessage: "Les objectifs ont \xE9t\xE9 jug\xE9s irr\xE9alistes. L'\xE9quipe
-    est d\xE9motiv\xE9e et sous pression."
+  successMessage: "Les objectifs ont dopé la productivité, mais la pression
+    se fait sentir. Attention à la durée."
+  failureMessage: "Les objectifs ont été jugés irréalistes. L'équipe
+    est démotivée et sous pression."

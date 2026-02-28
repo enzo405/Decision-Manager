@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: LoadBalancing
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "R\xE9\xE9quilibrage de charge"
-  description: "R\xE9distribuer les t\xE2ches pour \xE9viter la surcharge de certains membres."
+  cardName: "Rééquilibrage de charge"
+  description: "Rédistribuer les tâches pour éviter la surcharge de certains membres."
   requiredLevel: 2
   successProbability: 0.70
   motivationEffect: 6
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -3
   turnoverEffectOnFailure: 3
   riskLevel: 1
-  successMessage: "La charge est mieux r\xE9partie. L'\xE9quipe respire et les performances se stabilisent."
-  failureMessage: "Certains membres estiment avoir h\xE9rit\xE9 des t\xE2ches ind\xE9sirables. Ressentiment."
+  successMessage: "La charge est mieux répartie. L'équipe respire et les performances se stabilisent."
+  failureMessage: "Certains membres estiment avoir hérité des tâches indésirables. Ressentiment."

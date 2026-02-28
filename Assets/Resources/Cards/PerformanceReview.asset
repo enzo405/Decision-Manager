@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: PerformanceReview
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Entretien annuel d'\xE9valuation
-  description: "Conduire les entretiens annuels pour \xE9valuer et fixer de nouveaux objectifs."
+  cardName: Entretien annuel d'évaluation
+  description: "Conduire les entretiens annuels pour évaluer et fixer de nouveaux objectifs."
   requiredLevel: 2
   successProbability: 0.65
   motivationEffect: 7
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -3
   turnoverEffectOnFailure: 6
   riskLevel: 1
-  successMessage: "Les entretiens ont clarifi\xE9 les attentes et boost\xE9 la motivation de l'\xE9quipe."
-  failureMessage: "Les \xE9valuations ont \xE9t\xE9 per\xE7ues comme injustes. Le moral est en berne."
+  successMessage: "Les entretiens ont clarifié les attentes et boosté la motivation de l'équipe."
+  failureMessage: "Les évaluations ont été perçues comme injustes. Le moral est en berne."

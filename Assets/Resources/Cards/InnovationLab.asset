@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: InnovationLab
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "Laboratoire d'innovation"
-  description: "Cr\xE9er un espace d\xE9di\xE9 \xE0 l'exp\xE9rimentation et \xE0 l'innovation interne."
+  description: "Créer un espace dédié à l'expérimentation et à l'innovation interne."
   requiredLevel: 4
   successProbability: 0.55
   motivationEffect: 16
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -5
   turnoverEffectOnFailure: 3
   riskLevel: 2
-  successMessage: "Le lab a g\xE9n\xE9r\xE9 des id\xE9es concr\xE8tes. L'\xE9quipe est galvanis\xE9e par l'innovation."
-  failureMessage: "Le lab a \xE9t\xE9 per\xE7u comme un gadget. Peu de r\xE9sultats concrets, frustration."
+  successMessage: "Le lab a généré des idées concrètes. L'équipe est galvanisée par l'innovation."
+  failureMessage: "Le lab a été perçu comme un gadget. Peu de résultats concrets, frustration."

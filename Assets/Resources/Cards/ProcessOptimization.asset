@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ProcessOptimization
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "Optimisation des processus"
-  description: "Revoir et simplifier les proc\xE9dures internes pour gagner en efficacit\xE9."
+  description: "Revoir et simplifier les procédures internes pour gagner en efficacité."
   requiredLevel: 2
   successProbability: 0.70
   motivationEffect: 3
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -2
   turnoverEffectOnFailure: 3
   riskLevel: 1
-  successMessage: "Les nouveaux processus ont simplifi\xE9 le travail quotidien. L'\xE9quipe est plus efficace."
-  failureMessage: "Les changements ont perturb\xE9 les habitudes. L'\xE9quipe peine \xE0 s'adapter."
+  successMessage: "Les nouveaux processus ont simplifié le travail quotidien. L'équipe est plus efficace."
+  failureMessage: "Les changements ont perturbé les habitudes. L'équipe peine à s'adapter."

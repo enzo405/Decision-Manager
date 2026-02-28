@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: PredictiveAnalytics
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Analyse pr\xE9dictive RH
-  description: "Utiliser la data pour anticiper les risques RH et optimiser les d\xE9cisions."
+  cardName: Analyse prédictive RH
+  description: "Utiliser la data pour anticiper les risques RH et optimiser les décisions."
   requiredLevel: 5
   successProbability: 0.6
   motivationEffect: 6
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: 3
   turnoverEffectOnFailure: -3
   riskLevel: 2
-  successMessage: "Les insights data ont permis d'anticiper et de r\xE9soudre des probl\xE8mes avant qu'ils n'\xE9mergent."
-  failureMessage: "Les donn\xE9es mal interpr\xE9t\xE9es ont conduit \xE0 des d\xE9cisions contre-productives."
+  successMessage: "Les insights data ont permis d'anticiper et de résoudre des problèmes avant qu'ils n'émergent."
+  failureMessage: "Les données mal interprétées ont conduit à des décisions contre-productives."

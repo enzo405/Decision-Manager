@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: ExecutiveCoaching
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "Coaching ex\xE9cutif"
-  description: "Faire appel \xE0 un coach externe pour accompagner les managers cl\xE9s dans leur d\xE9veloppement."
+  cardName: "Coaching exécutif"
+  description: "Faire appel à un coach externe pour accompagner les managers clés dans leur développement."
   requiredLevel: 4
   successProbability: 0.72
   motivationEffect: 8
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: 2
   turnoverEffectOnFailure: 2
   riskLevel: 1
-  successMessage: "Le coaching a transform\xE9 les pratiques managériales. L'\xE9quipe progresse."
-  failureMessage: "Le coaching a \xE9t\xE9 v\xE9cu comme une remise en question. Tensions au sein du management."
+  successMessage: "Le coaching a transformé les pratiques managériales. L'équipe progresse."
+  failureMessage: "Le coaching a été vécu comme une remise en question. Tensions au sein du management."

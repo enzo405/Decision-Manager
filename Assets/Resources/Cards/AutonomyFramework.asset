@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AutonomyFramework
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Cadre d'autonomie
-  description: "Donner plus d'autonomie et de responsabilit\xE9s \xE0 chaque membre de l'\xE9quipe."
+  description: "Donner plus d'autonomie et de responsabilités à chaque membre de l'équipe."
   requiredLevel: 5
   successProbability: 0.65
   motivationEffect: 16
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -8
   turnoverEffectOnFailure: 6
   riskLevel: 2
-  successMessage: "L'autonomie accord\xE9e a lib\xE9r\xE9 la cr\xE9ativit\xE9 et renforc\xE9 l'engagement de chacun."
-  failureMessage: "Sans cadre clair, certains membres se sont sentis abandonn\xE9s et d\xE9pass\xE9s."
+  successMessage: "L'autonomie accordée a libéré la créativité et renforcé l'engagement de chacun."
+  failureMessage: "Sans cadre clair, certains membres se sont sentis abandonnés et dépassés."

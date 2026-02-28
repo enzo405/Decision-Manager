@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: FlexibleRemoteWork
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "T\xE9l\xE9travail flexible"
-  description: "Proposer des jours de t\xE9l\xE9travail pour am\xE9liorer l'\xE9quilibre
+  cardName: "Télétravail flexible"
+  description: "Proposer des jours de télétravail pour améliorer l'équilibre
     vie pro/perso."
   requiredLevel: 1
   successProbability: 0.75
@@ -26,7 +26,7 @@ MonoBehaviour:
   performanceEffectOnFailure: -4
   turnoverEffectOnFailure: 0
   riskLevel: 0
-  successMessage: "La flexibilit\xE9 a am\xE9lior\xE9 l'\xE9quilibre vie pro/perso.
-    L'\xE9quipe est plus sereine."
-  failureMessage: "Le t\xE9l\xE9travail a nui \xE0 la coordination. Certains membres
-    se sentent isol\xE9s."
+  successMessage: "La flexibilité a amélioré l'équilibre vie pro/perso.
+    L'équipe est plus sereine."
+  failureMessage: "Le télétravail a nui à la coordination. Certains membres
+    se sentent isolés."

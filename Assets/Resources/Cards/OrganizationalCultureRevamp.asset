@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OrganizationalCultureRevamp
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Refonte de la culture d'entreprise
-  description: "Red\xE9finir les valeurs et pratiques pour cr\xE9er une culture d'entreprise forte."
+  description: "Redéfinir les valeurs et pratiques pour créer une culture d'entreprise forte."
   requiredLevel: 4
   successProbability: 0.55
   motivationEffect: 15
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -5
   turnoverEffectOnFailure: 8
   riskLevel: 2
-  successMessage: "La nouvelle culture f\xE9d\xE8re l'\xE9quipe autour de valeurs communes et partag\xE9es."
-  failureMessage: "Le changement culturel a \xE9t\xE9 v\xE9cu comme forc\xE9. Le cynisme se r\xE9pand."
+  successMessage: "La nouvelle culture fédère l'équipe autour de valeurs communes et partagées."
+  failureMessage: "Le changement culturel a été vécu comme forcé. Le cynisme se répand."

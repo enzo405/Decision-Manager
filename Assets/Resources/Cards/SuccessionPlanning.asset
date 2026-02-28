@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SuccessionPlanning
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "Plan de succession"
-  description: "Identifier et pr\xE9parer les futurs leaders pour assurer la continuit\xE9 de l'organisation."
+  description: "Identifier et préparer les futurs leaders pour assurer la continuité de l'organisation."
   requiredLevel: 4
   successProbability: 0.65
   motivationEffect: 12
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: 0
   turnoverEffectOnFailure: 5
   riskLevel: 1
-  successMessage: "Les futurs leaders sont identifi\xE9s et motiv\xE9s. La continuit\xE9 est assur\xE9e."
-  failureMessage: "Le plan a cr\xE9\xE9 des jalousies entre candidats. Ambiance d\xE9grad\xE9e."
+  successMessage: "Les futurs leaders sont identifiés et motivés. La continuité est assurée."
+  failureMessage: "Le plan a créé des jalousies entre candidats. Ambiance dégradée."

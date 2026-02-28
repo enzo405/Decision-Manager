@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: BurnoutPrevention
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "Plan de pr\xE9vention burn-out"
-  description: "Mettre en place un dispositif complet de pr\xE9vention du burn-out et de soutien psychologique."
+  cardName: "Plan de prévention burn-out"
+  description: "Mettre en place un dispositif complet de prévention du burn-out et de soutien psychologique."
   requiredLevel: 3
   successProbability: 0.78
   motivationEffect: 6
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -1
   turnoverEffectOnFailure: -2
   riskLevel: 0
-  successMessage: "Le dispositif a permis de d\xE9tecter et traiter les signaux faibles. Le stress chute."
-  failureMessage: "Le plan a \xE9t\xE9 per\xE7u comme insuffisant. Certains membres sont d\xE9j\xE0 \xE0 bout."
+  successMessage: "Le dispositif a permis de détecter et traiter les signaux faibles. Le stress chute."
+  failureMessage: "Le plan a été perçu comme insuffisant. Certains membres sont déjà à bout."

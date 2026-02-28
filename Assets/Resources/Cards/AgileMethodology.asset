@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: AgileMethodology
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "M\xE9thodologie Agile"
-  description: "Introduire une m\xE9thodologie agile pour am\xE9liorer la gestion des projets."
+  cardName: "Méthodologie Agile"
+  description: "Introduire une méthodologie agile pour améliorer la gestion des projets."
   requiredLevel: 2
   successProbability: 0.65
   motivationEffect: 5
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -3
   turnoverEffectOnFailure: 4
   riskLevel: 1
-  successMessage: "L'agilit\xE9 a am\xE9lior\xE9 la coordination et la livraison des projets. L'\xE9quipe s'adapte bien."
-  failureMessage: "La transition vers l'agile a \xE9t\xE9 chaotique. L'\xE9quipe est d\xE9sorient\xE9e."
+  successMessage: "L'agilité a amélioré la coordination et la livraison des projets. L'équipe s'adapte bien."
+  failureMessage: "La transition vers l'agile a été chaotique. L'équipe est désorientée."

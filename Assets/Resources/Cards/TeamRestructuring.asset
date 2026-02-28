@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: TeamRestructuring
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "Restructuration de l'\xE9quipe"
-  description: "R\xE9organiser les r\xF4les et responsabilit\xE9s pour plus d'efficacit\xE9."
+  cardName: "Restructuration de l'équipe"
+  description: "Réorganiser les r\xF4les et responsabilités pour plus d'efficacité."
   requiredLevel: 1
   successProbability: 0.55
   motivationEffect: 4
@@ -25,7 +25,7 @@ MonoBehaviour:
   performanceEffectOnFailure: -5
   turnoverEffectOnFailure: 10
   riskLevel: 2
-  successMessage: "La restructuration a clarifi\xE9 les r\xF4les. L'\xE9quipe est
-    plus efficace malgr\xE9 la transition."
-  failureMessage: "La restructuration a sem\xE9 la confusion. L'\xE9quipe perd ses
-    rep\xE8res et certains envisagent de partir."
+  successMessage: "La restructuration a clarifié les r\xF4les. L'équipe est
+    plus efficace malgré la transition."
+  failureMessage: "La restructuration a semé la confusion. L'équipe perd ses
+    repères et certains envisagent de partir."

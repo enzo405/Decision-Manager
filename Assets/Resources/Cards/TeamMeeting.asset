@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: TeamMeeting
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "R\xE9union d'\xE9quipe"
-  description: "Organiser une r\xE9union pour clarifier les objectifs et renforcer
-    la coh\xE9sion."
+  cardName: "Réunion d'équipe"
+  description: "Organiser une réunion pour clarifier les objectifs et renforcer
+    la cohésion."
   requiredLevel: 1
   successProbability: 0.8
   motivationEffect: 8
@@ -26,7 +26,7 @@ MonoBehaviour:
   performanceEffectOnFailure: 0
   turnoverEffectOnFailure: 0
   riskLevel: 0
-  successMessage: "La r\xE9union a clarifi\xE9 les objectifs et renforc\xE9 la coh\xE9sion.
-    L'\xE9quipe repart motiv\xE9e."
-  failureMessage: "La r\xE9union a \xE9t\xE9 per\xE7ue comme une perte de temps.
-    L\xE9g\xE8re tension ressentie."
+  successMessage: "La réunion a clarifié les objectifs et renforcé la cohésion.
+    L'équipe repart motivée."
+  failureMessage: "La réunion a été perçue comme une perte de temps.
+    Légère tension ressentie."

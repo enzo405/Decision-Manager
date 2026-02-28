@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: StrategicVision
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "Vision strat\xE9gique"
-  description: "Partager une vision \xE0 long terme claire pour aligner l'\xE9quipe sur des objectifs communs."
+  cardName: "Vision stratégique"
+  description: "Partager une vision à long terme claire pour aligner l'équipe sur des objectifs communs."
   requiredLevel: 3
   successProbability: 0.70
   motivationEffect: 12
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -2
   turnoverEffectOnFailure: 5
   riskLevel: 1
-  successMessage: "La vision a galvanis\xE9 l'\xE9quipe. Chacun sait o\xF9 l'on va et pourquoi."
-  failureMessage: "La vision a sembl\xE9 irr\xE9aliste. L'\xE9quipe est sceptique et d\xE9motiv\xE9e."
+  successMessage: "La vision a galvanisé l'équipe. Chacun sait o\xF9 l'on va et pourquoi."
+  failureMessage: "La vision a semblé irréaliste. L'équipe est sceptique et démotivée."

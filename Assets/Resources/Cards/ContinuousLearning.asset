@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ContinuousLearning
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "Culture d'apprentissage continu"
-  description: "Instaurer une culture o\xF9 l'apprentissage et l'am\xE9lioration sont valoris\xE9s en permanence."
+  description: "Instaurer une culture o\xF9 l'apprentissage et l'amélioration sont valorisés en permanence."
   requiredLevel: 3
   successProbability: 0.72
   motivationEffect: 11
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: 1
   turnoverEffectOnFailure: 2
   riskLevel: 1
-  successMessage: "La culture d'apprentissage booste l'engagement et les comp\xE9tences sur le long terme."
-  failureMessage: "La pression d'apprendre en permanence a \xE9puis\xE9 certains membres."
+  successMessage: "La culture d'apprentissage booste l'engagement et les compétences sur le long terme."
+  failureMessage: "La pression d'apprendre en permanence a épuisé certains membres."

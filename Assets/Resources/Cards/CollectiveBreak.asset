@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CollectiveBreak
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Pause collective
-  description: "Organiser une pause d'\xE9quipe pour recharger les batteries."
+  description: "Organiser une pause d'équipe pour recharger les batteries."
   requiredLevel: 1
   successProbability: 0.9
   motivationEffect: 5
@@ -25,7 +25,7 @@ MonoBehaviour:
   performanceEffectOnFailure: -3
   turnoverEffectOnFailure: 0
   riskLevel: 0
-  successMessage: "La pause a recharg\xE9 les batteries de l'\xE9quipe. L'ambiance
-    est d\xE9tendue."
-  failureMessage: "Certains ont mal v\xE9cu l'interruption en plein rush. L\xE9g\xE8re
+  successMessage: "La pause a rechargé les batteries de l'équipe. L'ambiance
+    est détendue."
+  failureMessage: "Certains ont mal vécu l'interruption en plein rush. Légère
     frustration."

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: StrategicRetreat
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: S\xE9minaire strat\xE9gique
-  description: "Organiser un s\xE9minaire hors-site pour red\xE9finir la vision et les priorit\xE9s."
+  cardName: Séminaire stratégique
+  description: "Organiser un séminaire hors-site pour redéfinir la vision et les priorités."
   requiredLevel: 3
   successProbability: 0.75
   motivationEffect: 14
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -2
   turnoverEffectOnFailure: 1
   riskLevel: 1
-  successMessage: "Le s\xE9minaire a redonn\xE9 du sens et de la direction. L'\xE9quipe repart galvanis\xE9e."
-  failureMessage: "Le s\xE9minaire a manqu\xE9 de substance. L'\xE9quipe revient d\xE9\xE7ue et sceptique."
+  successMessage: "Le séminaire a redonné du sens et de la direction. L'équipe repart galvanisée."
+  failureMessage: "Le séminaire a manqué de substance. L'équipe revient déçue et sceptique."

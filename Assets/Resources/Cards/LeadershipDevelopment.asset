@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: LeadershipDevelopment
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: D\xE9veloppement du leadership
-  description: "Identifier et former les futurs leaders au sein de l'\xE9quipe."
+  cardName: Développement du leadership
+  description: "Identifier et former les futurs leaders au sein de l'équipe."
   requiredLevel: 3
   successProbability: 0.65
   motivationEffect: 10
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: 0
   turnoverEffectOnFailure: 3
   riskLevel: 1
-  successMessage: "Le programme a r\xE9v\xE9l\xE9 des talents cach\xE9s et insuffl\xE9 une nouvelle dynamique."
-  failureMessage: "Les jalousies entre candidats ont cr\xE9\xE9 des tensions au sein de l'\xE9quipe."
+  successMessage: "Le programme a révélé des talents cachés et insufflé une nouvelle dynamique."
+  failureMessage: "Les jalousies entre candidats ont créé des tensions au sein de l'équipe."

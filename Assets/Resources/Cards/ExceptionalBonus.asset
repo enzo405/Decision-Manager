@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ExceptionalBonus
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Prime exceptionnelle
-  description: "Accorder une prime exceptionnelle pour r\xE9compenser les efforts
-    r\xE9cents."
+  description: "Accorder une prime exceptionnelle pour récompenser les efforts
+    récents."
   requiredLevel: 1
   successProbability: 0.85
   motivationEffect: 12
@@ -26,7 +26,7 @@ MonoBehaviour:
   performanceEffectOnFailure: 0
   turnoverEffectOnFailure: 3
   riskLevel: 1
-  successMessage: "La prime a \xE9t\xE9 tr\xE8s bien accueillie. L'\xE9quipe se sent
-    valoris\xE9e et engag\xE9e."
-  failureMessage: "La prime a cr\xE9\xE9 de la jalousie entre certains membres. Ambiance
+  successMessage: "La prime a été très bien accueillie. L'équipe se sent
+    valorisée et engagée."
+  failureMessage: "La prime a créé de la jalousie entre certains membres. Ambiance
     tendue."

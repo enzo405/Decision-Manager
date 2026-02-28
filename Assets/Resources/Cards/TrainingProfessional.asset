@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TrainingProfessional
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Formation professionnelle
-  description: "Proposer une formation pour d\xE9velopper les comp\xE9tences de l'\xE9quipe."
+  description: "Proposer une formation pour développer les compétences de l'équipe."
   requiredLevel: 1
   successProbability: 0.7
   motivationEffect: 5
@@ -25,7 +25,7 @@ MonoBehaviour:
   performanceEffectOnFailure: 1
   turnoverEffectOnFailure: 0
   riskLevel: 1
-  successMessage: "La formation a \xE9t\xE9 bien accueillie. Les comp\xE9tences progressent
-    et l'\xE9quipe se sent valoris\xE9e."
-  failureMessage: "La formation est arriv\xE9e au mauvais moment. L'\xE9quipe d\xE9j\xE0
-    stress\xE9e l'a v\xE9cu comme une charge suppl\xE9mentaire."
+  successMessage: "La formation a été bien accueillie. Les compétences progressent
+    et l'équipe se sent valorisée."
+  failureMessage: "La formation est arrivée au mauvais moment. L'équipe déjà
+    stressée l'a vécu comme une charge supplémentaire."

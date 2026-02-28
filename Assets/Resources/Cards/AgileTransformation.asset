@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AgileTransformation
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Transformation Agile
-  description: "Adopter les m\xE9thodes agiles pour am\xE9liorer la r\xE9activit\xE9 et la collaboration."
+  description: "Adopter les méthodes agiles pour améliorer la réactivité et la collaboration."
   requiredLevel: 3
   successProbability: 0.55
   motivationEffect: 10
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -8
   turnoverEffectOnFailure: 10
   riskLevel: 2
-  successMessage: "L'adoption agile a transform\xE9 la productivit\xE9. L'\xE9quipe est plus r\xE9active et engag\xE9e."
-  failureMessage: "La transition a \xE9t\xE9 chaotique. L'\xE9quipe r\xE9siste au changement et le stress explose."
+  successMessage: "L'adoption agile a transformé la productivité. L'équipe est plus réactive et engagée."
+  failureMessage: "La transition a été chaotique. L'équipe résiste au changement et le stress explose."

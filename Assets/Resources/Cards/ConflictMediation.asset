@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: ConflictMediation
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "M\xE9diation de conflit"
-  description: "Intervenir pour r\xE9soudre un conflit latent au sein de l'\xE9quipe."
+  cardName: "Médiation de conflit"
+  description: "Intervenir pour résoudre un conflit latent au sein de l'équipe."
   requiredLevel: 1
   successProbability: 0.65
   motivationEffect: 5
@@ -25,7 +25,7 @@ MonoBehaviour:
   performanceEffectOnFailure: -2
   turnoverEffectOnFailure: 2
   riskLevel: 1
-  successMessage: "La m\xE9diation a apais\xE9 les tensions. L'\xE9quipe retrouve
+  successMessage: "La médiation a apaisé les tensions. L'équipe retrouve
     une dynamique positive."
-  failureMessage: "La m\xE9diation a raviv\xE9 certaines tensions. La situation est
+  failureMessage: "La médiation a ravivé certaines tensions. La situation est
     plus complexe qu'attendu."

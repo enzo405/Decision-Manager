@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: TalentRetention
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "Plan de r\xE9tention des talents"
-  description: "Mettre en place des actions cibl\xE9es pour retenir les meilleurs \xE9l\xE9ments."
+  cardName: "Plan de rétention des talents"
+  description: "Mettre en place des actions ciblées pour retenir les meilleurs éléments."
   requiredLevel: 3
   successProbability: 0.68
   motivationEffect: 10
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: 0
   turnoverEffectOnFailure: 3
   riskLevel: 1
-  successMessage: "Les talents cl\xE9s se sentent valoris\xE9s. Le risque de d\xE9parts diminue significativement."
-  failureMessage: "Les actions ont \xE9t\xE9 per\xE7ues comme insuffisantes. Certains talents envisagent encore de partir."
+  successMessage: "Les talents clés se sentent valorisés. Le risque de départs diminue significativement."
+  failureMessage: "Les actions ont été perçues comme insuffisantes. Certains talents envisagent encore de partir."

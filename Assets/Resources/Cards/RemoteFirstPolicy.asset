@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RemoteFirstPolicy
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "Politique remote-first"
-  description: "Passer \xE0 une organisation enti\xE8rement orient\xE9e t\xE9l\xE9travail avec des outils adapt\xE9s."
+  description: "Passer à une organisation entièrement orientée télétravail avec des outils adaptés."
   requiredLevel: 3
   successProbability: 0.58
   motivationEffect: 10
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -8
   turnoverEffectOnFailure: 7
   riskLevel: 2
-  successMessage: "La transition remote a \xE9t\xE9 un succ\xE8s. L'\xE9quipe gagne en autonomie et en satisfaction."
-  failureMessage: "L'isolement et les probl\xE8mes de communication ont d\xE9grad\xE9 la coh\xE9sion."
+  successMessage: "La transition remote a été un succès. L'équipe gagne en autonomie et en satisfaction."
+  failureMessage: "L'isolement et les problèmes de communication ont dégradé la cohésion."

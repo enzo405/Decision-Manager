@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: MergerIntegration
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Int\xE9gration post-fusion
-  description: "G\xE9rer l'int\xE9gration d'une nouvelle \xE9quipe suite \xE0 une fusion ou acquisition."
+  cardName: Intégration post-fusion
+  description: "Gérer l'intégration d'une nouvelle équipe suite à une fusion ou acquisition."
   requiredLevel: 4
   successProbability: 0.5
   motivationEffect: 8
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -10
   turnoverEffectOnFailure: 15
   riskLevel: 2
-  successMessage: "L'int\xE9gration a \xE9t\xE9 men\xE9e avec brio. Les deux cultures fusionnent harmonieusement."
-  failureMessage: "Les chocs culturels ont paralys\xE9 les \xE9quipes. La situation est critique."
+  successMessage: "L'intégration a été menée avec brio. Les deux cultures fusionnent harmonieusement."
+  failureMessage: "Les chocs culturels ont paralysé les équipes. La situation est critique."

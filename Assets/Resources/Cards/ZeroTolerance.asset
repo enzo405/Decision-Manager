@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: ZeroTolerance
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Politique tol\xE9rance z\xE9ro
-  description: "Instaurer une politique stricte contre les comportements toxiques et le harc\xE8lement."
+  cardName: Politique tolérance zéro
+  description: "Instaurer une politique stricte contre les comportements toxiques et le harcèlement."
   requiredLevel: 5
   successProbability: 0.65
   motivationEffect: 10
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -3
   turnoverEffectOnFailure: 5
   riskLevel: 2
-  successMessage: "La politique a assaini l'environnement de travail. L'\xE9quipe se sent enfin en s\xE9curit\xE9."
-  failureMessage: "La mise en oeuvre brutale a cr\xE9\xE9 de la peur et de la m\xE9fiance au sein de l'\xE9quipe."
+  successMessage: "La politique a assaini l'environnement de travail. L'équipe se sent enfin en sécurité."
+  failureMessage: "La mise en oeuvre brutale a créé de la peur et de la méfiance au sein de l'équipe."

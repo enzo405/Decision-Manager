@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: MergersIntegration
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: "Int\xE9gration post-fusion"
-  description: "G\xE9rer l'int\xE9gration culturelle et op\xE9rationnelle suite \xE0 une fusion ou acquisition."
+  cardName: "Intégration post-fusion"
+  description: "Gérer l'intégration culturelle et opérationnelle suite à une fusion ou acquisition."
   requiredLevel: 4
   successProbability: 0.48
   motivationEffect: 5
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -8
   turnoverEffectOnFailure: 16
   riskLevel: 2
-  successMessage: "L'int\xE9gration s'est bien pass\xE9e. Les deux cultures se compl\xE8tent et la performance monte."
-  failureMessage: "Les cultures ne se m\xE9langent pas. Clans, tensions et d\xE9parts en cascade."
+  successMessage: "L'intégration s'est bien passée. Les deux cultures se complètent et la performance monte."
+  failureMessage: "Les cultures ne se mélangent pas. Clans, tensions et départs en cascade."

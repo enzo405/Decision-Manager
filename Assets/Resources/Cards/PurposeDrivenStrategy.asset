@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
   m_Name: PurposeDrivenStrategy
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Strat\xE9gie orient\xE9e sens
-  description: "Red\xE9finir la mission de l'\xE9quipe autour d'un objectif porteur de sens."
+  cardName: Stratégie orientée sens
+  description: "Redéfinir la mission de l'équipe autour d'un objectif porteur de sens."
   requiredLevel: 5
   successProbability: 0.7
   motivationEffect: 18
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: 0
   turnoverEffectOnFailure: -2
   riskLevel: 1
-  successMessage: "La mission red\xE9finie galvanise l'\xE9quipe. Chacun comprend son impact et s'y investit pleinement."
-  failureMessage: "Le discours sur le sens a sembl\xE9 creux et d\xE9connect\xE9 du quotidien."
+  successMessage: "La mission redéfinie galvanise l'équipe. Chacun comprend son impact et s'y investit pleinement."
+  failureMessage: "Le discours sur le sens a semblé creux et déconnecté du quotidien."

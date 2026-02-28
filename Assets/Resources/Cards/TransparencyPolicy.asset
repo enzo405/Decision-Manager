@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TransparencyPolicy
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "Politique de transparence"
-  description: "Instaurer une culture de transparence sur les d\xE9cisions et les r\xE9sultats."
+  description: "Instaurer une culture de transparence sur les décisions et les résultats."
   requiredLevel: 2
   successProbability: 0.72
   motivationEffect: 9
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -1
   turnoverEffectOnFailure: 4
   riskLevel: 1
-  successMessage: "La transparence a renforc\xE9 la confiance. L'\xE9quipe comprend mieux les enjeux."
-  failureMessage: "Trop d'informations mal contextualis\xE9es ont g\xE9n\xE9r\xE9 de l'anxi\xE9t\xE9."
+  successMessage: "La transparence a renforcé la confiance. L'équipe comprend mieux les enjeux."
+  failureMessage: "Trop d'informations mal contextualisées ont généré de l'anxiété."

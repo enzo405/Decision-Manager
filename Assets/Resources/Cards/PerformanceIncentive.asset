@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PerformanceIncentive
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "Incentive performance"
-  description: "Introduire un syst\xE8me de r\xE9compenses li\xE9 aux r\xE9sultats individuels et collectifs."
+  description: "Introduire un système de récompenses lié aux résultats individuels et collectifs."
   requiredLevel: 3
   successProbability: 0.60
   motivationEffect: 8
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: 2
   turnoverEffectOnFailure: 6
   riskLevel: 2
-  successMessage: "Le syst\xE8me d'incentive a stimul\xE9 l'\xE9mulation positive. Les r\xE9sultats s'am\xE9liorent."
-  failureMessage: "La comp\xE9tition a d\xE9grad\xE9 l'ambiance. Certains se sentent d\xE9favoris\xE9s."
+  successMessage: "Le système d'incentive a stimulé l'émulation positive. Les résultats s'améliorent."
+  failureMessage: "La compétition a dégradé l'ambiance. Certains se sentent défavorisés."

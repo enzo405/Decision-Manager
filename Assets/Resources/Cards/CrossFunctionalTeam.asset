@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CrossFunctionalTeam
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "\xC9quipe transversale"
-  description: "Cr\xE9er des groupes de travail transversaux pour briser les silos."
+  description: "Créer des groupes de travail transversaux pour briser les silos."
   requiredLevel: 3
   successProbability: 0.62
   motivationEffect: 7
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -4
   turnoverEffectOnFailure: 6
   riskLevel: 2
-  successMessage: "La transversalit\xE9 a bris\xE9 les silos. Les projets avancent plus vite et mieux."
-  failureMessage: "Les groupes transversaux ont cr\xE9\xE9 des conflits de priorit\xE9s. Confusion g\xE9n\xE9rale."
+  successMessage: "La transversalité a brisé les silos. Les projets avancent plus vite et mieux."
+  failureMessage: "Les groupes transversaux ont créé des conflits de priorités. Confusion générale."

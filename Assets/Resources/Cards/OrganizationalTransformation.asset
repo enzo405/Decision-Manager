@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OrganizationalTransformation
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "Transformation organisationnelle"
-  description: "Engager une transformation profonde de la culture et des m\xE9thodes de travail."
+  description: "Engager une transformation profonde de la culture et des méthodes de travail."
   requiredLevel: 4
   successProbability: 0.50
   motivationEffect: 15
@@ -25,5 +25,5 @@ MonoBehaviour:
   performanceEffectOnFailure: -10
   turnoverEffectOnFailure: 15
   riskLevel: 2
-  successMessage: "La transformation a port\xE9 ses fruits. L'organisation est plus agile et performante."
-  failureMessage: "Le changement trop brutal a provoqu\xE9 une crise interne. L'\xE9quipe est d\xE9stabilis\xE9e."
+  successMessage: "La transformation a porté ses fruits. L'organisation est plus agile et performante."
+  failureMessage: "Le changement trop brutal a provoqué une crise interne. L'équipe est déstabilisée."

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CrisisManagement
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Gestion de crise
-  description: "Prendre les choses en main face \xE0 une situation critique qui menace
-    l'\xE9quipe."
+  description: "Prendre les choses en main face à une situation critique qui menace
+    l'équipe."
   requiredLevel: 1
   successProbability: 0.5
   motivationEffect: 3
@@ -26,7 +26,7 @@ MonoBehaviour:
   performanceEffectOnFailure: -8
   turnoverEffectOnFailure: 8
   riskLevel: 2
-  successMessage: "La crise a \xE9t\xE9 g\xE9r\xE9e avec sang-froid. L'\xE9quipe
-    en ressort soud\xE9e et plus r\xE9siliente."
-  failureMessage: "La gestion de crise a \xE9t\xE9 chaotique. Le stress atteint un
+  successMessage: "La crise a été gérée avec sang-froid. L'équipe
+    en ressort soudée et plus résiliente."
+  failureMessage: "La gestion de crise a été chaotique. Le stress atteint un
     niveau critique."
