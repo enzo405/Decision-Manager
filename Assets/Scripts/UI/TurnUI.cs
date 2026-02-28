@@ -5,19 +5,19 @@ public class TurnUI : MonoBehaviour
 {
     public TextMeshProUGUI turnText;
 
-    void Start()
+    public void Start()
     {
         GameManager.Instance.OnTurnStarted += RefreshUI;
         RefreshUI();
     }
 
-    void OnDisable()
+    public void OnDisable()
     {
         if (GameManager.Instance != null)
             GameManager.Instance.OnTurnStarted -= RefreshUI;
     }
 
-    void RefreshUI()
+    public void RefreshUI()
     {
         turnText.text = $"Semaine {GameManager.Instance.CurrentWeek} / {GameManager.Instance.totalWeeks}";
     }

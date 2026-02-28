@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
-[System.Serializable]
+[Serializable]
 public class CardSlot
 {
     public GameObject cardObject;
@@ -15,10 +16,10 @@ public class CardSlot
 public class CardSelectionUI : MonoBehaviour
 {
     public CardSlot[] slots = new CardSlot[3];
-    public CardData[] availableCards;
-
+    private CardData[] availableCards;
     public void Start()
     {
+        availableCards = Resources.LoadAll<CardData>("Cards");
         GameManager.Instance.OnTurnStarted += DrawCards;
         DrawCards();
     }
@@ -52,12 +53,15 @@ public class CardSelectionUI : MonoBehaviour
 
     public CardData[] PickRandomCards(int count)
     {
-        CardData[] shuffled = (CardData[])availableCards.Clone();
+        var unlocked = Array.FindAll(availableCards,
+            card => card.requiredLevel <= PlayerProgressionSystem.Instance.CurrentLevel);
+
+        CardData[] shuffled = (CardData[])unlocked.Clone();
 
         // Fisher-Yates shuffle
         for (int i = shuffled.Length - 1; i > 0; i--)
         {
-            int j = Random.Range(0, i + 1);
+            int j = UnityEngine.Random.Range(0, i + 1);
             (shuffled[i], shuffled[j]) = (shuffled[j], shuffled[i]);
         }
 

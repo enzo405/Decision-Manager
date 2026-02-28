@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
+  m_Name: StrategicVision
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: "Vision stratégique"
+  description: "Partager une vision à long terme claire pour aligner l'équipe sur des objectifs communs."
+  requiredLevel: 3
+  successProbability: 0.70
+  motivationEffect: 12
+  stressEffect: -3
+  performanceEffect: 8
+  turnoverEffect: -8
+  motivationEffectOnFailure: -6
+  stressEffectOnFailure: 7
+  performanceEffectOnFailure: -2
+  turnoverEffectOnFailure: 5
+  riskLevel: 1
+  successMessage: "La vision a galvanisé l'équipe. Chacun sait o\xF9 l'on va et pourquoi."
+  failureMessage: "La vision a semblé irréaliste. L'équipe est sceptique et démotivée."

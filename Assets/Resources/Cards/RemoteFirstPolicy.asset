@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
+  m_Name: RemoteFirstPolicy
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: "Politique remote-first"
+  description: "Passer à une organisation entièrement orientée télétravail avec des outils adaptés."
+  requiredLevel: 3
+  successProbability: 0.58
+  motivationEffect: 10
+  stressEffect: -8
+  performanceEffect: 5
+  turnoverEffect: -10
+  motivationEffectOnFailure: -5
+  stressEffectOnFailure: 10
+  performanceEffectOnFailure: -8
+  turnoverEffectOnFailure: 7
+  riskLevel: 2
+  successMessage: "La transition remote a été un succès. L'équipe gagne en autonomie et en satisfaction."
+  failureMessage: "L'isolement et les problèmes de communication ont dégradé la cohésion."

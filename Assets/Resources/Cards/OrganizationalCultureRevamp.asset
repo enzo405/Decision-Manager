@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
+  m_Name: OrganizationalCultureRevamp
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: Refonte de la culture d'entreprise
+  description: "Redéfinir les valeurs et pratiques pour créer une culture d'entreprise forte."
+  requiredLevel: 4
+  successProbability: 0.55
+  motivationEffect: 15
+  stressEffect: 6
+  performanceEffect: 12
+  turnoverEffect: -15
+  motivationEffectOnFailure: -8
+  stressEffectOnFailure: 10
+  performanceEffectOnFailure: -5
+  turnoverEffectOnFailure: 8
+  riskLevel: 2
+  successMessage: "La nouvelle culture fédère l'équipe autour de valeurs communes et partagées."
+  failureMessage: "Le changement culturel a été vécu comme forcé. Le cynisme se répand."

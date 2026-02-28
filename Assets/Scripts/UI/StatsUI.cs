@@ -9,20 +9,20 @@ public class StatsUI : MonoBehaviour
     public Slider performanceBar;
     public Slider turnoverBar;
 
-    void OnDisable()
+    public void OnDisable()
     {
         if (StatSystem.Instance != null)
             StatSystem.Instance.OnStatsChanged -= RefreshUI;
     }
 
 
-    void Start()
+    public void Start()
     {
         StatSystem.Instance.OnStatsChanged += RefreshUI;
         RefreshUI();
     }
 
-    void RefreshUI()
+    public void RefreshUI()
     {
         motivationBar.value = StatSystem.Instance.Motivation;
         stressBar.value = StatSystem.Instance.Stress;

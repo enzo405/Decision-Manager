@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
+  m_Name: RecognitionCeremony
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: "Cérémonie de reconnaissance"
+  description: "Organiser un événement pour célébrer les réussites collectives et individuelles."
+  requiredLevel: 2
+  successProbability: 0.85
+  motivationEffect: 14
+  stressEffect: -5
+  performanceEffect: 3
+  turnoverEffect: -7
+  motivationEffectOnFailure: 3
+  stressEffectOnFailure: 2
+  performanceEffectOnFailure: 0
+  turnoverEffectOnFailure: 1
+  riskLevel: 0
+  successMessage: "La cérémonie a boosté le moral. Chacun se sent reconnu et valorisé."
+  failureMessage: "Certains ont estimé que la reconnaissance était inéquitable. Jalousies."

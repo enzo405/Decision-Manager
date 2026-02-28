@@ -14,8 +14,9 @@ public class GameManager : MonoBehaviour
 
     public event Action OnTurnStarted;
 
-    void Awake()
+    public void Awake()
     {
+        Debug.Log("GameManager Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+    public void Start()
     {
         StartTurn();
     }
@@ -66,8 +67,20 @@ public class GameManager : MonoBehaviour
         IsGameOver = false;
         GameHistoryData.Clear();
         StatSystem.Instance.Start();
+        PlayerProgressionSystem.Instance.ResetGame();
         SceneManager.LoadScene("MainGame");
     }
+
+    public void AbandonGame()
+    {
+        CurrentWeek = 1;
+        IsGameOver = false;
+        GameHistoryData.Clear();
+        StatSystem.Instance.Start();
+        PlayerProgressionSystem.Instance.AbandonCurrentGameProgression();
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public static void EndGame()
     {
         SceneManager.LoadScene("GameOver");

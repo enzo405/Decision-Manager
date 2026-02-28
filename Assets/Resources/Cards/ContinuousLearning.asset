@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
+  m_Name: ContinuousLearning
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: "Culture d'apprentissage continu"
+  description: "Instaurer une culture o\xF9 l'apprentissage et l'amélioration sont valorisés en permanence."
+  requiredLevel: 3
+  successProbability: 0.72
+  motivationEffect: 11
+  stressEffect: 3
+  performanceEffect: 10
+  turnoverEffect: -7
+  motivationEffectOnFailure: -2
+  stressEffectOnFailure: 6
+  performanceEffectOnFailure: 1
+  turnoverEffectOnFailure: 2
+  riskLevel: 1
+  successMessage: "La culture d'apprentissage booste l'engagement et les compétences sur le long terme."
+  failureMessage: "La pression d'apprendre en permanence a épuisé certains membres."

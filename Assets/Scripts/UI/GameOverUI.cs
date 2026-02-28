@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameOverUI : MonoBehaviour
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI reasonText;
     public Button replayButton;
+    public Button mainMenuButton;
 
     [Header("Decisions")]
     public Transform decisionsList;
@@ -16,15 +18,16 @@ public class GameOverUI : MonoBehaviour
     [Header("Graph")]
     public RectTransform graphContainer;
 
-    void Start()
+    public void Start()
     {
         SetupHeader();
         SetupDecisions();
         SetupGraph();
         replayButton.onClick.AddListener(() => GameManager.Instance.ResetGame());
+        mainMenuButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
     }
 
-    void SetupHeader()
+    public void SetupHeader()
     {
         bool isVictory = GameOverData.IsVictory;
         DefeatReason reason = GameOverData.Reason;
@@ -39,7 +42,7 @@ public class GameOverUI : MonoBehaviour
         };
     }
 
-    void SetupDecisions()
+    public void SetupDecisions()
     {
         foreach (var record in GameHistoryData.History)
         {
@@ -52,7 +55,7 @@ public class GameOverUI : MonoBehaviour
         }
     }
 
-    void SetupGraph()
+    public void SetupGraph()
     {
         Canvas.ForceUpdateCanvases();
 
@@ -68,7 +71,7 @@ public class GameOverUI : MonoBehaviour
         DrawCurve(history, r => r.turnover, new Color(0.90f, 0.49f, 0.13f), width, height);   // Orange
     }
 
-    void DrawCurve(System.Collections.Generic.List<TurnRecord> history,
+    public void DrawCurve(System.Collections.Generic.List<TurnRecord> history,
         System.Func<TurnRecord, int> getValue,
         Color color, float width, float height)
     {
@@ -83,7 +86,7 @@ public class GameOverUI : MonoBehaviour
         }
     }
 
-    void DrawLine(Vector2 start, Vector2 end, Color color)
+    public void DrawLine(Vector2 start, Vector2 end, Color color)
     {
         GameObject line = new GameObject("Line", typeof(Image));
         line.transform.SetParent(graphContainer, false);

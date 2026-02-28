@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
+  m_Name: WellnessProgram
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: "Programme bien-être"
+  description: "Lancer un programme de bien-être au travail : sport, mindfulness, espaces de détente."
+  requiredLevel: 2
+  successProbability: 0.80
+  motivationEffect: 10
+  stressEffect: -12
+  performanceEffect: 2
+  turnoverEffect: -6
+  motivationEffectOnFailure: 2
+  stressEffectOnFailure: -3
+  performanceEffectOnFailure: -2
+  turnoverEffectOnFailure: 0
+  riskLevel: 0
+  successMessage: "Le programme bien-être a été très apprécié. L'équipe se sent mieux dans son travail."
+  failureMessage: "Le programme a été perçu comme superficiel. Peu d'adhésion de l'équipe."

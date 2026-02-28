@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
+  m_Name: WorkspaceReorganization
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: Réorganisation de l'espace de travail
+  description: "Repenser l'aménagement des bureaux pour favoriser la collaboration."
+  requiredLevel: 2
+  successProbability: 0.7
+  motivationEffect: 6
+  stressEffect: -5
+  performanceEffect: 4
+  turnoverEffect: -3
+  motivationEffectOnFailure: -3
+  stressEffectOnFailure: 7
+  performanceEffectOnFailure: -2
+  turnoverEffectOnFailure: 1
+  riskLevel: 1
+  successMessage: "Le nouvel espace favorise les échanges et améliore le bien-être au travail."
+  failureMessage: "Le changement a perturbé les habitudes. L'équipe peine à retrouver ses repères."

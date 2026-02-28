@@ -7,19 +7,19 @@ public class ProgressionUI : MonoBehaviour
     public TextMeshProUGUI levelText;
     public Slider xpBar;
 
-    void Start()
+    public void Start()
     {
         PlayerProgressionSystem.Instance.OnProgressionChanged += RefreshUI;
         RefreshUI();
     }
 
-    void OnDestroy()
+    public void OnDestroy()
     {
         if (PlayerProgressionSystem.Instance != null)
             PlayerProgressionSystem.Instance.OnProgressionChanged -= RefreshUI;
     }
 
-    void RefreshUI()
+    public void RefreshUI()
     {
         var progression = PlayerProgressionSystem.Instance;
         levelText.text = $"{progression.LevelTitle()} — Niveau {progression.CurrentLevel}";
