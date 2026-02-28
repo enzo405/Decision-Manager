@@ -13,7 +13,7 @@ public class FeedbackUI : MonoBehaviour
     public TextMeshProUGUI statsChangesText;
     public Button continueButton;
 
-    void Awake()
+    public void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -23,19 +23,19 @@ public class FeedbackUI : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    public void Start()
     {
         CardManager.Instance.OnCardResolved += ShowFeedback;
         gameObject.SetActive(false);
     }
 
-    void OnDestroy()
+    public void OnDestroy()
     {
         if (CardManager.Instance != null)
             CardManager.Instance.OnCardResolved -= ShowFeedback;
     }
 
-    void ShowFeedback(CardData card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
+    public void ShowFeedback(CardData card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
     {
         // Show the popup
         gameObject.SetActive(true);

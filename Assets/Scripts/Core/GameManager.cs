@@ -14,8 +14,9 @@ public class GameManager : MonoBehaviour
 
     public event Action OnTurnStarted;
 
-    void Awake()
+    public void Awake()
     {
+        Debug.Log("GameManager Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+    public void Start()
     {
         StartTurn();
     }

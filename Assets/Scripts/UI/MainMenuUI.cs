@@ -7,6 +7,7 @@ public class MainMenuUI : MonoBehaviour
 {
     [Header("Buttons")]
     public Button playButton;
+    public Button collectionButton;
     public Button howToPlayButton;
     public Button quitButton;
 
@@ -15,9 +16,10 @@ public class MainMenuUI : MonoBehaviour
     public Button closeButton;
     public TextMeshProUGUI howToPlayText;
 
-    void Start()
+    public void Start()
     {
         playButton.onClick.AddListener(() => SceneManager.LoadScene("MainGame"));
+        collectionButton.onClick.AddListener(() => SceneManager.LoadScene("Collection"));
         howToPlayButton.onClick.AddListener(() => howToPlayPanel.SetActive(true));
         closeButton.onClick.AddListener(() => howToPlayPanel.SetActive(false));
         quitButton.onClick.AddListener(() => Application.Quit());

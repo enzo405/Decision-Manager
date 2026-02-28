@@ -8,14 +8,16 @@ public class CardManager : MonoBehaviour
     public event Action<CardData, bool, int, int, int, int> OnCardResolved;
     // (card, wasSuccess, motivDelta, stressDelta, perfDelta, turnoverDelta)
 
-    void Awake()
+    public void Awake()
     {
+        Debug.Log("CardManager Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void PlayCard(CardData card)
