@@ -9,7 +9,7 @@ public class PlayerProgressionSystem : MonoBehaviour
     private const int XP_PER_TURN = 50;
     private const int XP_BONUS_GOOD_DECISION = 25;
     private const int MAX_LEVEL = 20;
-    private const int BASE_XP = 2000;
+    private const int BASE_XP = 1000;
     private const float EXPONENT = 2.0f;
     private int XPThreshold(int level)
     {

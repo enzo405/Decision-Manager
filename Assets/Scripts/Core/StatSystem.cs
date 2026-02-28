@@ -19,10 +19,10 @@ public class StatSystem : MonoBehaviour
     // Anyone can subscribe to know when stats change
     public event Action OnStatsChanged;
 
-    [Header("Defeat Thresholds")]
-    public int maxStress = 85;
-    public int maxTurnover = 80;
-    public int minPerformance = 15;
+    public int GetMaxStress() => Mathf.Max(85 - (PlayerProgressionSystem.Instance.CurrentLevel * 2), 60);
+    public int GetMaxTurnover() => Mathf.Max(80 - (PlayerProgressionSystem.Instance.CurrentLevel * 2), 55);
+    public int GetMinPerformance() => Mathf.Min(15 + (PlayerProgressionSystem.Instance.CurrentLevel * 2), 35);
+
 
     public void Awake()
     {
@@ -58,12 +58,13 @@ public class StatSystem : MonoBehaviour
         OnStatsChanged?.Invoke();
     }
 
-
     public DefeatReason CheckDefeatConditions()
     {
-        if (Stress >= maxStress) return DefeatReason.Burnout;
-        if (Turnover >= maxTurnover) return DefeatReason.MassiveDepartures;
-        if (Performance <= minPerformance) return DefeatReason.PoorPerformance;
+        Debug.Log($"Checking defeat conditions: Stress={Stress}, Turnover={Turnover}, Performance={Performance}");
+        Debug.Log($"Thresholds: MaxStress={GetMaxStress()}, MaxTurnover={GetMaxTurnover()}, MinPerformance={GetMinPerformance()}");
+        if (Stress >= GetMaxStress()) return DefeatReason.Burnout;
+        if (Turnover >= GetMaxTurnover()) return DefeatReason.MassiveDepartures;
+        if (Performance <= GetMinPerformance()) return DefeatReason.PoorPerformance;
         return DefeatReason.None;
     }
 
