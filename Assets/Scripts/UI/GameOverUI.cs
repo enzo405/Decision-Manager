@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameOverUI : MonoBehaviour
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI reasonText;
     public Button replayButton;
+    public Button mainMenuButton;
 
     [Header("Decisions")]
     public Transform decisionsList;
@@ -22,6 +24,7 @@ public class GameOverUI : MonoBehaviour
         SetupDecisions();
         SetupGraph();
         replayButton.onClick.AddListener(() => GameManager.Instance.ResetGame());
+        mainMenuButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
     }
 
     public void SetupHeader()

@@ -67,8 +67,20 @@ public class GameManager : MonoBehaviour
         IsGameOver = false;
         GameHistoryData.Clear();
         StatSystem.Instance.Start();
+        PlayerProgressionSystem.Instance.ResetGame();
         SceneManager.LoadScene("MainGame");
     }
+
+    public void AbandonGame()
+    {
+        CurrentWeek = 1;
+        IsGameOver = false;
+        GameHistoryData.Clear();
+        StatSystem.Instance.Start();
+        PlayerProgressionSystem.Instance.AbandonCurrentGameProgression();
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public static void EndGame()
     {
         SceneManager.LoadScene("GameOver");

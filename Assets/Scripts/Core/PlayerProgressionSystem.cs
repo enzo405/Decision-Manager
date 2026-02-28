@@ -19,6 +19,7 @@ public class PlayerProgressionSystem : MonoBehaviour
 
     public int CurrentXP { get; private set; }
     public int CurrentLevel { get; private set; }
+    public int XPEarnedThisGame { get; private set; } = 0;
 
     public event Action OnProgressionChanged;
 
@@ -39,9 +40,25 @@ public class PlayerProgressionSystem : MonoBehaviour
     {
         int xpGained = XP_PER_TURN + (wasGoodDecision ? XP_BONUS_GOOD_DECISION : 0);
         CurrentXP += xpGained;
+        XPEarnedThisGame += xpGained;
         CheckLevelUp();
         Save();
         OnProgressionChanged?.Invoke();
+    }
+
+    public void ResetGame()
+    {
+        XPEarnedThisGame = 0;
+    }
+
+    public void AbandonCurrentGameProgression()
+    {
+        CurrentXP -= XPEarnedThisGame;
+        if (CurrentXP < 0) CurrentXP = 0;
+        CheckLevelUp();
+        Save();
+        OnProgressionChanged?.Invoke();
+        XPEarnedThisGame = 0;
     }
 
     private void CheckLevelUp()
@@ -54,12 +71,6 @@ public class PlayerProgressionSystem : MonoBehaviour
                 break;
             }
         }
-    }
-
-    public int XPForNextLevel()
-    {
-        if (CurrentLevel >= MAX_LEVEL) return -1;
-        return XPThreshold(CurrentLevel + 1) - CurrentXP;
     }
 
     public float XPProgress()
