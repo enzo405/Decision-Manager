@@ -25,20 +25,26 @@ public class MainMenuUI : MonoBehaviour
         quitButton.onClick.AddListener(() => Application.Quit());
 
         howToPlayText.text =
-            "Objectif\n" +
+            "<b>Objectif</b>\n" +
             "Maintenir l'équilibre de ton équipe sur 12 semaines.\n\n" +
-            "Les 4 stats\n" +
-            "• Motivation — l'engagement de l'équipe\n" +
-            "• Stress — la pression ressentie\n" +
-            "• Performance — la productivité\n" +
-            "• Turnover — le risque de départs\n\n" +
-            "Les cartes\n" +
+            "<b>Les 4 stats</b>\n" +
+            "Motivation — l'engagement de l'équipe\n" +
+            "Stress — la pression ressentie\n" +
+            "Performance — la productivité\n" +
+            "Turnover — le risque de départs\n\n" +
+            "<b>Les cartes</b>\n" +
             "Chaque tour, choisis une carte parmi 3.\n" +
             "Chaque carte a une probabilité de succès.\n" +
             "Le hasard simule l'imprévisibilité du monde professionnel.\n\n" +
-            "Victoire\n" +
+            "<b>Événements aléatoires</b>\n" +
+            "Des événements imprévus peuvent survenir chaque tour.\n" +
+            "Plus ton niveau est élevé, plus ils sont fréquents et impactants.\n\n" +
+            "<b>Difficulté</b>\n" +
+            "Les seuils de défaite se resserrent avec ton niveau.\n" +
+            "Les erreurs sont plus coûteuses au fil de ta progression.\n\n" +
+            "<b>Victoire</b>\n" +
             "Survivre 12 semaines sans burn-out ni départs massifs.\n\n" +
-            "Défaite\n" +
+            "<b>Défaite</b>\n" +
             "Stress trop élevé, trop de départs, ou performance effondrée.";
 
         howToPlayPanel.SetActive(false);

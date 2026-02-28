@@ -23,6 +23,8 @@ public class CardManager : MonoBehaviour
     public void PlayCard(CardData card)
     {
         bool success = UnityEngine.Random.value <= card.successProbability;
+        int level = PlayerProgressionSystem.Instance.CurrentLevel;
+        float negativeMultiplier = 1f + (level * 0.05f); // +5% par niveau
 
         int motiv, stress, perf, turnover;
 
@@ -35,10 +37,10 @@ public class CardManager : MonoBehaviour
         }
         else
         {
-            motiv = card.motivationEffectOnFailure;
-            stress = card.stressEffectOnFailure;
-            perf = card.performanceEffectOnFailure;
-            turnover = card.turnoverEffectOnFailure;
+            motiv = Mathf.RoundToInt(card.motivationEffectOnFailure * (card.motivationEffectOnFailure < 0 ? negativeMultiplier : 1f));
+            stress = Mathf.RoundToInt(card.stressEffectOnFailure * (card.stressEffectOnFailure > 0 ? negativeMultiplier : 1f));
+            perf = Mathf.RoundToInt(card.performanceEffectOnFailure * (card.performanceEffectOnFailure < 0 ? negativeMultiplier : 1f));
+            turnover = Mathf.RoundToInt(card.turnoverEffectOnFailure * (card.turnoverEffectOnFailure > 0 ? negativeMultiplier : 1f));
         }
 
         StatSystem.Instance.ApplyEffects(motiv, stress, perf, turnover);
@@ -52,6 +54,8 @@ public class CardManager : MonoBehaviour
         );
 
         GameManager.Instance.OnCardPlayed();
+
+        // Trigger le FeedbackUI
         OnCardResolved?.Invoke(card, success, motiv, stress, perf, turnover);
 
         bool wasGood = GameHistoryData.History.Count > 0 &&

@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     public void OnCardPlayed()
     {
+        RandomEventSystem.Instance.RollForEvent();
+
         var defeat = StatSystem.Instance.CheckDefeatConditions();
         if (defeat != DefeatReason.None)
         {

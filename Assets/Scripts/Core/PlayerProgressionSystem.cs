@@ -10,8 +10,9 @@ public class PlayerProgressionSystem : MonoBehaviour
     private const int XP_BONUS_GOOD_DECISION = 25;
     private const int MAX_LEVEL = 20;
     private const int BASE_XP = 1000;
-    private const float EXPONENT = 1.5f;
-    private int XPThreshold(int level)
+    private const float EXPONENT = 2.0f;
+
+    private static int XPThreshold(int level)
     {
         if (level <= 1) return 0;
         return Mathf.RoundToInt(BASE_XP * Mathf.Pow(level - 1, EXPONENT));

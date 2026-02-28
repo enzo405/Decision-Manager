@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class FeedbackUI : MonoBehaviour
 {
     public static FeedbackUI Instance { get; private set; }
@@ -11,6 +10,7 @@ public class FeedbackUI : MonoBehaviour
     public TextMeshProUGUI resultText;
     public TextMeshProUGUI messageText;
     public TextMeshProUGUI statsChangesText;
+    public TextMeshProUGUI eventMessageText;
     public Button continueButton;
 
     public void Awake()
@@ -26,13 +26,33 @@ public class FeedbackUI : MonoBehaviour
     public void Start()
     {
         CardManager.Instance.OnCardResolved += ShowFeedback;
+        RandomEventSystem.Instance.OnEventTriggered += ShowRandomEvent;
         gameObject.SetActive(false);
     }
 
     public void OnDestroy()
     {
         if (CardManager.Instance != null)
+        {
             CardManager.Instance.OnCardResolved -= ShowFeedback;
+            RandomEventSystem.Instance.OnEventTriggered -= ShowRandomEvent;
+        }
+    }
+
+    public void ShowRandomEvent(RandomEvent randomEvent)
+    {
+        if (randomEvent == null)
+        {
+            eventMessageText.text = "";
+        }
+        else
+        {
+            eventMessageText.text = $"{randomEvent.Message}\n" +
+                                $"Motivation {Signed(randomEvent.MotivationDelta)}\n" +
+                                $"Stress {Signed(randomEvent.StressDelta)}\n" +
+                                $"Performance {Signed(randomEvent.PerformanceDelta)}\n" +
+                                $"Turnover {Signed(randomEvent.TurnoverDelta)}";
+        }
     }
 
     public void ShowFeedback(CardData card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
@@ -73,5 +93,5 @@ public class FeedbackUI : MonoBehaviour
         });
     }
 
-    private string Signed(int val) => val >= 0 ? $"+{val}" : $"{val}";
+    private static string Signed(int v) => v >= 0 ? $"+{v}" : $"{v}";
 }
