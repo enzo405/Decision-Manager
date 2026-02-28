@@ -23,12 +23,16 @@ public class RandomEventSystem : MonoBehaviour
         int level = PlayerProgressionSystem.Instance.CurrentLevel;
         float eventChance = Mathf.Min(0.05f + (level * 0.02f), 0.30f); // 5% + 2% par niveau, max 30%
 
-        if (UnityEngine.Random.value > eventChance) return;
+        RandomEvent randomEvent = null;
+        if (UnityEngine.Random.value <= eventChance)
+        {
+            randomEvent = TriggerRandomEvent(level);
+        }
 
-        TriggerRandomEvent(level);
+        OnEventTriggered?.Invoke(randomEvent);
     }
 
-    private void TriggerRandomEvent(int level)
+    private RandomEvent TriggerRandomEvent(int level)
     {
         var events = GetEventsForLevel(level);
         var randomEvent = events[UnityEngine.Random.Range(0, events.Length)];
@@ -40,7 +44,7 @@ public class RandomEventSystem : MonoBehaviour
             randomEvent.TurnoverDelta
         );
 
-        OnEventTriggered?.Invoke(randomEvent);
+        return randomEvent;
     }
 
     private RandomEvent[] GetEventsForLevel(int level)

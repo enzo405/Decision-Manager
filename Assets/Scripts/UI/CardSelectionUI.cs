@@ -76,8 +76,9 @@ public class CardSelectionUI : MonoBehaviour
         return $"Motivation {Signed(card.motivationEffect)}\n" +
                $"Stress {Signed(card.stressEffect)}\n" +
                $"Performance {Signed(card.performanceEffect)}\n" +
+               $"Turnover {Signed(card.turnoverEffect)}\n" +
                $"Risque : {card.riskLevel}";
     }
 
-    private string Signed(int val) => val >= 0 ? $"+{val}" : $"{val}";
+    private string Signed(int v) => v >= 0 ? $"+{v}" : $"{v}";
 }

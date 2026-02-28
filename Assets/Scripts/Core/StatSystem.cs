@@ -52,7 +52,6 @@ public class StatSystem : MonoBehaviour
         Performance = Mathf.Clamp(Performance + performance, 0, 100);
         Turnover = Mathf.Clamp(Turnover + turnover, 0, 100);
 
-        // Interdependency logic (like in your GDD)
         ApplyInterdependencies();
 
         OnStatsChanged?.Invoke();

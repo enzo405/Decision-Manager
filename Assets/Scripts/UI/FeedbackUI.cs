@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class FeedbackUI : MonoBehaviour
 {
     public static FeedbackUI Instance { get; private set; }
@@ -42,11 +41,18 @@ public class FeedbackUI : MonoBehaviour
 
     public void ShowRandomEvent(RandomEvent randomEvent)
     {
-        eventMessageText.text = $"{randomEvent.Message}\n" +
-                           $"Motivation {Signed(randomEvent.MotivationDelta)}  " +
-                           $"Stress {Signed(randomEvent.StressDelta)}  " +
-                           $"Performance {Signed(randomEvent.PerformanceDelta)}  " +
-                           $"Turnover {Signed(randomEvent.TurnoverDelta)}";
+        if (randomEvent == null)
+        {
+            eventMessageText.text = "";
+        }
+        else
+        {
+            eventMessageText.text = $"{randomEvent.Message}\n" +
+                                $"Motivation {Signed(randomEvent.MotivationDelta)}\n" +
+                                $"Stress {Signed(randomEvent.StressDelta)}\n" +
+                                $"Performance {Signed(randomEvent.PerformanceDelta)}\n" +
+                                $"Turnover {Signed(randomEvent.TurnoverDelta)}";
+        }
     }
 
     public void ShowFeedback(CardData card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
