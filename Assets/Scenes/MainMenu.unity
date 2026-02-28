@@ -1687,7 +1687,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1180958916}
-  - component: {fileID: 1180958915}
   - component: {fileID: 1180958920}
   - component: {fileID: 1180958919}
   - component: {fileID: 1180958918}
@@ -1699,25 +1698,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1180958915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180958914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c300070d774114b42bc416c5b9dce526, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainMenuUI
-  playButton: {fileID: 427912921}
-  collectionButton: {fileID: 2041757377}
-  howToPlayButton: {fileID: 777927779}
-  quitButton: {fileID: 352803861}
-  howToPlayPanel: {fileID: 1815619544}
-  closeButton: {fileID: 1009888263}
-  howToPlayText: {fileID: 1222363126}
 --- !u!4 &1180958916
 Transform:
   m_ObjectHideFlags: 0
@@ -2398,6 +2378,57 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &2072399361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2072399363}
+  - component: {fileID: 2072399362}
+  m_Layer: 0
+  m_Name: MenuMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2072399362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072399361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c300070d774114b42bc416c5b9dce526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuUI
+  playButton: {fileID: 427912921}
+  collectionButton: {fileID: 2041757377}
+  howToPlayButton: {fileID: 777927779}
+  quitButton: {fileID: 352803861}
+  howToPlayPanel: {fileID: 1815619544}
+  closeButton: {fileID: 1009888263}
+  howToPlayText: {fileID: 1222363126}
+--- !u!4 &2072399363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072399361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 397.23923, y: 808.7512, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2134707307
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,3 +2577,4 @@ SceneRoots:
   - {fileID: 1005844109}
   - {fileID: 650791576}
   - {fileID: 1180958916}
+  - {fileID: 2072399363}
