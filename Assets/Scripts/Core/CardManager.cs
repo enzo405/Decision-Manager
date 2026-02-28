@@ -23,7 +23,7 @@ public class CardManager : MonoBehaviour
     public void PlayCard(CardData card)
     {
         bool success = UnityEngine.Random.value <= card.successProbability;
-        int level = PlayerProgressionSystem.Instance.CurrentLevel;
+        int level = PlayerProgressionSystem.Instance.LevelThisGame;
         float negativeMultiplier = 1f + (level * 0.05f); // +5% par niveau
 
         int motiv, stress, perf, turnover;

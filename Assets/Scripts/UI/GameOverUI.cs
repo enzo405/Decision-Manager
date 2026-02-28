@@ -23,7 +23,7 @@ public class GameOverUI : MonoBehaviour
         SetupHeader();
         SetupDecisions();
         SetupGraph();
-        replayButton.onClick.AddListener(() => GameManager.Instance.ResetGame());
+        replayButton.onClick.AddListener(() => GameManager.Instance.NewGame());
         mainMenuButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
     }
 

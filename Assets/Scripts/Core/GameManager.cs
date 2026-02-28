@@ -63,24 +63,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ResetGame()
+    public void NewGame()
     {
-        CurrentWeek = 1;
-        IsGameOver = false;
-        GameHistoryData.Clear();
-        StatSystem.Instance.Start();
-        PlayerProgressionSystem.Instance.ResetGame();
+        ResetGameStats();
         SceneManager.LoadScene("MainGame");
     }
 
-    public void AbandonGame()
+    public void ResetGameStats()
     {
         CurrentWeek = 1;
         IsGameOver = false;
         GameHistoryData.Clear();
         StatSystem.Instance.Start();
-        PlayerProgressionSystem.Instance.AbandonCurrentGameProgression();
-        SceneManager.LoadScene("MainMenu");
+        PlayerProgressionSystem.Instance.NewGame();
     }
 
     public static void EndGame()
@@ -95,5 +90,4 @@ public class GameManager : MonoBehaviour
         GameOverData.IsVictory = isVictory;
         GameOverData.Reason = reason;
     }
-
 }

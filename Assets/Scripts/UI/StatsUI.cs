@@ -24,9 +24,11 @@ public class StatsUI : MonoBehaviour
 
     public void RefreshUI()
     {
-        motivationBar.value = StatSystem.Instance.Motivation;
-        stressBar.value = StatSystem.Instance.Stress;
-        performanceBar.value = StatSystem.Instance.Performance;
-        turnoverBar.value = StatSystem.Instance.Turnover;
+        var stats = StatSystem.Instance;
+
+        motivationBar.value = stats.Motivation;
+        stressBar.value = (float)stats.Stress / StatSystem.GetMaxStress() * 100f;
+        performanceBar.value = (float)(stats.Performance - StatSystem.GetMinPerformance()) / (100f - StatSystem.GetMinPerformance()) * 100f;
+        turnoverBar.value = (float)stats.Turnover / StatSystem.GetMaxTurnover() * 100f;
     }
 }
