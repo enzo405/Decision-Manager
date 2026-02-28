@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Linq;
 
 public class CollectionUI : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class CollectionUI : MonoBehaviour
 
     public void Start()
     {
-        allCards = Resources.LoadAll<CardData>("Cards");
+        allCards = Resources.LoadAll<CardData>("Cards").OrderBy(c => c.requiredLevel).ToArray();
         backButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
         PopulateCollection();
     }
