@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844f4d300a7065b44840b2c4598a1634, type: 3}
+  m_Name: MergerIntegration
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: Int\xE9gration post-fusion
+  description: "G\xE9rer l'int\xE9gration d'une nouvelle \xE9quipe suite \xE0 une fusion ou acquisition."
+  requiredLevel: 4
+  successProbability: 0.5
+  motivationEffect: 8
+  stressEffect: 12
+  performanceEffect: 10
+  turnoverEffect: -12
+  motivationEffectOnFailure: -12
+  stressEffectOnFailure: 18
+  performanceEffectOnFailure: -10
+  turnoverEffectOnFailure: 15
+  riskLevel: 2
+  successMessage: "L'int\xE9gration a \xE9t\xE9 men\xE9e avec brio. Les deux cultures fusionnent harmonieusement."
+  failureMessage: "Les chocs culturels ont paralys\xE9 les \xE9quipes. La situation est critique."

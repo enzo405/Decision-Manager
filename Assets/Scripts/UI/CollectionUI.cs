@@ -12,6 +12,7 @@ public class CollectionUI : MonoBehaviour
 
     public void Start()
     {
+        allCards = Resources.LoadAll<CardData>("Cards");
         backButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
         PopulateCollection();
     }

@@ -16,10 +16,10 @@ public class CardSlot
 public class CardSelectionUI : MonoBehaviour
 {
     public CardSlot[] slots = new CardSlot[3];
-    public CardData[] availableCards;
-
+    private CardData[] availableCards;
     public void Start()
     {
+        availableCards = Resources.LoadAll<CardData>("Cards");
         GameManager.Instance.OnTurnStarted += DrawCards;
         DrawCards();
     }
