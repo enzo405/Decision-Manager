@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -65,22 +67,23 @@ public class GameOverUI : MonoBehaviour
         float width = graphContainer.rect.width;
         float height = graphContainer.rect.height;
 
-        DrawCurve(history, r => r.motivation, new Color(0.29f, 0.56f, 0.85f), width, height); // Bleu
-        DrawCurve(history, r => r.stress, new Color(0.91f, 0.30f, 0.24f), width, height);     // Rouge
-        DrawCurve(history, r => r.performance, new Color(0.18f, 0.80f, 0.44f), width, height); // Vert
-        DrawCurve(history, r => r.turnover, new Color(0.90f, 0.49f, 0.13f), width, height);   // Orange
+        DrawCurve(history, r => r.motivation, 100f, 0f, new Color(0.29f, 0.56f, 0.85f), width, height);
+        DrawCurve(history, r => r.stress, StatSystem.GetMaxStress(), 0f, new Color(0.91f, 0.30f, 0.24f), width, height);
+        DrawCurve(history, r => r.performance, 100f, StatSystem.GetMinPerformance(), new Color(0.18f, 0.80f, 0.44f), width, height);
+        DrawCurve(history, r => r.turnover, StatSystem.GetMaxTurnover(), 0f, new Color(0.90f, 0.49f, 0.13f), width, height);
     }
 
-    public void DrawCurve(System.Collections.Generic.List<TurnRecord> history,
-        System.Func<TurnRecord, int> getValue,
+    public void DrawCurve(List<TurnRecord> history,
+        Func<TurnRecord, int> getValue,
+        float max, float min,
         Color color, float width, float height)
     {
         for (int i = 0; i < history.Count - 1; i++)
         {
             float x1 = (i / (float)(history.Count - 1)) * width;
-            float y1 = (getValue(history[i]) / 100f) * height;
+            float y1 = Mathf.Clamp01((getValue(history[i]) - min) / (max - min)) * height;
             float x2 = ((i + 1) / (float)(history.Count - 1)) * width;
-            float y2 = (getValue(history[i + 1]) / 100f) * height;
+            float y2 = Mathf.Clamp01((getValue(history[i + 1]) - min) / (max - min)) * height;
 
             DrawLine(new Vector2(x1, y1), new Vector2(x2, y2), color);
         }
@@ -88,7 +91,7 @@ public class GameOverUI : MonoBehaviour
 
     public void DrawLine(Vector2 start, Vector2 end, Color color)
     {
-        GameObject line = new GameObject("Line", typeof(Image));
+        GameObject line = new("Line", typeof(Image));
         line.transform.SetParent(graphContainer, false);
 
         RectTransform rt = line.GetComponent<RectTransform>();

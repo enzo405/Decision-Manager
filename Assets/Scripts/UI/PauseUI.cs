@@ -16,6 +16,7 @@ public class PauseUI : MonoBehaviour
         mainMenuButton.onClick.AddListener(() =>
         {
             pauseOverlay.SetActive(false);
+            PlayerProgressionSystem.Instance.AbandonCurrentGameProgression();
             GameManager.Instance.ResetGameStats();
             SceneManager.LoadScene("MainMenu");
         });
