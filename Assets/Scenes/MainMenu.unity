@@ -1692,6 +1692,7 @@ GameObject:
   - component: {fileID: 1180958918}
   - component: {fileID: 1180958917}
   - component: {fileID: 1180958921}
+  - component: {fileID: 1180958922}
   m_Layer: 0
   m_Name: _Managers
   m_TagString: Untagged
@@ -1779,6 +1780,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ab1c86b3d12394f8927f3025a23ef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RandomEventSystem
+--- !u!114 &1180958922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180958914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29bc7b7d83b9ca64fbce985bdacc6939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameHistoryManager
 --- !u!1 &1222363124
 GameObject:
   m_ObjectHideFlags: 0

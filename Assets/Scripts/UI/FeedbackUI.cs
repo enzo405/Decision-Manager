@@ -39,7 +39,7 @@ public class FeedbackUI : MonoBehaviour
         }
     }
 
-    public void ShowRandomEvent(RandomEvent randomEvent)
+    public void ShowRandomEvent(Event randomEvent)
     {
         if (randomEvent == null)
         {

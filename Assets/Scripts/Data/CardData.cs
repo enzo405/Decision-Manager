@@ -31,6 +31,9 @@ public class CardData : ScriptableObject
     [Header("Feedback Messages")]
     [TextArea] public string successMessage;
     [TextArea] public string failureMessage;
+
+    [Header("Events Associated with this Card")]
+    public Event[] Events;
 }
 
 public enum RiskLevel { Low, Medium, High }

@@ -16,10 +16,11 @@ public class CardSlot
 public class CardSelectionUI : MonoBehaviour
 {
     public CardSlot[] slots = new CardSlot[3];
-    private CardData[] availableCards;
+    private CardData[] unlockedCards;
     public void Start()
     {
-        availableCards = Resources.LoadAll<CardData>("Cards");
+        unlockedCards = CardManager.Instance.GetUnlockedCards();
+
         GameManager.Instance.OnTurnStarted += DrawCards;
         DrawCards();
     }
@@ -53,10 +54,7 @@ public class CardSelectionUI : MonoBehaviour
 
     public CardData[] PickRandomCards(int count)
     {
-        var unlocked = Array.FindAll(availableCards,
-            card => card.requiredLevel <= PlayerProgressionSystem.Instance.LevelThisGame);
-
-        CardData[] shuffled = (CardData[])unlocked.Clone();
+        CardData[] shuffled = (CardData[])unlockedCards.Clone();
 
         // Fisher-Yates shuffle
         for (int i = shuffled.Length - 1; i > 0; i--)

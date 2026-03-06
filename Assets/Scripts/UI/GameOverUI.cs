@@ -46,7 +46,7 @@ public class GameOverUI : MonoBehaviour
 
     public void SetupDecisions()
     {
-        foreach (var record in GameHistoryData.History)
+        foreach (var record in GameHistoryManager.Instance.History)
         {
             GameObject item = Instantiate(decisionItemPrefab, decisionsList);
             TextMeshProUGUI text = item.GetComponent<TextMeshProUGUI>();
@@ -61,7 +61,7 @@ public class GameOverUI : MonoBehaviour
     {
         Canvas.ForceUpdateCanvases();
 
-        var history = GameHistoryData.History;
+        var history = GameHistoryManager.Instance.History;
         if (history.Count < 2) return;
 
         float width = graphContainer.rect.width;

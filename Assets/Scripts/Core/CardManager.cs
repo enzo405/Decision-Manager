@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class CardManager : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class CardManager : MonoBehaviour
 
     public event Action<CardData, bool, int, int, int, int> OnCardResolved;
     // (card, wasSuccess, motivDelta, stressDelta, perfDelta, turnoverDelta)
+
+    public CardData[] AllCards { get; private set; }
 
     public void Awake()
     {
@@ -18,6 +21,19 @@ public class CardManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void Start()
+    {
+        AllCards = Resources.LoadAll<CardData>("Cards");
+        Debug.Log($"Loaded {AllCards.Length} cards.");
+    }
+
+    public CardData[] GetUnlockedCards()
+    {
+        return AllCards
+            .Where(card => card.requiredLevel <= PlayerProgressionSystem.Instance.LevelThisGame)
+            .ToArray();
     }
 
     public void PlayCard(CardData card)
@@ -44,22 +60,10 @@ public class CardManager : MonoBehaviour
         }
 
         StatSystem.Instance.ApplyEffects(motiv, stress, perf, turnover);
-        GameHistoryData.Record(
-            card.cardName, success,
-            motiv, stress, perf, turnover,
-            StatSystem.Instance.Motivation,
-            StatSystem.Instance.Stress,
-            StatSystem.Instance.Performance,
-            StatSystem.Instance.Turnover
-        );
 
-        GameManager.Instance.OnCardPlayed();
+        GameManager.Instance.OnCardPlayed(card, success, motiv, stress, perf, turnover);
 
         // Trigger le FeedbackUI
         OnCardResolved?.Invoke(card, success, motiv, stress, perf, turnover);
-
-        bool wasGood = GameHistoryData.History.Count > 0 &&
-                       GameHistoryData.History[^1].wasGoodDecision;
-        PlayerProgressionSystem.Instance.AddXP(wasGood);
     }
 }

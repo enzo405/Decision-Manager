@@ -37,9 +37,19 @@ public class GameManager : MonoBehaviour
         OnTurnStarted?.Invoke();
     }
 
-    public void OnCardPlayed()
+    public void OnCardPlayed(CardData card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
     {
-        RandomEventSystem.Instance.RollForEvent();
+        GameHistoryManager.Instance.RecordTurn(
+            card.cardName, wasSuccess,
+            motivDelta, stressDelta, perfDelta, turnoverDelta,
+            StatSystem.Instance.Motivation,
+            StatSystem.Instance.Stress,
+            StatSystem.Instance.Performance,
+            StatSystem.Instance.Turnover
+        );
+        GameHistoryManager.Instance.RegisterCardEvents(card);
+
+        RandomEventSystem.Instance.RollEvent();
 
         var defeat = StatSystem.Instance.CheckDefeatConditions();
         if (defeat != DefeatReason.None)
@@ -73,7 +83,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentWeek = 1;
         IsGameOver = false;
-        GameHistoryData.Clear();
+        GameHistoryManager.Instance.Reset();
         StatSystem.Instance.Start();
         PlayerProgressionSystem.Instance.NewGame();
     }

@@ -1,13 +1,14 @@
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class RandomEventSystem : MonoBehaviour
 {
     public static RandomEventSystem Instance { get; private set; }
 
-    public event Action<RandomEvent> OnEventTriggered;
+    public event Action<Event> OnEventTriggered;
 
-    void Awake()
+    public void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -18,57 +19,41 @@ public class RandomEventSystem : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void RollForEvent()
+    public void RollEvent()
     {
-        int level = PlayerProgressionSystem.Instance.LevelThisGame;
-        float eventChance = Mathf.Min(0.05f + (level * 0.02f), 0.30f); // 5% + 2% par niveau, max 30%
+        Event[] events = GameHistoryManager.Instance.Events
+            .Where(e => e.Value == true)
+            .Select(e => e.Key)
+            .ToArray();
 
-        RandomEvent randomEvent = null;
-        if (UnityEngine.Random.value <= eventChance)
+        if (events.Length == 0)
         {
-            randomEvent = TriggerRandomEvent(level);
+            OnEventTriggered?.Invoke(null);
+            return;
         }
 
-        OnEventTriggered?.Invoke(randomEvent);
+        Event randomEvent = events[UnityEngine.Random.Range(0, events.Length)];
+
+        bool isTriggered = UnityEngine.Random.value <= randomEvent.Chance;
+
+        if (isTriggered)
+        {
+            TriggerEvent(randomEvent);
+        }
+
+        OnEventTriggered?.Invoke(isTriggered ? randomEvent : null);
     }
 
-    private RandomEvent TriggerRandomEvent(int level)
+    private static void TriggerEvent(Event randomEvent)
     {
-        var events = GetEventsForLevel(level);
-        var randomEvent = events[UnityEngine.Random.Range(0, events.Length)];
+        int level = PlayerProgressionSystem.Instance.LevelThisGame;
+        float negativeMultiplier = 1f + Mathf.Min(0.03f + (level * 0.02f), 0.20f); // 2% par niveau, max 20%
 
         StatSystem.Instance.ApplyEffects(
-            randomEvent.MotivationDelta,
-            randomEvent.StressDelta,
-            randomEvent.PerformanceDelta,
-            randomEvent.TurnoverDelta
+            Mathf.RoundToInt(randomEvent.MotivationDelta * negativeMultiplier),
+            Mathf.RoundToInt(randomEvent.StressDelta * negativeMultiplier),
+            Mathf.RoundToInt(randomEvent.PerformanceDelta * negativeMultiplier),
+            Mathf.RoundToInt(randomEvent.TurnoverDelta * negativeMultiplier)
         );
-
-        return randomEvent;
     }
-
-    private RandomEvent[] GetEventsForLevel(int level)
-    {
-        if (level <= 3) return lowLevelEvents;
-        if (level <= 6) return midLevelEvents;
-        return highLevelEvents;
-    }
-
-    private static readonly RandomEvent[] lowLevelEvents = {
-        new("Un membre clé est absent cette semaine.", 0, 5, -5, 2),
-        new("Conflit mineur entre deux collègues.", -3, 6, 0, 1),
-        new("Retard inattendu sur un livrable.", 0, 4, -6, 0),
-    };
-
-    private static readonly RandomEvent[] midLevelEvents = {
-        new("Départ surprise d'un talent clé.", -8, 8, -5, 8),
-        new("Crise client impactant toute l'équipe.", -4, 10, -8, 3),
-        new("Vague de maladies dans l'équipe.", -3, 5, -10, 2),
-    };
-
-    private static readonly RandomEvent[] highLevelEvents = {
-        new("Restructuration imposée par la direction.", -10, 15, -5, 12),
-        new("Fuite d'informations confidentielles.", -8, 12, -8, 10),
-        new("Échec d'un projet stratégique majeur.", -12, 14, -15, 8),
-    };
 }
