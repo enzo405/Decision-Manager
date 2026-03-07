@@ -27,7 +27,9 @@ Each turn, the player chooses one of three decision cards — such as organizing
 - **Performance** — overall productivity
 - **Turnover** — risk of team members leaving
 
-Random events can occur each turn, simulating the unpredictability of the professional world. Difficulty scales with the player's level — thresholds tighten and negative events become more frequent and impactful.
+Each card may also carry **deferred events** — consequences that trigger in the turns following the decision, simulating the delayed and unpredictable nature of managerial choices.
+
+Random events can occur each turn. Difficulty scales with the player's level — thresholds tighten and negative effects become more impactful.
 
 ---
 
@@ -36,6 +38,7 @@ Random events can occur each turn, simulating the unpredictability of the profes
 - Understand the human consequences of managerial decisions
 - Learn to manage risk and uncertainty
 - Identify the fragile balance between performance and well-being
+- Experience the delayed consequences of decisions
 - Develop a medium to long-term strategic vision
 
 ---
@@ -56,9 +59,10 @@ Random events can occur each turn, simulating the unpredictability of the profes
 1. Player selects one of three decision cards
 2. A probability roll determines success or failure
 3. Stats update immediately
-4. A random event may occur
-5. Feedback popup explains what happened and why
-6. Player clicks Continue — next turn begins
+4. Deferred events from previously played cards are evaluated
+5. A random event may trigger based on cards played
+6. Feedback popup explains what happened and why
+7. Player clicks Continue — next turn begins
 
 ### Win / Loss Conditions
 
@@ -73,7 +77,22 @@ Random events can occur each turn, simulating the unpredictability of the profes
 - **Poor performance** — performance too low
 
 ### Difficulty Scaling
-Thresholds tighten as the player levels up — the same decisions become riskier at higher levels. Negative effects on failed cards are amplified by 5% per level.
+Thresholds tighten as the player levels up — the same decisions become riskier at higher levels. Negative effects on failed cards and triggered events are amplified by 2% per level, up to a maximum of 20%.
+
+---
+
+## Event System
+
+Each card can carry one or more **deferred events** — consequences that may trigger in a defined week range after the card is played.
+
+For example, playing *Transformation Agile* at week 3 might trigger *"La résistance au changement refait surface"* between weeks 2 and 7.
+
+Each event has :
+- A **week range** (relative to when the card was played)
+- A **chance** of triggering
+- **Stat effects** (amplified by player level)
+
+This system simulates the delayed and compounding consequences of managerial decisions.
 
 ---
 
@@ -113,15 +132,16 @@ Each card has :
 - Secondary (often negative) effects on failure
 - A risk level (Low / Medium / High)
 - A pedagogical feedback message
+- Deferred events with delayed stat consequences
 
 ---
 
 ## Backend Integration
 
-Decision Manager connects to the [DecisionManager API](https://github.com/your-username/DecisionManagerAPI) to :
-- Persist player progression across devices reinstalls
-- Dynamically configure cards and game settings remotely
-- Roll random events server-side
+Decision Manager connects to the [DecisionManager API](https://github.com/enzo405/Decision-Manager-API) to :
+- Persist player progression across game sessions
+- Dynamically fetch cards and their associated events
+- Remotely configure game settings and defeat conditions without a game update
 
 Player identity is based on `SystemInfo.deviceUniqueIdentifier` — no login required.
 
