@@ -51,9 +51,9 @@ public class GameOverUI : MonoBehaviour
             GameObject item = Instantiate(decisionItemPrefab, decisionsList);
             TextMeshProUGUI text = item.GetComponent<TextMeshProUGUI>();
 
-            string success = record.wasSuccess ? "Succès" : "Échec";
-            text.text = $"{success} — {record.cardName}";
-            text.color = record.wasGoodDecision ? Color.darkGreen : Color.softRed;
+            string success = record.WasSuccess ? "Succès" : "Échec";
+            text.text = $"{success} — {record.CardDisplayName}";
+            text.color = record.WasGoodDecision ? Color.darkGreen : Color.softRed;
         }
     }
 
@@ -67,10 +67,10 @@ public class GameOverUI : MonoBehaviour
         float width = graphContainer.rect.width;
         float height = graphContainer.rect.height;
 
-        DrawCurve(history, r => r.motivation, 100f, 0f, new Color(0.29f, 0.56f, 0.85f), width, height);
-        DrawCurve(history, r => r.stress, StatSystem.GetMaxStress(), 0f, new Color(0.91f, 0.30f, 0.24f), width, height);
-        DrawCurve(history, r => r.performance, 100f, StatSystem.GetMinPerformance(), new Color(0.18f, 0.80f, 0.44f), width, height);
-        DrawCurve(history, r => r.turnover, StatSystem.GetMaxTurnover(), 0f, new Color(0.90f, 0.49f, 0.13f), width, height);
+        DrawCurve(history, r => r.Motivation, 100f, 0f, new Color(0.29f, 0.56f, 0.85f), width, height);
+        DrawCurve(history, r => r.Stress, StatSystem.GetMaxStress(), 0f, new Color(0.91f, 0.30f, 0.24f), width, height);
+        DrawCurve(history, r => r.Performance, 100f, StatSystem.GetMinPerformance(), new Color(0.18f, 0.80f, 0.44f), width, height);
+        DrawCurve(history, r => r.Turnover, StatSystem.GetMaxTurnover(), 0f, new Color(0.90f, 0.49f, 0.13f), width, height);
     }
 
     public void DrawCurve(List<TurnRecord> history,

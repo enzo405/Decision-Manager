@@ -6,10 +6,8 @@ public class CardManager : MonoBehaviour
 {
     public static CardManager Instance { get; private set; }
 
-    public event Action<CardData, bool, int, int, int, int> OnCardResolved;
+    public event Action<Card, bool, int, int, int, int> OnCardResolved;
     // (card, wasSuccess, motivDelta, stressDelta, perfDelta, turnoverDelta)
-
-    public CardData[] AllCards { get; private set; }
 
     public void Awake()
     {
@@ -23,22 +21,9 @@ public class CardManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Start()
+    public void PlayCard(Card card)
     {
-        AllCards = Resources.LoadAll<CardData>("Cards");
-        Debug.Log($"Loaded {AllCards.Length} cards.");
-    }
-
-    public CardData[] GetUnlockedCards()
-    {
-        return AllCards
-            .Where(card => card.requiredLevel <= PlayerProgressionSystem.Instance.LevelThisGame)
-            .ToArray();
-    }
-
-    public void PlayCard(CardData card)
-    {
-        bool success = UnityEngine.Random.value <= card.successProbability;
+        bool success = UnityEngine.Random.value <= card.SuccessProbability;
         int level = PlayerProgressionSystem.Instance.LevelThisGame;
         float negativeMultiplier = 1f + (level * 0.05f); // +5% par niveau
 
@@ -46,17 +31,17 @@ public class CardManager : MonoBehaviour
 
         if (success)
         {
-            motiv = card.motivationEffect;
-            stress = card.stressEffect;
-            perf = card.performanceEffect;
-            turnover = card.turnoverEffect;
+            motiv = card.MotivationEffect;
+            stress = card.StressEffect;
+            perf = card.PerformanceEffect;
+            turnover = card.TurnoverEffect;
         }
         else
         {
-            motiv = Mathf.RoundToInt(card.motivationEffectOnFailure * (card.motivationEffectOnFailure < 0 ? negativeMultiplier : 1f));
-            stress = Mathf.RoundToInt(card.stressEffectOnFailure * (card.stressEffectOnFailure > 0 ? negativeMultiplier : 1f));
-            perf = Mathf.RoundToInt(card.performanceEffectOnFailure * (card.performanceEffectOnFailure < 0 ? negativeMultiplier : 1f));
-            turnover = Mathf.RoundToInt(card.turnoverEffectOnFailure * (card.turnoverEffectOnFailure > 0 ? negativeMultiplier : 1f));
+            motiv = Mathf.RoundToInt(card.MotivationEffectOnFailure * (card.MotivationEffectOnFailure < 0 ? negativeMultiplier : 1f));
+            stress = Mathf.RoundToInt(card.StressEffectOnFailure * (card.StressEffectOnFailure > 0 ? negativeMultiplier : 1f));
+            perf = Mathf.RoundToInt(card.PerformanceEffectOnFailure * (card.PerformanceEffectOnFailure < 0 ? negativeMultiplier : 1f));
+            turnover = Mathf.RoundToInt(card.TurnoverEffectOnFailure * (card.TurnoverEffectOnFailure > 0 ? negativeMultiplier : 1f));
         }
 
         StatSystem.Instance.ApplyEffects(motiv, stress, perf, turnover);

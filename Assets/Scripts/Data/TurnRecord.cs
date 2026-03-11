@@ -1,10 +1,11 @@
 public class TurnRecord
 {
-    public string cardName;
-    public bool wasSuccess;
-    public int motivation;
-    public int stress;
-    public int performance;
-    public int turnover;
-    public bool wasGoodDecision;
+    public string CardSlug;
+    public string CardDisplayName;
+    public bool WasSuccess;
+    public int Motivation;
+    public int Stress;
+    public int Performance;
+    public int Turnover;
+    public bool WasGoodDecision;
 }

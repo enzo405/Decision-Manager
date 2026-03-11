@@ -6,11 +6,11 @@ public class PlayerProgressionSystem : MonoBehaviour
     public static PlayerProgressionSystem Instance { get; private set; }
 
     // XP Settings
-    private const int XP_PER_TURN = 50;
-    private const int XP_BONUS_GOOD_DECISION = 25;
-    private const int MAX_LEVEL = 20;
-    private const int BASE_XP = 1000;
-    private const float EXPONENT = 2.0f;
+    private int XpPerTurn;
+    private int XpBonusGoodDecision;
+    private int MaxLevel;
+    private int BaseXp;
+    private float Exponent;
 
     public int CurrentXP { get; private set; }
     public int CurrentLevel { get; private set; }
@@ -33,17 +33,24 @@ public class PlayerProgressionSystem : MonoBehaviour
 
     public void Start()
     {
+        // Charger les paramètres de progression depuis les Thresholds
+        Thresholds thresholds = ConfigApiService.Instance.Thresholds;
+        BaseXp = thresholds.BaseXp;
+        Exponent = thresholds.Exponent;
+        XpPerTurn = thresholds.XpPerTurn;
+        XpBonusGoodDecision = thresholds.XpBonusGoodDecision;
+        MaxLevel = thresholds.MaxLevel;
+
         // Valeur initiale
         NewGame();
     }
 
     public void AddXP(bool wasGoodDecision)
     {
-        int xpGained = XP_PER_TURN + (wasGoodDecision ? XP_BONUS_GOOD_DECISION : 0);
+        int xpGained = XpPerTurn + (wasGoodDecision ? XpBonusGoodDecision : 0);
         CurrentXP += xpGained;
         XPEarnedThisGame += xpGained;
         CheckLevelUp();
-        Save();
         OnProgressionChanged?.Invoke();
     }
 
@@ -60,13 +67,31 @@ public class PlayerProgressionSystem : MonoBehaviour
         CurrentXP -= XPEarnedThisGame;
         if (CurrentXP < 0) CurrentXP = 0;
         CheckLevelUp();
-        Save();
         OnProgressionChanged?.Invoke();
     }
 
+    public float XPProgress()
+    {
+        if (CurrentLevel >= MaxLevel) return 1f;
+        int levelStart = XPThreshold(CurrentLevel);
+        int levelEnd = XPThreshold(CurrentLevel + 1);
+        return (float)(CurrentXP - levelStart) / (levelEnd - levelStart);
+    }
+
+    public void EndGame()
+    {
+        // Backup call: Making sure we don't save a wrong Level
+        CheckLevelUp();
+
+        StartCoroutine(PlayerApiService.Instance.UpdateProgression());
+        PlayerPrefs.SetInt("PlayerXP", CurrentXP);
+        PlayerPrefs.Save();
+    }
+
+
     private void CheckLevelUp()
     {
-        for (int i = MAX_LEVEL; i >= 1; i--)
+        for (int i = MaxLevel; i >= 1; i--)
         {
             if (CurrentXP >= XPThreshold(i))
             {
@@ -76,24 +101,10 @@ public class PlayerProgressionSystem : MonoBehaviour
         }
     }
 
-    public float XPProgress()
-    {
-        if (CurrentLevel >= MAX_LEVEL) return 1f;
-        int levelStart = XPThreshold(CurrentLevel);
-        int levelEnd = XPThreshold(CurrentLevel + 1);
-        return (float)(CurrentXP - levelStart) / (levelEnd - levelStart);
-    }
-
-    private void Save()
-    {
-        PlayerPrefs.SetInt("PlayerXP", CurrentXP);
-        PlayerPrefs.Save();
-    }
-
-    private static int XPThreshold(int level)
+    private int XPThreshold(int level)
     {
         if (level <= 1) return 0;
-        return Mathf.RoundToInt(BASE_XP * Mathf.Pow(level - 1, EXPONENT));
+        return Mathf.RoundToInt(BaseXp * Mathf.Pow(level - 1, Exponent));
     }
 
 

@@ -8,9 +8,6 @@ public class GameHistoryManager : MonoBehaviour
 
     public List<TurnRecord> History { get; private set; } = new();
 
-    // Events for current session
-    public Dictionary<Event, bool> Events { get; private set; } = new();
-
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -25,11 +22,10 @@ public class GameHistoryManager : MonoBehaviour
     public void Reset()
     {
         History.Clear();
-        Events.Clear();
     }
 
 
-    public void RecordTurn(string cardName, bool wasSuccess,
+    public void RecordTurn(Card card, bool wasSuccess,
         int motivDelta, int stressDelta, int perfDelta, int turnoverDelta,
         int motivation, int stress, int performance, int turnover)
     {
@@ -42,38 +38,17 @@ public class GameHistoryManager : MonoBehaviour
         var wasGoodDecision = improved >= 2;
         History.Add(new TurnRecord
         {
-            cardName = cardName,
-            wasSuccess = wasSuccess,
-            motivation = motivation,
-            stress = stress,
-            performance = performance,
-            turnover = turnover,
-            wasGoodDecision = wasGoodDecision
+            CardSlug = card.Slug,
+            CardDisplayName = card.DisplayName,
+            WasSuccess = wasSuccess,
+            Motivation = motivation,
+            Stress = stress,
+            Performance = performance,
+            Turnover = turnover,
+            WasGoodDecision = wasGoodDecision
         });
 
         PlayerProgressionSystem.Instance.AddXP(wasGoodDecision);
-    }
-
-    public void RegisterCardEvents(CardData card)
-    {
-        int currentWeek = GameManager.Instance.CurrentWeek;
-
-        foreach (var key in Events.Keys.ToList())
-        {
-            Events[key] = History
-                .Where((tr, i) =>
-                {
-                    var weeksSincePlayed = currentWeek - (i + 1);
-                    return weeksSincePlayed >= key.WeekRange.Min &&
-                           weeksSincePlayed <= key.WeekRange.Max &&
-                           tr.cardName == key.CardName;
-                })
-                .Any();
-        }
-
-        foreach (Event ev in card.Events)
-        {
-            Events[ev] = ev.WeekRange.Min == 0;
-        }
+        EventSystem.Instance.RegisterCardEvents(card);
     }
 }

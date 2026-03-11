@@ -37,19 +37,18 @@ public class GameManager : MonoBehaviour
         OnTurnStarted?.Invoke();
     }
 
-    public void OnCardPlayed(CardData card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
+    public void OnCardPlayed(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
     {
         GameHistoryManager.Instance.RecordTurn(
-            card.cardName, wasSuccess,
+            card, wasSuccess,
             motivDelta, stressDelta, perfDelta, turnoverDelta,
             StatSystem.Instance.Motivation,
             StatSystem.Instance.Stress,
             StatSystem.Instance.Performance,
             StatSystem.Instance.Turnover
         );
-        GameHistoryManager.Instance.RegisterCardEvents(card);
 
-        RandomEventSystem.Instance.RollEvent();
+        EventSystem.Instance.RollEvent();
 
         var defeat = StatSystem.Instance.CheckDefeatConditions();
         if (defeat != DefeatReason.None)
@@ -84,12 +83,14 @@ public class GameManager : MonoBehaviour
         CurrentWeek = 1;
         IsGameOver = false;
         GameHistoryManager.Instance.Reset();
+        EventSystem.Instance.Reset();
         StatSystem.Instance.Start();
         PlayerProgressionSystem.Instance.NewGame();
     }
 
     public static void EndGame()
     {
+        PlayerProgressionSystem.Instance.EndGame();
         SceneManager.LoadScene("GameOver");
     }
 

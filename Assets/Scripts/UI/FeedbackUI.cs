@@ -26,7 +26,7 @@ public class FeedbackUI : MonoBehaviour
     public void Start()
     {
         CardManager.Instance.OnCardResolved += ShowFeedback;
-        RandomEventSystem.Instance.OnEventTriggered += ShowRandomEvent;
+        EventSystem.Instance.OnEventTriggered += ShowRandomEvent;
         gameObject.SetActive(false);
     }
 
@@ -35,7 +35,7 @@ public class FeedbackUI : MonoBehaviour
         if (CardManager.Instance != null)
         {
             CardManager.Instance.OnCardResolved -= ShowFeedback;
-            RandomEventSystem.Instance.OnEventTriggered -= ShowRandomEvent;
+            EventSystem.Instance.OnEventTriggered -= ShowRandomEvent;
         }
     }
 
@@ -55,7 +55,7 @@ public class FeedbackUI : MonoBehaviour
         }
     }
 
-    public void ShowFeedback(CardData card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
+    public void ShowFeedback(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
     {
         // Show the popup
         gameObject.SetActive(true);
@@ -64,7 +64,7 @@ public class FeedbackUI : MonoBehaviour
         resultText.text = wasSuccess ? "Succès" : "Échec";
 
         // The explanatory message from the card
-        messageText.text = wasSuccess ? card.successMessage : card.failureMessage;
+        messageText.text = wasSuccess ? card.SuccessMessage : card.FailureMessage;
 
         // Stats changes summary
         statsChangesText.text = $"Motivation {Signed(motivDelta)}\n" +

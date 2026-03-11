@@ -8,12 +8,12 @@ public class CollectionUI : MonoBehaviour
 {
     public Transform cardsGrid;
     public GameObject cardItemPrefab;
-    public CardData[] allCards;
+    public Card[] allCards;
     public Button backButton;
 
     public void Start()
     {
-        allCards = Resources.LoadAll<CardData>("Cards").OrderBy(c => c.requiredLevel).ToArray();
+        allCards = CardApiService.Instance.AllCards.OrderBy(c => c.RequiredLevel).ToArray();
         backButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
         PopulateCollection();
     }
@@ -31,11 +31,11 @@ public class CollectionUI : MonoBehaviour
             GameObject lockedOverlay = item.transform.Find("LockedOverlay").gameObject;
             TextMeshProUGUI lockText = lockedOverlay.transform.Find("LockText").GetComponent<TextMeshProUGUI>();
 
-            bool isUnlocked = card.requiredLevel <= playerLevel;
+            bool isUnlocked = card.RequiredLevel <= playerLevel;
 
-            nameText.text = isUnlocked ? card.cardName : "???";
-            levelText.text = $"Niveau {card.requiredLevel}";
-            lockText.text = $"Niveau {card.requiredLevel} requis";
+            nameText.text = isUnlocked ? card.DisplayName : "???";
+            levelText.text = $"Niveau {card.RequiredLevel}";
+            lockText.text = $"Niveau {card.RequiredLevel} requis";
             lockedOverlay.SetActive(!isUnlocked);
         }
     }

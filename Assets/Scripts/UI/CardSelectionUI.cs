@@ -16,10 +16,10 @@ public class CardSlot
 public class CardSelectionUI : MonoBehaviour
 {
     public CardSlot[] slots = new CardSlot[3];
-    private CardData[] unlockedCards;
+    private Card[] unlockedCards;
     public void Start()
     {
-        unlockedCards = CardManager.Instance.GetUnlockedCards();
+        unlockedCards = CardApiService.Instance.GetUnlockedCards(PlayerProgressionSystem.Instance.LevelThisGame);
 
         GameManager.Instance.OnTurnStarted += DrawCards;
         DrawCards();
@@ -34,27 +34,27 @@ public class CardSelectionUI : MonoBehaviour
     public void DrawCards()
     {
         // Mélange et pioche 3 cartes aléatoires
-        CardData[] picked = PickRandomCards(3);
+        Card[] picked = PickRandomCards(3);
 
         for (int i = 0; i < slots.Length; i++)
         {
-            CardData card = picked[i];
+            Card card = picked[i];
             CardSlot slot = slots[i];
 
-            slot.titleText.text = card.cardName;
-            slot.descriptionText.text = card.description;
+            slot.titleText.text = card.DisplayName;
+            slot.descriptionText.text = card.Description;
             slot.effectsText.text = BuildEffectsText(card);
 
             // Capture pour le lambda
-            CardData capturedCard = card;
+            Card capturedCard = card;
             slot.cardButton.onClick.RemoveAllListeners();
             slot.cardButton.onClick.AddListener(() => CardManager.Instance.PlayCard(capturedCard));
         }
     }
 
-    public CardData[] PickRandomCards(int count)
+    public Card[] PickRandomCards(int count)
     {
-        CardData[] shuffled = (CardData[])unlockedCards.Clone();
+        Card[] shuffled = (Card[])unlockedCards.Clone();
 
         // Fisher-Yates shuffle
         for (int i = shuffled.Length - 1; i > 0; i--)
@@ -63,19 +63,19 @@ public class CardSelectionUI : MonoBehaviour
             (shuffled[i], shuffled[j]) = (shuffled[j], shuffled[i]);
         }
 
-        CardData[] result = new CardData[count];
+        Card[] result = new Card[count];
         for (int i = 0; i < count; i++)
             result[i] = shuffled[i];
         return result;
     }
 
-    private string BuildEffectsText(CardData card)
+    private string BuildEffectsText(Card card)
     {
-        return $"Motivation {Signed(card.motivationEffect)}\n" +
-               $"Stress {Signed(card.stressEffect)}\n" +
-               $"Performance {Signed(card.performanceEffect)}\n" +
-               $"Turnover {Signed(card.turnoverEffect)}\n" +
-               $"Risque : {card.riskLevel}";
+        return $"Motivation {Signed(card.MotivationEffect)}\n" +
+               $"Stress {Signed(card.StressEffect)}\n" +
+               $"Performance {Signed(card.PerformanceEffect)}\n" +
+               $"Turnover {Signed(card.TurnoverEffect)}\n" +
+               $"Risque : {card.RiskLevel}";
     }
 
     private string Signed(int v) => v >= 0 ? $"+{v}" : $"{v}";
