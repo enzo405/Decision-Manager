@@ -12,6 +12,7 @@ public class ConfigApiService : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("[ConfigApiService] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -29,7 +30,7 @@ public class ConfigApiService : MonoBehaviour
                 Thresholds = thresholds;
                 onSuccess?.Invoke(Thresholds);
             },
-            onError
+            (err) => onError?.Invoke(err)
         ));
     }
 
@@ -42,7 +43,7 @@ public class ConfigApiService : MonoBehaviour
                 DefeatConditions = defeatConditions;
                 onSuccess?.Invoke(DefeatConditions);
             },
-            onError
+            (err) => onError?.Invoke(err)
         ));
     }
 
@@ -55,7 +56,7 @@ public class ConfigApiService : MonoBehaviour
                 StatsInit = statsInit;
                 onSuccess?.Invoke(StatsInit);
             },
-            onError
+            (err) => onError?.Invoke(err)
         ));
     }
 }
