@@ -5,12 +5,6 @@ public class StatSystem : MonoBehaviour
 {
     public static StatSystem Instance { get; private set; }
 
-    [Header("Initial Values")]
-    [Range(0, 100)] public int initialMotivation = 50;
-    [Range(0, 100)] public int initialStress = 30;
-    [Range(0, 100)] public int initialPerformance = 40;
-    [Range(0, 100)] public int initialTurnover = 20;
-
     public int Motivation { get; private set; }
     public int Stress { get; private set; }
     public int Performance { get; private set; }
@@ -19,9 +13,14 @@ public class StatSystem : MonoBehaviour
     // Anyone can subscribe to know when stats change
     public event Action OnStatsChanged;
 
-    public static int GetMaxStress() => Mathf.Max(85 - (PlayerProgressionSystem.Instance.LevelThisGame * 2), 60);
-    public static int GetMaxTurnover() => Mathf.Max(80 - (PlayerProgressionSystem.Instance.LevelThisGame * 2), 55);
-    public static int GetMinPerformance() => Mathf.Min(15 + (PlayerProgressionSystem.Instance.LevelThisGame * 2), 35);
+    public static int GetMaxTurnover => ConfigApiService.Instance.DefeatConditions.Turnover.Max;
+    public static int GetMinTurnover => ConfigApiService.Instance.DefeatConditions.Turnover.Min;
+    public static int GetMaxPerformance => ConfigApiService.Instance.DefeatConditions.Performance.Max;
+    public static int GetMinPerformance => ConfigApiService.Instance.DefeatConditions.Performance.Min;
+    public static int GetMaxStress => ConfigApiService.Instance.DefeatConditions.Stress.Max;
+    public static int GetMinStress => ConfigApiService.Instance.DefeatConditions.Stress.Min;
+    public static int GetMaxMotivation => ConfigApiService.Instance.DefeatConditions.Motivation.Max;
+    public static int GetMinMotivation => ConfigApiService.Instance.DefeatConditions.Motivation.Min;
 
 
     public void Awake()
@@ -38,20 +37,25 @@ public class StatSystem : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log($"Thresholds: MaxStress={GetMaxStress()}, MaxTurnover={GetMaxTurnover()}, MinPerformance={GetMinPerformance()}");
-        Motivation = initialMotivation;
-        Stress = initialStress;
-        Performance = initialPerformance;
-        Turnover = initialTurnover;
+        NewGame();
+    }
+
+    public void NewGame()
+    {
+        var statsInit = ConfigApiService.Instance.StatsInit;
+        Motivation = statsInit.InitialMotivation;
+        Stress = statsInit.InitialStress;
+        Performance = statsInit.InitialPerformance;
+        Turnover = statsInit.InitialTurnover;
         OnStatsChanged?.Invoke();
     }
 
     public void ApplyEffects(int motivation, int stress, int performance, int turnover)
     {
-        Motivation = Mathf.Clamp(Motivation + motivation, 0, 100);
-        Stress = Mathf.Clamp(Stress + stress, 0, 100);
-        Performance = Mathf.Clamp(Performance + performance, 0, 100);
-        Turnover = Mathf.Clamp(Turnover + turnover, 0, 100);
+        Motivation = Mathf.Clamp(Motivation + motivation, GetMinMotivation, GetMaxMotivation);
+        Stress = Mathf.Clamp(Stress + stress, GetMinStress, GetMaxStress);
+        Performance = Mathf.Clamp(Performance + performance, GetMinPerformance, GetMaxPerformance);
+        Turnover = Mathf.Clamp(Turnover + turnover, GetMinTurnover, GetMaxTurnover);
 
         ApplyInterdependencies();
 
@@ -61,9 +65,10 @@ public class StatSystem : MonoBehaviour
     public DefeatReason CheckDefeatConditions()
     {
         Debug.Log($"Checking defeat conditions: Stress={Stress}, Turnover={Turnover}, Performance={Performance}");
-        if (Stress >= GetMaxStress()) return DefeatReason.Burnout;
-        if (Turnover >= GetMaxTurnover()) return DefeatReason.MassiveDepartures;
-        if (Performance <= GetMinPerformance()) return DefeatReason.PoorPerformance;
+
+        if (Stress >= GetMaxStress) return DefeatReason.Burnout;
+        if (Turnover >= GetMaxTurnover) return DefeatReason.MassiveDepartures;
+        if (Performance <= GetMinPerformance) return DefeatReason.PoorPerformance;
         return DefeatReason.None;
     }
 
@@ -71,12 +76,10 @@ public class StatSystem : MonoBehaviour
     {
         // High stress slowly degrades motivation
         if (Stress > 70)
-            Motivation = Mathf.Clamp(Motivation - 2, 0, 100);
+            Motivation = Mathf.Clamp(Motivation - 2, GetMinMotivation, GetMaxMotivation);
 
         // High stress increases turnover risk
         if (Stress > 80)
-            Turnover = Mathf.Clamp(Turnover + 3, 0, 100);
+            Turnover = Mathf.Clamp(Turnover + 3, GetMinTurnover, GetMaxTurnover);
     }
 }
-
-public enum DefeatReason { None, Burnout, MassiveDepartures, PoorPerformance }

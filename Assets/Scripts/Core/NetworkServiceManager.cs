@@ -62,6 +62,11 @@ public class NetworkServiceManager : MonoBehaviour
             onError: error => Debug.LogError($"[Network] FetchThresholds init failed: {error}")
         ));
 
+        yield return StartCoroutine(_configApiService.FetchStatsInit(
+            onSuccess: statsInit => Debug.Log($"[Network] Fetched and initialized initial stats: InitialMotivation={statsInit.InitialMotivation}; InitialPerformance={statsInit.InitialPerformance}; InitialStress={statsInit.InitialStress}; InitialTurnover={statsInit.InitialTurnover}"),
+            onError: error => Debug.LogError($"[Network] FetchStatsInit init failed: {error}")
+        ));
+
         IsReady = true;
         Debug.Log("[Network] Initialization complete.");
     }

@@ -8,6 +8,7 @@ public class ConfigApiService : MonoBehaviour
 
     public Thresholds Thresholds { get; private set; }
     public DefeatConditions DefeatConditions { get; private set; }
+    public StatsInit StatsInit { get; private set; }
 
     void Awake()
     {
@@ -40,6 +41,19 @@ public class ConfigApiService : MonoBehaviour
             {
                 DefeatConditions = defeatConditions;
                 onSuccess?.Invoke(DefeatConditions);
+            },
+            onError
+        ));
+    }
+
+    public IEnumerator FetchStatsInit(Action<StatsInit> onSuccess = null, Action<string> onError = null)
+    {
+        yield return StartCoroutine(ApiClient.Get<StatsInit>(
+            "/api/config/initial-stats",
+            statsInit =>
+            {
+                StatsInit = statsInit;
+                onSuccess?.Invoke(StatsInit);
             },
             onError
         ));

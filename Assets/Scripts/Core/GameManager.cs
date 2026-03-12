@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         IsGameOver = false;
         GameHistoryManager.Instance.Reset();
         EventSystem.Instance.Reset();
-        StatSystem.Instance.Start();
+        StatSystem.Instance.NewGame();
         PlayerProgressionSystem.Instance.NewGame();
     }
 
