@@ -1,0 +1,4 @@
+- Implement Tresholds
+- Implement TurnRecord with Events to display the random events on the feedbackUI screen
+- Loading scene where Initializing NetworkService would belong
+- Refactor StatSystem

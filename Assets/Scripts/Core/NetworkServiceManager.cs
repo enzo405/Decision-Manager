@@ -42,7 +42,7 @@ public class NetworkServiceManager : MonoBehaviour
         yield return StartCoroutine(_playerService.CreateOrGetPlayer(
             deviceId,
             onSuccess: player => Debug.Log($"[Network] Player initialized: {player.DeviceId}"),
-            onError: error => Debug.LogError($"[Network] Player init failed: {error}")
+            onError: error => Debug.LogError($"[Network] Player init failed with DeviceId {deviceId}: {error}")
         ));
 
         // 2 - Initialize Cards
