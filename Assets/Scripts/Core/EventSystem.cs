@@ -14,6 +14,7 @@ public class EventSystem : MonoBehaviour
 
     public void Awake()
     {
+        Debug.Log("[EventSystem] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

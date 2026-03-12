@@ -25,7 +25,7 @@ public class StatSystem : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("StatSystem Awake");
+        Debug.Log("[StatSystem] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

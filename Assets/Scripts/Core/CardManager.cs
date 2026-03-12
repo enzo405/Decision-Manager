@@ -11,7 +11,7 @@ public class CardManager : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("CardManager Awake");
+        Debug.Log("[CardManager] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

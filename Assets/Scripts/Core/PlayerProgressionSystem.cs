@@ -21,7 +21,7 @@ public class PlayerProgressionSystem : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("PlayerProgressionSystem Awake");
+        Debug.Log("[PlayerProgressionSystem] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

@@ -1,7 +1,7 @@
 public class Event
 {
-    public string Name { get; }
-    public string CardSlug { get; }
+    public string Name { get; set; }
+    public string CardSlug { get; set; }
 
     /// <summary>
     /// Range de tour entre lequel l'évenement pourra se déclencher
@@ -12,20 +12,20 @@ public class Event
     /// <summary>
     /// Message affiché lorsque l'évenement est déclenché
     /// </summary>
-    public string Message { get; }
+    public string Message { get; set; }
 
     /// <summary>
     /// Chance que cet évenement se déclenche
     /// </summary>
-    public float Chance { get; }
+    public float Chance { get; set; }
 
 
     #region Effect on Stats
 
-    public int MotivationDelta { get; }
-    public int StressDelta { get; }
-    public int PerformanceDelta { get; }
-    public int TurnoverDelta { get; }
+    public int MotivationDelta { get; set; }
+    public int StressDelta { get; set; }
+    public int PerformanceDelta { get; set; }
+    public int TurnoverDelta { get; set; }
 
     #endregion
 }

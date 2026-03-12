@@ -13,16 +13,6 @@ public class FeedbackUI : MonoBehaviour
     public TextMeshProUGUI eventMessageText;
     public Button continueButton;
 
-    public void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
-
     public void Start()
     {
         CardManager.Instance.OnCardResolved += ShowFeedback;

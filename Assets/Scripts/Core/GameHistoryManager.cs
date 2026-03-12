@@ -10,6 +10,7 @@ public class GameHistoryManager : MonoBehaviour
 
     public void Awake()
     {
+        Debug.Log("[GameHistoryManager] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
