@@ -10,6 +10,7 @@ public class PlayerApiService : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("[PlayerApiService] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -42,7 +43,7 @@ public class PlayerApiService : MonoBehaviour
                 CurrentPlayer = player;
                 onSuccess?.Invoke(CurrentPlayer);
             },
-            onError
+            (err) => onError?.Invoke(err)
         ));
     }
 
@@ -57,8 +58,13 @@ public class PlayerApiService : MonoBehaviour
         yield return StartCoroutine(ApiClient.Put(
             $"/api/players/{CurrentPlayer.DeviceId}/progression",
             dto,
-            onSuccess,
-            onError
+            () =>
+            {
+                CurrentPlayer.Progression.CurrentXP = dto.CurrentXp;
+                CurrentPlayer.Progression.CurrentLevel = dto.CurrentLevel;
+                onSuccess?.Invoke();
+            },
+            (err) => onError?.Invoke(err)
         ));
     }
 }

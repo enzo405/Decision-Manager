@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using System;
 
 public static class ApiClient
 {
-    public static IEnumerator Get<T>(string endpoint, System.Action<T> onSuccess, System.Action<string> onError = null)
+    public static IEnumerator Get<T>(string endpoint, Action<T> onSuccess, Action<string> onError = null)
     {
         using var request = UnityWebRequest.Get(ApiConfig.BaseUrl + endpoint);
         request.SetRequestHeader("X-Api-Key", ApiConfig.ApiKey);
@@ -21,7 +22,7 @@ public static class ApiClient
         onSuccess(result);
     }
 
-    public static IEnumerator Post<TBody, TResponse>(string endpoint, TBody body, System.Action<TResponse> onSuccess, System.Action<string> onError = null)
+    public static IEnumerator Post<TBody, TResponse>(string endpoint, TBody body, Action<TResponse> onSuccess, Action<string> onError = null)
     {
         var json = JsonConvert.SerializeObject(body);
         using var request = new UnityWebRequest(ApiConfig.BaseUrl + endpoint, "POST");
@@ -42,7 +43,7 @@ public static class ApiClient
         onSuccess(result);
     }
 
-    public static IEnumerator Put<TBody>(string endpoint, TBody body, System.Action onSuccess, System.Action<string> onError = null)
+    public static IEnumerator Put<TBody>(string endpoint, TBody body, Action onSuccess, Action<string> onError = null)
     {
         var json = JsonConvert.SerializeObject(body);
         using var request = new UnityWebRequest(ApiConfig.BaseUrl + endpoint, "PUT");

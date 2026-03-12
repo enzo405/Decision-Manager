@@ -12,6 +12,7 @@ public class CardApiService : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("[CardApiService] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -29,7 +30,7 @@ public class CardApiService : MonoBehaviour
                 AllCards = cards;
                 onSuccess?.Invoke(cards);
             },
-            onError
+            (err) => onError?.Invoke(err)
         ));
     }
 
