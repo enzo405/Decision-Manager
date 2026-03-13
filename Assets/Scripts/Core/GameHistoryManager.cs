@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class GameHistoryManager : MonoBehaviour
@@ -7,6 +6,7 @@ public class GameHistoryManager : MonoBehaviour
     public static GameHistoryManager Instance { get; private set; }
 
     public List<TurnRecord> History { get; private set; } = new();
+    public Dictionary<int, Event> HistoryRandomEvents { get; private set; } = new();
 
     public void Awake()
     {
@@ -23,8 +23,13 @@ public class GameHistoryManager : MonoBehaviour
     public void Reset()
     {
         History.Clear();
+        HistoryRandomEvents.Clear();
     }
 
+    public void RecordRandomEvent(Event randomEvent, int fromTurnDecision)
+    {
+        HistoryRandomEvents.Add(fromTurnDecision, randomEvent);
+    }
 
     public void RecordTurn(Card card, bool wasSuccess,
         int motivDelta, int stressDelta, int perfDelta, int turnoverDelta,

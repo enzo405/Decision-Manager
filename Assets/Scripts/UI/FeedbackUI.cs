@@ -29,7 +29,7 @@ public class FeedbackUI : MonoBehaviour
         }
     }
 
-    public void ShowRandomEvent(Event randomEvent)
+    public void ShowRandomEvent(Event randomEvent, int fromTurnDecision)
     {
         if (randomEvent == null)
         {
@@ -37,11 +37,14 @@ public class FeedbackUI : MonoBehaviour
         }
         else
         {
-            eventMessageText.text = $"{randomEvent.Message}\n" +
-                                $"Motivation {Signed(randomEvent.MotivationDelta)}\n" +
-                                $"Stress {Signed(randomEvent.StressDelta)}\n" +
-                                $"Performance {Signed(randomEvent.PerformanceDelta)}\n" +
-                                $"Turnover {Signed(randomEvent.TurnoverDelta)}";
+            var originCard = GameHistoryManager.Instance.History[fromTurnDecision - 1].CardDisplayName;
+
+            eventMessageText.text = $"Événement déclenché par \"{originCard}\" (tour {fromTurnDecision})\n\n" +
+                            $"{randomEvent.Message}\n\n" +
+                            $"Motivation {Signed(randomEvent.MotivationDelta)}\n" +
+                            $"Stress {Signed(randomEvent.StressDelta)}\n" +
+                            $"Performance {Signed(randomEvent.PerformanceDelta)}\n" +
+                            $"Turnover {Signed(randomEvent.TurnoverDelta)}";
         }
     }
 

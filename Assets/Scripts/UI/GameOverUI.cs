@@ -46,14 +46,27 @@ public class GameOverUI : MonoBehaviour
 
     public void SetupDecisions()
     {
-        foreach (var record in GameHistoryManager.Instance.History)
+        for (int i = 0; i < GameHistoryManager.Instance.History.Count; i++)
         {
+            var record = GameHistoryManager.Instance.History[i];
+            int turn = i + 1;
+
+            // Decision item
             GameObject item = Instantiate(decisionItemPrefab, decisionsList);
             TextMeshProUGUI text = item.GetComponent<TextMeshProUGUI>();
-
             string success = record.WasSuccess ? "Succès" : "Échec";
-            text.text = $"{success} — {record.CardDisplayName}";
+            text.text = $"Semaine {turn} — {success} — {record.CardDisplayName}";
             text.color = record.WasGoodDecision ? Color.darkGreen : Color.softRed;
+
+            // Random event linked to this turn
+            if (GameHistoryManager.Instance.HistoryRandomEvents.TryGetValue(turn, out Event randomEvent))
+            {
+                GameObject eventItem = Instantiate(decisionItemPrefab, decisionsList);
+                TextMeshProUGUI eventText = eventItem.GetComponent<TextMeshProUGUI>();
+                eventText.text = $"Semaine {turn} — Événement — {randomEvent.Name} (déclenché par \"{record.CardDisplayName}\")";
+                eventText.color = new Color(0.90f, 0.49f, 0.13f); // orange
+                eventText.fontStyle = FontStyles.Italic;
+            }
         }
     }
 
