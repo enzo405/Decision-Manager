@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: eb2af654592201e4093791aed35dda59
+guid: aa5339268731c264da06fdb6cbfcaa33
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Caskaydia Cove
+  - Share Tech Mono
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
