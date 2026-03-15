@@ -41,11 +41,9 @@ public class CardDetailsOverlayUI : MonoBehaviour
     [SerializeField] private Button handleButton;
 
     // Stat colors
-    private static readonly Color ColorMotivation = new Color(0.29f, 0.56f, 0.85f); // #4A8FD9
-    private static readonly Color ColorStress = new Color(0.91f, 0.30f, 0.24f); // #E84C3D
-    private static readonly Color ColorPerformance = new Color(0.18f, 0.80f, 0.44f); // #2ECC70
-    private static readonly Color ColorTurnover = new Color(0.90f, 0.49f, 0.13f); // #E67E21
-
+    private static readonly Color ColorRed = new(0.91f, 0.30f, 0.24f); // #E84C3D
+    private static readonly Color ColorGreen = new(0.18f, 0.80f, 0.44f); // #2ECC70
+    private static readonly Color ColorOrange = new(0.90f, 0.49f, 0.13f); // #E67E21
 
     private Card _currentCard;
 
@@ -79,34 +77,34 @@ public class CardDetailsOverlayUI : MonoBehaviour
         Color riskColor = GetRiskColor(card.RiskLevel);
         riskBadgeText.text = GetRiskLabel(card.RiskLevel);
         riskBadgeText.color = riskColor;
-        riskBadgeBg.color = new Color(riskColor.r, riskColor.g, riskColor.b, 0.6f);
+        riskBadgeBg.color = new Color(riskColor.r, riskColor.g, riskColor.b, 0.04f);
         borderImage.color = new Color(riskColor.r, riskColor.g, riskColor.b, 0.55f);
 
         // Probability
         probValue.text = $"{card.SuccessProbability * 100f}%";
 
         // Effects — values with sign and color
-        SetStatValue(statValuePerformance, card.PerformanceEffect, ColorPerformance);
-        SetStatValue(statValueTurnover, card.TurnoverEffect, ColorTurnover);
-        SetStatValue(statValueMotivation, card.MotivationEffect, ColorMotivation);
-        SetStatValue(statValueStress, card.StressEffect, ColorStress);
+        SetStatValue(statValuePerformance, card.PerformanceEffect);
+        SetStatValue(statValueTurnover, card.TurnoverEffect);
+        SetStatValue(statValueMotivation, card.MotivationEffect);
+        SetStatValue(statValueStress, card.StressEffect);
 
         // Messages
         msgSuccessText.text = card.SuccessMessage;
         msgFailureText.text = card.FailureMessage;
     }
 
-    private void SetStatValue(TextMeshProUGUI label, int value, Color statColor)
+    private void SetStatValue(TextMeshProUGUI label, int value)
     {
         label.text = value >= 0 ? $"+{value}" : $"{value}";
-        label.color = value >= 0 ? ColorPerformance : ColorStress;
+        label.color = value >= 0 ? ColorGreen : ColorRed;
     }
 
     private Color GetRiskColor(RiskLevel risk) => risk switch
     {
-        RiskLevel.Low => ColorPerformance,
-        RiskLevel.Medium => ColorTurnover,
-        RiskLevel.High => ColorStress,
+        RiskLevel.Low => ColorGreen,
+        RiskLevel.Medium => ColorOrange,
+        RiskLevel.High => ColorRed,
         _ => Color.white
     };
 
