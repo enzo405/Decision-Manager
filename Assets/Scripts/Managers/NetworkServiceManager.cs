@@ -17,6 +17,10 @@ public class NetworkServiceManager : MonoBehaviour
 
     [SerializeField] private LoadingUI loadingUI;
 
+
+    public string ApiBaseUrl { get; private set; }
+    public string ApiKey { get; private set; }
+
     public void Awake()
     {
         Debug.Log("[NetworkServiceManager] Awake");
@@ -27,6 +31,7 @@ public class NetworkServiceManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        LoadConfig();
 
         _playerService = GetComponent<PlayerApiService>();
         _cardService = GetComponent<CardApiService>();
@@ -84,5 +89,14 @@ public class NetworkServiceManager : MonoBehaviour
         yield return _waitForSeconds0_5;
         loadingUI = null;
         SceneManager.LoadScene("MainMenu");
+    }
+
+
+    private void LoadConfig()
+    {
+        TextAsset file = Resources.Load<TextAsset>("ApiConfig");
+        ApiConfig config = JsonUtility.FromJson<ApiConfig>(file.text);
+        ApiBaseUrl = config.apiBaseUrl;
+        ApiKey = config.apiKey;
     }
 }

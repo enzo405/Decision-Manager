@@ -5,10 +5,13 @@ using System;
 
 public static class ApiClient
 {
+    private static string BaseUrl => NetworkServiceManager.Instance.ApiBaseUrl;
+    private static string ApiKey => NetworkServiceManager.Instance.ApiKey;
+
     public static IEnumerator Get<T>(string endpoint, Action<T> onSuccess, Action<string> onError = null)
     {
-        using var request = UnityWebRequest.Get(ApiConfig.BaseUrl + endpoint);
-        request.SetRequestHeader("X-Api-Key", ApiConfig.ApiKey);
+        using var request = UnityWebRequest.Get(BaseUrl + endpoint);
+        request.SetRequestHeader("X-Api-Key", ApiKey);
 
         yield return request.SendWebRequest();
 
@@ -25,11 +28,11 @@ public static class ApiClient
     public static IEnumerator Post<TBody, TResponse>(string endpoint, TBody body, Action<TResponse> onSuccess, Action<string> onError = null)
     {
         var json = JsonConvert.SerializeObject(body);
-        using var request = new UnityWebRequest(ApiConfig.BaseUrl + endpoint, "POST");
+        using var request = new UnityWebRequest(BaseUrl + endpoint, "POST");
         request.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json));
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        request.SetRequestHeader("X-Api-Key", ApiConfig.ApiKey);
+        request.SetRequestHeader("X-Api-Key", ApiKey);
 
         yield return request.SendWebRequest();
 
@@ -46,11 +49,11 @@ public static class ApiClient
     public static IEnumerator Put<TBody>(string endpoint, TBody body, Action onSuccess, Action<string> onError = null)
     {
         var json = JsonConvert.SerializeObject(body);
-        using var request = new UnityWebRequest(ApiConfig.BaseUrl + endpoint, "PUT");
+        using var request = new UnityWebRequest(BaseUrl + endpoint, "PUT");
         request.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json));
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        request.SetRequestHeader("X-Api-Key", ApiConfig.ApiKey);
+        request.SetRequestHeader("X-Api-Key", ApiKey);
 
         yield return request.SendWebRequest();
 
