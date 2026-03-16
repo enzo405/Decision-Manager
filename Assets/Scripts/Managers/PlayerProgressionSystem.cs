@@ -29,10 +29,7 @@ public class PlayerProgressionSystem : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-    }
 
-    public void Start()
-    {
         // Charger les paramètres de progression depuis les Thresholds
         Thresholds thresholds = ConfigApiService.Instance.Thresholds;
         BaseXp = thresholds.BaseXp;
@@ -40,6 +37,14 @@ public class PlayerProgressionSystem : MonoBehaviour
         XpPerTurn = thresholds.XpPerTurn;
         XpBonusGoodDecision = thresholds.XpBonusGoodDecision;
         MaxLevel = thresholds.MaxLevel;
+
+    }
+
+    public void Start()
+    {
+        GameManager.Instance.OnEndGameTriggered += EndGame;
+        GameManager.Instance.OnNewGameTriggered += NewGame;
+        GameManager.Instance.OnGameAbandonedTriggered += AbandonCurrentGameProgression;
 
         // Valeur initiale
         NewGame();
@@ -54,7 +59,7 @@ public class PlayerProgressionSystem : MonoBehaviour
         OnProgressionChanged?.Invoke();
     }
 
-    public void NewGame()
+    private void NewGame()
     {
         CurrentXP = PlayerPrefs.GetInt("PlayerXP", 0);
         CheckLevelUp();
@@ -78,7 +83,7 @@ public class PlayerProgressionSystem : MonoBehaviour
         return (float)(CurrentXP - levelStart) / (levelEnd - levelStart);
     }
 
-    public void EndGame()
+    private void EndGame()
     {
         // Backup call: Making sure we don't save a wrong Level
         CheckLevelUp();

@@ -26,12 +26,24 @@ public class EventSystem : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Reset()
+    public void Start()
+    {
+        GameManager.Instance.OnCardPlayedTriggered += OnCardPlayedWrapper;
+
+        GameManager.Instance.OnNewGameTriggered += Reset;
+    }
+
+    private void Reset()
     {
         Events.Clear();
     }
 
-    public void RollEvent()
+    private void OnCardPlayedWrapper(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
+    {
+        RollEvent();
+    }
+
+    private void RollEvent()
     {
         TurnEventRecord[] events = Events
             .Where(e => e.Value.IsActiv == true)
@@ -51,7 +63,6 @@ public class EventSystem : MonoBehaviour
 
         if (isTriggered)
         {
-            TriggerEvent(randomEvent);
             OnEventTriggered?.Invoke(randomEvent.Event, randomEvent.FromTurnDecision);
         }
         else
@@ -84,21 +95,5 @@ public class EventSystem : MonoBehaviour
             var key = BuildDictKey(ev, currentWeek);
             Events[key] = turnEventRecord;
         }
-    }
-
-
-    private static void TriggerEvent(TurnEventRecord randomEvent)
-    {
-        GameHistoryManager.Instance.RecordRandomEvent(randomEvent.Event, randomEvent.FromTurnDecision);
-
-        int level = PlayerProgressionSystem.Instance.LevelThisGame;
-        float negativeMultiplier = 1f + Mathf.Min(0.03f + (level * 0.02f), 0.15f); // 2% par niveau, max 15%
-
-        StatSystem.Instance.ApplyEffects(
-            Mathf.RoundToInt(randomEvent.Event.MotivationDelta * negativeMultiplier),
-            Mathf.RoundToInt(randomEvent.Event.StressDelta * negativeMultiplier),
-            Mathf.RoundToInt(randomEvent.Event.PerformanceDelta * negativeMultiplier),
-            Mathf.RoundToInt(randomEvent.Event.TurnoverDelta * negativeMultiplier)
-        );
     }
 }

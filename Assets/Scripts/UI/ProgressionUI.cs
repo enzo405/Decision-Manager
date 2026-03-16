@@ -4,7 +4,9 @@ using TMPro;
 
 public class ProgressionUI : MonoBehaviour
 {
+    [Header("Progression Display")]
     public TextMeshProUGUI levelText;
+    public TextMeshProUGUI levelTitle;
     public Slider xpBar;
 
     public void Start()
@@ -22,7 +24,8 @@ public class ProgressionUI : MonoBehaviour
     public void RefreshUI()
     {
         var progression = PlayerProgressionSystem.Instance;
-        levelText.text = $"{progression.LevelTitle()} — Niveau {progression.CurrentLevel}";
+        levelText.text = $"Niv. {progression.CurrentLevel}";
+        levelTitle.text = progression.LevelTitle();
         xpBar.value = progression.XPProgress();
     }
 }

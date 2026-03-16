@@ -1,13 +1,11 @@
 using UnityEngine;
 using System;
-using System.Linq;
 
 public class CardManager : MonoBehaviour
 {
     public static CardManager Instance { get; private set; }
 
     public event Action<Card, bool, int, int, int, int> OnCardResolved;
-    // (card, wasSuccess, motivDelta, stressDelta, perfDelta, turnoverDelta)
 
     public void Awake()
     {
@@ -44,11 +42,6 @@ public class CardManager : MonoBehaviour
             turnover = Mathf.RoundToInt(card.TurnoverEffectOnFailure * (card.TurnoverEffectOnFailure > 0 ? negativeMultiplier : 1f));
         }
 
-        StatSystem.Instance.ApplyEffects(motiv, stress, perf, turnover);
-
-        GameManager.Instance.OnCardPlayed(card, success, motiv, stress, perf, turnover);
-
-        // Trigger le FeedbackUI
         OnCardResolved?.Invoke(card, success, motiv, stress, perf, turnover);
     }
 }

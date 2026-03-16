@@ -20,20 +20,28 @@ public class GameHistoryManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Reset()
+    public void Start()
+    {
+        GameManager.Instance.OnCardPlayedTriggered += RecordTurn;
+        EventSystem.Instance.OnEventTriggered += RecordRandomEvent;
+        GameManager.Instance.OnNewGameTriggered += Reset;
+    }
+
+
+    private void Reset()
     {
         History.Clear();
         HistoryRandomEvents.Clear();
     }
 
-    public void RecordRandomEvent(Event randomEvent, int fromTurnDecision)
+    private void RecordRandomEvent(Event randomEvent, int fromTurnDecision)
     {
+        if (randomEvent == null) return;
         HistoryRandomEvents.Add(fromTurnDecision, randomEvent);
     }
 
-    public void RecordTurn(Card card, bool wasSuccess,
-        int motivDelta, int stressDelta, int perfDelta, int turnoverDelta,
-        int motivation, int stress, int performance, int turnover)
+    private void RecordTurn(Card card, bool wasSuccess,
+        int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
     {
         int improved = 0;
         if (motivDelta > 0) improved++;
@@ -47,10 +55,10 @@ public class GameHistoryManager : MonoBehaviour
             CardSlug = card.Slug,
             CardDisplayName = card.DisplayName,
             WasSuccess = wasSuccess,
-            Motivation = motivation,
-            Stress = stress,
-            Performance = performance,
-            Turnover = turnover,
+            Motivation = StatSystem.Instance.Motivation,
+            Stress = StatSystem.Instance.Stress,
+            Performance = StatSystem.Instance.Performance,
+            Turnover = StatSystem.Instance.Turnover,
             WasGoodDecision = wasGoodDecision
         });
 

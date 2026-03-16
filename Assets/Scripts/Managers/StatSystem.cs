@@ -37,10 +37,19 @@ public class StatSystem : MonoBehaviour
 
     public void Start()
     {
-        NewGame();
+        GameManager.Instance.OnNewGameTriggered += NewGame;
+        GameManager.Instance.OnCardPlayedTriggered += (_, _, motivation, stress, performance, turnover) =>
+        {
+            ApplyEffects(motivation, stress, performance, turnover);
+        };
+        EventSystem.Instance.OnEventTriggered += (ev, fromTurn) =>
+        {
+            if (ev == null) return;
+            ApplyEffects(ev.MotivationDelta, ev.StressDelta, ev.PerformanceDelta, ev.TurnoverDelta);
+        };
     }
 
-    public void NewGame()
+    private void NewGame()
     {
         var statsInit = ConfigApiService.Instance.StatsInit;
         Motivation = statsInit.InitialMotivation;

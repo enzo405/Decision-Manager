@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class FeedbackUI : MonoBehaviour
 {
-    public static FeedbackUI Instance { get; private set; }
 
     [Header("UI References")]
+    public GameObject feedbackUIPanel;
     public TextMeshProUGUI resultText;
     public TextMeshProUGUI messageText;
     public TextMeshProUGUI statsChangesText;
@@ -15,13 +15,20 @@ public class FeedbackUI : MonoBehaviour
 
     public void Start()
     {
+        continueButton.onClick.AddListener(() =>
+            {
+                feedbackUIPanel.SetActive(false);
+                GameManager.Instance.OnNextTurn();
+            }
+        );
+
         CardManager.Instance.OnCardResolved += ShowFeedback;
         EventSystem.Instance.OnEventTriggered += ShowRandomEvent;
-        gameObject.SetActive(false);
     }
 
     public void OnDestroy()
     {
+        continueButton.onClick.RemoveAllListeners();
         if (CardManager.Instance != null)
         {
             CardManager.Instance.OnCardResolved -= ShowFeedback;
@@ -50,9 +57,7 @@ public class FeedbackUI : MonoBehaviour
 
     public void ShowFeedback(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
     {
-        // Show the popup
-        gameObject.SetActive(true);
-
+        feedbackUIPanel.SetActive(true);
         // Success or failure title
         resultText.text = wasSuccess ? "Succès" : "Échec";
 
@@ -65,25 +70,10 @@ public class FeedbackUI : MonoBehaviour
                                 $"Performance {Signed(perfDelta)}\n" +
                                 $"Turnover {Signed(turnoverDelta)}";
 
-        // Continue button closes popup and triggers next turn
-        continueButton.onClick.RemoveAllListeners();
-
         if (GameManager.Instance.IsGameOver)
         {
             continueButton.GetComponentInChildren<TextMeshProUGUI>().text = "Terminer partie";
         }
-        continueButton.onClick.AddListener(() =>
-        {
-            if (GameManager.Instance.IsGameOver)
-            {
-                GameManager.EndGame();
-            }
-            else
-            {
-                gameObject.SetActive(false);
-                GameManager.Instance.OnNextTurn();
-            }
-        });
     }
 
     private static string Signed(int v) => v >= 0 ? $"+{v}" : $"{v}";
