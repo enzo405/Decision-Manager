@@ -40,11 +40,6 @@ public class CardDetailsOverlayUI : MonoBehaviour
     [SerializeField] private Button closeButton;
     [SerializeField] private Button handleButton;
 
-    // Stat colors
-    private static readonly Color ColorRed = new(0.91f, 0.30f, 0.24f); // #E84C3D
-    private static readonly Color ColorGreen = new(0.18f, 0.80f, 0.44f); // #2ECC70
-    private static readonly Color ColorOrange = new(0.90f, 0.49f, 0.13f); // #E67E21
-
     private Card _currentCard;
 
 
@@ -74,8 +69,8 @@ public class CardDetailsOverlayUI : MonoBehaviour
         description.text = card.Description;
 
         // Risk badge + strip + border color
-        Color riskColor = GetRiskColor(card.RiskLevel);
-        riskBadgeText.text = GetRiskLabel(card.RiskLevel);
+        Color riskColor = RiskUtilities.GetRiskColor(card.RiskLevel);
+        riskBadgeText.text = RiskUtilities.GetRiskLabel(card.RiskLevel);
         riskBadgeText.color = riskColor;
         riskBadgeBg.color = new Color(riskColor.r, riskColor.g, riskColor.b, 0.04f);
         borderImage.color = new Color(riskColor.r, riskColor.g, riskColor.b, 0.55f);
@@ -97,25 +92,8 @@ public class CardDetailsOverlayUI : MonoBehaviour
     private void SetStatValue(TextMeshProUGUI label, int value)
     {
         label.text = value >= 0 ? $"+{value}" : $"{value}";
-        label.color = value >= 0 ? ColorGreen : ColorRed;
+        label.color = value >= 0 ? new(0.18f, 0.80f, 0.44f) : new(0.91f, 0.30f, 0.24f);
     }
-
-    private Color GetRiskColor(RiskLevel risk) => risk switch
-    {
-        RiskLevel.Low => ColorGreen,
-        RiskLevel.Medium => ColorOrange,
-        RiskLevel.High => ColorRed,
-        _ => Color.white
-    };
-
-    private string GetRiskLabel(RiskLevel risk) => risk switch
-    {
-        RiskLevel.Low => "FAIBLE",
-        RiskLevel.Medium => "MOYEN",
-        RiskLevel.High => "ÉLEVÉ",
-        _ => ""
-    };
-
 
     private IEnumerator AnimateOpenDelayed()
     {

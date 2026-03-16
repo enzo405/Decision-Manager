@@ -10,6 +10,7 @@ public class CardSlot
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
     public Button cardButton;
+    public GameObject riskBadgePrefab;
 }
 
 public class CardSelectionUI : MonoBehaviour
@@ -43,6 +44,12 @@ public class CardSelectionUI : MonoBehaviour
 
             slot.titleText.text = card.DisplayName;
             slot.descriptionText.text = card.Description;
+
+            // Modifier la couleur du badge et le text qui va avec:
+            Color riskColor = RiskUtilities.GetRiskColor(card.RiskLevel);
+            slot.riskBadgePrefab.GetComponent<Image>().color = new Color(riskColor.r, riskColor.g, riskColor.b, 0.06f);
+            slot.riskBadgePrefab.GetComponentInChildren<TextMeshProUGUI>().text = RiskUtilities.GetRiskLabel(card.RiskLevel);
+            slot.riskBadgePrefab.GetComponentInChildren<TextMeshProUGUI>().color = riskColor;
 
             // Capture pour le lambda
             Card capturedCard = card;
