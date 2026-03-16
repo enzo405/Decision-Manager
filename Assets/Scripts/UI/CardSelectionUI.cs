@@ -11,6 +11,7 @@ public class CardSlot
     public TextMeshProUGUI descriptionText;
     public Button cardButton;
     public GameObject riskBadgePrefab;
+    public Image cardStrip;
 }
 
 public class CardSelectionUI : MonoBehaviour
@@ -50,6 +51,7 @@ public class CardSelectionUI : MonoBehaviour
             slot.riskBadgePrefab.GetComponent<Image>().color = new Color(riskColor.r, riskColor.g, riskColor.b, 0.06f);
             slot.riskBadgePrefab.GetComponentInChildren<TextMeshProUGUI>().text = RiskUtilities.GetRiskLabel(card.RiskLevel);
             slot.riskBadgePrefab.GetComponentInChildren<TextMeshProUGUI>().color = riskColor;
+            slot.cardStrip.color = riskColor;
 
             // Capture pour le lambda
             Card capturedCard = card;

@@ -808,9 +808,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 50
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1665,9 +1665,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 50
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2115,16 +2115,19 @@ MonoBehaviour:
     descriptionText: {fileID: 616641461}
     cardButton: {fileID: 886195756}
     riskBadgePrefab: {fileID: 112165444}
+    cardStrip: {fileID: 1414465160}
   - cardObject: {fileID: 1708455229}
     titleText: {fileID: 406493086}
     descriptionText: {fileID: 2061728392}
     cardButton: {fileID: 1708455233}
     riskBadgePrefab: {fileID: 1204268942}
+    cardStrip: {fileID: 722735320}
   - cardObject: {fileID: 1937883716}
     titleText: {fileID: 1530339745}
     descriptionText: {fileID: 459787791}
     cardButton: {fileID: 1937883720}
     riskBadgePrefab: {fileID: 480112394}
+    cardStrip: {fileID: 1325390921}
 --- !u!114 &432562271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3868,7 +3871,7 @@ GameObject:
   - component: {fileID: 722735320}
   - component: {fileID: 722735322}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Strip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5788,9 +5791,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 50
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5902,7 +5905,7 @@ GameObject:
   - component: {fileID: 1325390921}
   - component: {fileID: 1325390920}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Strip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6397,7 +6400,7 @@ GameObject:
   - component: {fileID: 1414465160}
   - component: {fileID: 1414465162}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Strip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9988,9 +9991,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 44698063}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 50
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

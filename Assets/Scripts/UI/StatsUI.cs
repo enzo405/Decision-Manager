@@ -32,14 +32,21 @@ public class StatsUI : MonoBehaviour
     {
         var stats = StatSystem.Instance;
 
-        motivationBar.value = stats.Motivation;
-        stressBar.value = stats.Stress;
-        performanceBar.value = stats.Performance;
-        turnoverBar.value = stats.Turnover;
+        motivationBar.value = Normalize(stats.Motivation, StatSystem.GetMinMotivation, StatSystem.GetMaxMotivation);
+        stressBar.value = Normalize(stats.Stress, StatSystem.GetMinStress, StatSystem.GetMaxStress);
+        performanceBar.value = Normalize(stats.Performance, StatSystem.GetMinPerformance, StatSystem.GetMaxPerformance);
+        turnoverBar.value = Normalize(stats.Turnover, StatSystem.GetMinTurnover, StatSystem.GetMaxTurnover);
 
         motivationValueText.text = stats.Motivation.ToString();
         stressValueText.text = stats.Stress.ToString();
         performanceValueText.text = stats.Performance.ToString();
         turnoverValueText.text = stats.Turnover.ToString();
+    }
+
+    private float Normalize(int value, int min, int max)
+    {
+        Debug.Log($"Result: {(float)(value - min) / (max - min)}");
+        Debug.Log($"Value: {value}, Min: {min}, Max: {max}");
+        return (float)(value - min) / (max - min);
     }
 }
