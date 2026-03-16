@@ -37,7 +37,6 @@ public class PlayerProgressionSystem : MonoBehaviour
         XpPerTurn = thresholds.XpPerTurn;
         XpBonusGoodDecision = thresholds.XpBonusGoodDecision;
         MaxLevel = thresholds.MaxLevel;
-
     }
 
     public void Start()
@@ -45,9 +44,6 @@ public class PlayerProgressionSystem : MonoBehaviour
         GameManager.Instance.OnEndGameTriggered += EndGame;
         GameManager.Instance.OnNewGameTriggered += NewGame;
         GameManager.Instance.OnGameAbandonedTriggered += AbandonCurrentGameProgression;
-
-        // Valeur initiale
-        NewGame();
     }
 
     public void AddXP(bool wasGoodDecision)

@@ -63,6 +63,9 @@ public class EventSystem : MonoBehaviour
 
         if (isTriggered)
         {
+            string dictKey = BuildDictKey(randomEvent.Event, randomEvent.FromTurnDecision);
+
+            Events.Remove(dictKey); // Remove the event so it doesn't trigger again in the future
             OnEventTriggered?.Invoke(randomEvent.Event, randomEvent.FromTurnDecision);
         }
         else

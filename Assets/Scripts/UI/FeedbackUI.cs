@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FeedbackUI : MonoBehaviour
@@ -17,7 +18,10 @@ public class FeedbackUI : MonoBehaviour
     {
         continueButton.onClick.AddListener(() =>
             {
-                feedbackUIPanel.SetActive(false);
+                if (!GameManager.Instance.IsGameOver)
+                {
+                    feedbackUIPanel.SetActive(false);
+                }
                 GameManager.Instance.OnNextTurn();
             }
         );
