@@ -69,32 +69,35 @@ public class CardDetailsOverlayUI : MonoBehaviour
         description.text = card.Description;
 
         // Risk badge + strip + border color
-        Color riskColor = RiskUtilities.GetRiskColor(card.RiskLevel);
-        riskBadgeText.text = RiskUtilities.GetRiskLabel(card.RiskLevel);
-        riskBadgeText.color = riskColor;
-        riskBadgeBg.color = new Color(riskColor.r, riskColor.g, riskColor.b, 0.04f);
-        borderImage.color = new Color(riskColor.r, riskColor.g, riskColor.b, 0.55f);
+        riskBadgeText.text = ColorUtilities.GetRiskLabel(card.RiskLevel);
+        riskBadgeText.color = ColorUtilities.GetRiskColorText(card.RiskLevel);
+        riskBadgeBg.color = ColorUtilities.GetRiskColorBackground(card.RiskLevel);
+        borderImage.color = ColorUtilities.GetRiskColorBackground(card.RiskLevel);
 
         // Probability
         probValue.text = $"{card.SuccessProbability * 100f}%";
 
         // Effects — values with sign and color
-        SetStatValue(statValuePerformance, card.PerformanceEffect);
-        SetStatValue(statValueTurnover, card.TurnoverEffect);
-        SetStatValue(statValueMotivation, card.MotivationEffect);
-        SetStatValue(statValueStress, card.StressEffect);
+        SetStatValue(statValuePerformance, card.PerformanceEffect, "Performance");
+        SetStatValue(statValueTurnover, card.TurnoverEffect, "Turnover");
+        SetStatValue(statValueMotivation, card.MotivationEffect, "Motivation");
+        SetStatValue(statValueStress, card.StressEffect, "Stress");
 
         // Messages
         msgSuccessText.text = card.SuccessMessage;
         msgFailureText.text = card.FailureMessage;
     }
 
-    private void SetStatValue(TextMeshProUGUI label, int value)
+    private void SetStatValue(TextMeshProUGUI label, int value, string statName)
     {
         label.text = value >= 0 ? $"+{value}" : $"{value}";
-        label.color = value >= 0 ? new(0.18f, 0.80f, 0.44f) : new(0.91f, 0.30f, 0.24f);
+        if (statName == "Performance" || statName == "Motivation")
+            label.color = value >= 0 ? ColorUtilities.Green : ColorUtilities.Red;
+        else
+            label.color = value < 0 ? ColorUtilities.Green : ColorUtilities.Red;
     }
 
+    #region Animation Methods
     private IEnumerator AnimateOpenDelayed()
     {
         LayoutRebuilder.ForceRebuildLayoutImmediate(bottomSheet);
@@ -143,4 +146,5 @@ public class CardDetailsOverlayUI : MonoBehaviour
 
         gameObject.SetActive(false);
     }
+    #endregion
 }

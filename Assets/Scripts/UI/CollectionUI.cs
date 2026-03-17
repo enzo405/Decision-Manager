@@ -100,26 +100,21 @@ public class CollectionUI : MonoBehaviour
             TextMeshProUGUI badgeText = item.transform.Find("LevelBadge/LevelBadgeText").GetComponent<TextMeshProUGUI>();
             GameObject lockedOverlay = item.transform.Find("LockedOverlay").gameObject;
 
-            Color riskColor = card.RiskLevel switch
-            {
-                RiskLevel.Low => new Color(0.18f, 0.80f, 0.44f),    // #2ECC70
-                RiskLevel.Medium => new Color(0.90f, 0.49f, 0.13f), // #E67E21
-                RiskLevel.High => new Color(0.91f, 0.30f, 0.24f),   // #E84C3D
-                _ => new Color(0.55f, 0.36f, 0.96f)                  // #8B5CF6
-            };
+            Color riskColorText = ColorUtilities.GetRiskColorText(card.RiskLevel);
+            Color riskColorBackground = ColorUtilities.GetRiskColorBackground(card.RiskLevel);
 
             if (isUnlocked)
             {
-                strip.color = riskColor;
+                strip.color = riskColorText;
                 nameText.text = card.DisplayName;
                 badgeText.text = $"NIV.{card.RequiredLevel}";
-                badgeImage.color = new Color(riskColor.r, riskColor.g, riskColor.b, 0.15f);
-                badgeText.color = riskColor;
+                badgeImage.color = riskColorBackground;
+                badgeText.color = riskColorText;
                 lockedOverlay.SetActive(false);
 
                 Outline outline = item.GetComponent<Outline>();
                 if (outline != null)
-                    outline.effectColor = new Color(riskColor.r, riskColor.g, riskColor.b, 0.35f);
+                    outline.effectColor = riskColorText;
 
                 item.GetComponent<Button>().onClick.AddListener(() => cardDetailsOverlay.Open(card));
             }

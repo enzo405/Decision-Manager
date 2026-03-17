@@ -42,8 +42,11 @@ public class PlayerProgressionSystem : MonoBehaviour
     public void Start()
     {
         GameManager.Instance.OnEndGameTriggered += EndGame;
-        GameManager.Instance.OnNewGameTriggered += NewGame;
+        GameManager.Instance.OnNewGameTriggered += InitStats;
         GameManager.Instance.OnGameAbandonedTriggered += AbandonCurrentGameProgression;
+
+        // Initial load of player progression
+        InitStats();
     }
 
     public void AddXP(bool wasGoodDecision)
@@ -55,7 +58,7 @@ public class PlayerProgressionSystem : MonoBehaviour
         OnProgressionChanged?.Invoke();
     }
 
-    private void NewGame()
+    private void InitStats()
     {
         CurrentXP = PlayerPrefs.GetInt("PlayerXP", 0);
         CheckLevelUp();

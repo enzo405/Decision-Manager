@@ -28,8 +28,6 @@ public class EventSystem : MonoBehaviour
 
     public void Start()
     {
-        GameManager.Instance.OnCardPlayedTriggered += OnCardPlayedWrapper;
-
         GameManager.Instance.OnNewGameTriggered += Reset;
     }
 
@@ -38,12 +36,7 @@ public class EventSystem : MonoBehaviour
         Events.Clear();
     }
 
-    private void OnCardPlayedWrapper(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
-    {
-        RollEvent();
-    }
-
-    private void RollEvent()
+    public (Event, int) RollEvent()
     {
         TurnEventRecord[] events = Events
             .Where(e => e.Value.IsActiv == true)
@@ -54,7 +47,7 @@ public class EventSystem : MonoBehaviour
         if (events.Length == 0)
         {
             OnEventTriggered?.Invoke(null, 0);
-            return;
+            return (null, 0);
         }
 
         TurnEventRecord randomEvent = events[UnityEngine.Random.Range(0, events.Length)];
@@ -67,10 +60,12 @@ public class EventSystem : MonoBehaviour
 
             Events.Remove(dictKey); // Remove the event so it doesn't trigger again in the future
             OnEventTriggered?.Invoke(randomEvent.Event, randomEvent.FromTurnDecision);
+            return (randomEvent.Event, randomEvent.FromTurnDecision);
         }
         else
         {
             OnEventTriggered?.Invoke(null, 0);
+            return (null, 0);
         }
     }
 

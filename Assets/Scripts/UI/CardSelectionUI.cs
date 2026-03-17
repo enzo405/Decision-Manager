@@ -47,9 +47,9 @@ public class CardSelectionUI : MonoBehaviour
             slot.descriptionText.text = card.Description;
 
             // Modifier la couleur du badge et le text qui va avec:
-            Color riskColor = RiskUtilities.GetRiskColor(card.RiskLevel);
-            slot.riskBadgePrefab.GetComponent<Image>().color = new Color(riskColor.r, riskColor.g, riskColor.b, 0.06f);
-            slot.riskBadgePrefab.GetComponentInChildren<TextMeshProUGUI>().text = RiskUtilities.GetRiskLabel(card.RiskLevel);
+            Color riskColor = ColorUtilities.GetRiskColorText(card.RiskLevel);
+            slot.riskBadgePrefab.GetComponent<Image>().color = ColorUtilities.GetRiskColorBackground(card.RiskLevel);
+            slot.riskBadgePrefab.GetComponentInChildren<TextMeshProUGUI>().text = ColorUtilities.GetRiskLabel(card.RiskLevel);
             slot.riskBadgePrefab.GetComponentInChildren<TextMeshProUGUI>().color = riskColor;
             slot.cardStrip.color = riskColor;
 

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver { get; private set; } = false;
 
     public event Action OnTurnStarted;
+    public event Action<Card, bool, int, int, int, int, Event, int> OnTurnResolved;
     public event Action<Card, bool, int, int, int, int> OnCardPlayedTriggered;
     public event Action OnNewGameTriggered;
     public event Action OnEndGameTriggered;
@@ -69,17 +70,28 @@ public class GameManager : MonoBehaviour
         OnCardPlayedTriggered?.Invoke(card, wasSuccess,
             motivDelta, stressDelta, perfDelta, turnoverDelta);
 
+        var (randomEvent, fromTurnDecision) = EventSystem.Instance.RollEvent();
+
         var defeat = StatSystem.Instance.CheckDefeatConditions();
         if (defeat != DefeatReason.None)
         {
             PreloadEndGame(false, defeat);
-            return;
         }
-
-        if (CurrentWeek >= totalWeeks)
+        else if (CurrentWeek >= totalWeeks)
         {
             PreloadEndGame(true, DefeatReason.None);
         }
+
+        OnTurnResolved?.Invoke(
+            card,
+            wasSuccess,
+            motivDelta,
+            stressDelta,
+            perfDelta,
+            turnoverDelta,
+            randomEvent,
+            fromTurnDecision
+        );
     }
 
     private void PreloadEndGame(bool isVictory, DefeatReason reason)
