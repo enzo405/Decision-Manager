@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver { get; private set; } = false;
 
     public event Action OnTurnStarted;
-    public event Action<Card, bool, int, int, int, int, Event, int> OnTurnResolved;
+    public event Action<Card, bool, int, int, int, int, TurnEventRecord, int> OnTurnResolved;
     public event Action<Card, bool, int, int, int, int> OnCardPlayedTriggered;
     public event Action OnNewGameTriggered;
     public event Action OnEndGameTriggered;
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         OnCardPlayedTriggered?.Invoke(card, wasSuccess,
             motivDelta, stressDelta, perfDelta, turnoverDelta);
 
-        var (randomEvent, fromTurnDecision) = EventSystem.Instance.RollEvent();
+        var (randomEvent, turn) = EventSystem.Instance.RollEvent();
 
         var defeat = StatSystem.Instance.CheckDefeatConditions();
         if (defeat != DefeatReason.None)
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             perfDelta,
             turnoverDelta,
             randomEvent,
-            fromTurnDecision
+            turn
         );
     }
 

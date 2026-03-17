@@ -6,7 +6,7 @@ public class GameHistoryManager : MonoBehaviour
     public static GameHistoryManager Instance { get; private set; }
 
     public List<TurnRecord> History { get; private set; } = new();
-    public Dictionary<int, Event> HistoryRandomEvents { get; private set; } = new();
+    public Dictionary<int, TurnEventRecord> HistoryRandomEvents { get; private set; } = new();
 
     public void Awake()
     {
@@ -34,10 +34,10 @@ public class GameHistoryManager : MonoBehaviour
         HistoryRandomEvents.Clear();
     }
 
-    private void RecordRandomEvent(Event randomEvent, int fromTurnDecision)
+    private void RecordRandomEvent(TurnEventRecord randomEvent, int turn)
     {
         if (randomEvent == null) return;
-        HistoryRandomEvents.Add(fromTurnDecision, randomEvent);
+        HistoryRandomEvents.Add(turn, randomEvent);
     }
 
     private void RecordTurn(Card card, bool wasSuccess,

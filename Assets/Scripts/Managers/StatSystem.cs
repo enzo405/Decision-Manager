@@ -45,7 +45,8 @@ public class StatSystem : MonoBehaviour
         EventSystem.Instance.OnEventTriggered += (ev, fromTurn) =>
         {
             if (ev == null) return;
-            ApplyEffects(ev.MotivationDelta, ev.StressDelta, ev.PerformanceDelta, ev.TurnoverDelta);
+            var eventRecord = ev.Event;
+            ApplyEffects(eventRecord.MotivationDelta, eventRecord.StressDelta, eventRecord.PerformanceDelta, eventRecord.TurnoverDelta);
         };
     }
 

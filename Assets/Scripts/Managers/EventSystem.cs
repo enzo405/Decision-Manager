@@ -10,7 +10,7 @@ public class EventSystem : MonoBehaviour
     // Events for current session
     public Dictionary<string, TurnEventRecord> Events { get; private set; } = new();
 
-    public event Action<Event, int> OnEventTriggered;
+    public event Action<TurnEventRecord, int> OnEventTriggered;
 
     private Func<Event, int, string> BuildDictKey = (ev, week) => $"{ev.Name}_{week}";
 
@@ -36,7 +36,7 @@ public class EventSystem : MonoBehaviour
         Events.Clear();
     }
 
-    public (Event, int) RollEvent()
+    public (TurnEventRecord, int) RollEvent()
     {
         TurnEventRecord[] events = Events
             .Where(e => e.Value.IsActiv == true)
@@ -59,8 +59,8 @@ public class EventSystem : MonoBehaviour
             string dictKey = BuildDictKey(randomEvent.Event, randomEvent.FromTurnDecision);
 
             Events.Remove(dictKey); // Remove the event so it doesn't trigger again in the future
-            OnEventTriggered?.Invoke(randomEvent.Event, randomEvent.FromTurnDecision);
-            return (randomEvent.Event, randomEvent.FromTurnDecision);
+            OnEventTriggered?.Invoke(randomEvent, GameManager.Instance.CurrentWeek);
+            return (randomEvent, GameManager.Instance.CurrentWeek);
         }
         else
         {

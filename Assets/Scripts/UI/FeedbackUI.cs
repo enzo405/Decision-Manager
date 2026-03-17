@@ -63,15 +63,15 @@ public class FeedbackUI : MonoBehaviour
         }
     }
 
-    public void Open(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta, Event randomEvent, int fromTurnDecision)
+    public void Open(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta, TurnEventRecord randomEvent, int turn)
     {
         feedbackUIPanel.SetActive(true);
-        Populate(card, wasSuccess, motivDelta, stressDelta, perfDelta, turnoverDelta, randomEvent, fromTurnDecision);
+        Populate(card, wasSuccess, motivDelta, stressDelta, perfDelta, turnoverDelta, randomEvent, turn);
 
         StartCoroutine(AnimateOpenDelayed());
     }
 
-    private void Populate(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta, Event randomEvent, int fromTurnDecision)
+    private void Populate(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta, TurnEventRecord randomEvent, int turn)
     {
         stripImage.color = wasSuccess ? ColorUtilities.SuccessColor : ColorUtilities.FailColor;
         resultText.text = wasSuccess ? "Succès" : "Échec";
@@ -100,16 +100,15 @@ public class FeedbackUI : MonoBehaviour
         else
         {
             eventBody.SetActive(true);
-            var originCard = GameHistoryManager.Instance.History[fromTurnDecision - 1].CardDisplayName;
-            eventName.text = randomEvent.Name;
-            eventMessageText.text = $"Événement déclenché par \"{originCard}\" (tour {fromTurnDecision})\n\n" +
-                                    $"{randomEvent.Message}\n\n";
+            var originCard = GameHistoryManager.Instance.History[randomEvent.FromTurnDecision - 1].CardDisplayName;
+            eventName.text = randomEvent.Event.Name;
+            eventMessageText.text = $"Événement déclenché par \"{originCard}\" (tour {randomEvent.FromTurnDecision})\n\n" +
+                                    $"{randomEvent.Event.Message}\n\n";
 
             // TODO: Add event effects display
             // public GameObject eventEffectPrefab;
             // public GameObject eventEffectContainer;
         }
-
     }
 
     #region Animation methods
