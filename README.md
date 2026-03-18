@@ -4,6 +4,8 @@ A mobile serious game about managerial decision-making and human resource manage
 
 Built with Unity for Android, Decision Manager puts you in the role of a newly appointed manager responsible for balancing your team's performance and well-being over 12 weeks.
 
+The API connected to the game is here: [DecisionManager API](https://github.com/enzo405/Decision-Manager-API) (ASP.NET Core 10 + PostgreSQL)
+
 ---
 
 ## Screenshots
