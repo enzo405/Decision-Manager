@@ -1,13 +1,11 @@
 using UnityEngine;
 using System;
-using System.Linq;
 
 public class CardManager : MonoBehaviour
 {
     public static CardManager Instance { get; private set; }
 
     public event Action<Card, bool, int, int, int, int> OnCardResolved;
-    // (card, wasSuccess, motivDelta, stressDelta, perfDelta, turnoverDelta)
 
     public void Awake()
     {
@@ -24,7 +22,7 @@ public class CardManager : MonoBehaviour
     public void PlayCard(Card card)
     {
         bool success = UnityEngine.Random.value <= card.SuccessProbability;
-        int level = PlayerProgressionSystem.Instance.LevelThisGame;
+        int level = PlayerProgressionManager.Instance.LevelThisGame;
         float negativeMultiplier = 1f + (level * 0.05f); // +5% par niveau
 
         int motiv, stress, perf, turnover;
@@ -44,11 +42,6 @@ public class CardManager : MonoBehaviour
             turnover = Mathf.RoundToInt(card.TurnoverEffectOnFailure * (card.TurnoverEffectOnFailure > 0 ? negativeMultiplier : 1f));
         }
 
-        StatSystem.Instance.ApplyEffects(motiv, stress, perf, turnover);
-
-        GameManager.Instance.OnCardPlayed(card, success, motiv, stress, perf, turnover);
-
-        // Trigger le FeedbackUI
         OnCardResolved?.Invoke(card, success, motiv, stress, perf, turnover);
     }
 }

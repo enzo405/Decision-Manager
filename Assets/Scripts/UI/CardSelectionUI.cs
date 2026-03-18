@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Collections;
 
 [Serializable]
 public class CardSlot
@@ -9,20 +10,30 @@ public class CardSlot
     public GameObject cardObject;
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
-    public TextMeshProUGUI effectsText;
     public Button cardButton;
+    public GameObject riskBadgePrefab;
+    public Image cardStrip;
 }
 
 public class CardSelectionUI : MonoBehaviour
 {
-    public CardSlot[] slots = new CardSlot[3];
+    [Header("Layout")]
+    [SerializeField] private RectTransform cardsContainer;
+
+    [Header("Slots")]
+    [SerializeField] private CardSlot[] slots = new CardSlot[3];
+
     private Card[] unlockedCards;
+
+
     public void Start()
     {
-        unlockedCards = CardApiService.Instance.GetUnlockedCards(PlayerProgressionSystem.Instance.LevelThisGame);
+        unlockedCards = CardApiService.Instance.GetUnlockedCards();
 
+        DrawCards(); // Draw cards at the start of the game as well
         GameManager.Instance.OnTurnStarted += DrawCards;
-        DrawCards();
+
+        StartCoroutine(ForceCardWidths());
     }
 
     public void OnDestroy()
@@ -31,7 +42,7 @@ public class CardSelectionUI : MonoBehaviour
             GameManager.Instance.OnTurnStarted -= DrawCards;
     }
 
-    public void DrawCards()
+    private void DrawCards()
     {
         // Mélange et pioche 3 cartes aléatoires
         Card[] picked = PickRandomCards(3);
@@ -43,7 +54,13 @@ public class CardSelectionUI : MonoBehaviour
 
             slot.titleText.text = card.DisplayName;
             slot.descriptionText.text = card.Description;
-            slot.effectsText.text = BuildEffectsText(card);
+
+            // Modifier la couleur du badge et le text qui va avec:
+            Color riskColor = ColorUtilities.GetRiskColorText(card.RiskLevel);
+            slot.riskBadgePrefab.GetComponent<Image>().color = ColorUtilities.GetRiskColorBackground(card.RiskLevel);
+            slot.riskBadgePrefab.GetComponentInChildren<TextMeshProUGUI>().text = ColorUtilities.GetRiskLabel(card.RiskLevel);
+            slot.riskBadgePrefab.GetComponentInChildren<TextMeshProUGUI>().color = riskColor;
+            slot.cardStrip.color = riskColor;
 
             // Capture pour le lambda
             Card capturedCard = card;
@@ -52,7 +69,7 @@ public class CardSelectionUI : MonoBehaviour
         }
     }
 
-    public Card[] PickRandomCards(int count)
+    private Card[] PickRandomCards(int count)
     {
         Card[] shuffled = (Card[])unlockedCards.Clone();
 
@@ -69,14 +86,20 @@ public class CardSelectionUI : MonoBehaviour
         return result;
     }
 
-    private string BuildEffectsText(Card card)
+    private IEnumerator ForceCardWidths()
     {
-        return $"Motivation {Signed(card.MotivationEffect)}\n" +
-               $"Stress {Signed(card.StressEffect)}\n" +
-               $"Performance {Signed(card.PerformanceEffect)}\n" +
-               $"Turnover {Signed(card.TurnoverEffect)}\n" +
-               $"Risque : {card.RiskLevel}";
-    }
+        yield return null;
 
-    private string Signed(int v) => v >= 0 ? $"+{v}" : $"{v}";
+        float containerWidth = cardsContainer.rect.width;
+        float padding = 40f; // left + right padding du HLG
+        float spacing = 32f; // spacing * espaces entre 3 cartes
+        float cardWidth = (containerWidth - padding - spacing) / 3f;
+
+        foreach (CardSlot slot in slots)
+        {
+            LayoutElement le = slot.cardObject.GetComponent<LayoutElement>();
+            le.preferredWidth = cardWidth;
+            le.flexibleWidth = 0;
+        }
+    }
 }

@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver { get; private set; } = false;
 
     public event Action OnTurnStarted;
+    public event Action<Card, bool, int, int, int, int, TurnEventRecord, int> OnTurnResolved;
+    public event Action<Card, bool, int, int, int, int> OnCardPlayedTriggered;
+    public event Action OnNewGameTriggered;
+    public event Action OnEndGameTriggered;
+    public event Action OnGameAbandonedTriggered;
 
     public void Awake()
     {
@@ -28,39 +33,16 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        StartTurn();
+        CardManager.Instance.OnCardResolved += OnCardPlayed;
     }
 
-    public void StartTurn()
+    public void NewGame()
     {
-        if (IsGameOver) return;
+        SceneManager.LoadScene("MainGame");
+        CurrentWeek = 1;
+        IsGameOver = false;
+        OnNewGameTriggered?.Invoke();
         OnTurnStarted?.Invoke();
-    }
-
-    public void OnCardPlayed(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
-    {
-        GameHistoryManager.Instance.RecordTurn(
-            card, wasSuccess,
-            motivDelta, stressDelta, perfDelta, turnoverDelta,
-            StatSystem.Instance.Motivation,
-            StatSystem.Instance.Stress,
-            StatSystem.Instance.Performance,
-            StatSystem.Instance.Turnover
-        );
-
-        EventSystem.Instance.RollEvent();
-
-        var defeat = StatSystem.Instance.CheckDefeatConditions();
-        if (defeat != DefeatReason.None)
-        {
-            PreloadEndGame(false, defeat);
-            return;
-        }
-
-        if (CurrentWeek >= totalWeeks)
-        {
-            PreloadEndGame(true, DefeatReason.None);
-        }
     }
 
     public void OnNextTurn()
@@ -68,30 +50,48 @@ public class GameManager : MonoBehaviour
         if (!IsGameOver)
         {
             CurrentWeek++;
-            StartTurn();
+            OnTurnStarted?.Invoke();
+        }
+        else
+        {
+            OnEndGameTriggered?.Invoke();
+            SceneManager.LoadScene("GameOver");
         }
     }
 
-    public void NewGame()
+    public void AbandonGame()
     {
-        ResetGameStats();
-        SceneManager.LoadScene("MainGame");
+        OnGameAbandonedTriggered?.Invoke();
+        SceneManager.LoadScene("MainMenu");
     }
 
-    public void ResetGameStats()
+    private void OnCardPlayed(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
     {
-        CurrentWeek = 1;
-        IsGameOver = false;
-        GameHistoryManager.Instance.Reset();
-        EventSystem.Instance.Reset();
-        StatSystem.Instance.NewGame();
-        PlayerProgressionSystem.Instance.NewGame();
-    }
+        OnCardPlayedTriggered?.Invoke(card, wasSuccess,
+            motivDelta, stressDelta, perfDelta, turnoverDelta);
 
-    public static void EndGame()
-    {
-        PlayerProgressionSystem.Instance.EndGame();
-        SceneManager.LoadScene("GameOver");
+        var (randomEvent, turn) = EventManager.Instance.RollEvent();
+
+        var defeat = StatManager.Instance.CheckDefeatConditions();
+        if (defeat != DefeatReason.None)
+        {
+            PreloadEndGame(false, defeat);
+        }
+        else if (CurrentWeek >= totalWeeks)
+        {
+            PreloadEndGame(true, DefeatReason.None);
+        }
+
+        OnTurnResolved?.Invoke(
+            card,
+            wasSuccess,
+            motivDelta,
+            stressDelta,
+            perfDelta,
+            turnoverDelta,
+            randomEvent,
+            turn
+        );
     }
 
     private void PreloadEndGame(bool isVictory, DefeatReason reason)

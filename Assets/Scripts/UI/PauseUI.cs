@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseUI : MonoBehaviour
@@ -16,9 +15,7 @@ public class PauseUI : MonoBehaviour
         mainMenuButton.onClick.AddListener(() =>
         {
             pauseOverlay.SetActive(false);
-            PlayerProgressionSystem.Instance.AbandonCurrentGameProgression();
-            GameManager.Instance.ResetGameStats();
-            SceneManager.LoadScene("MainMenu");
+            GameManager.Instance.AbandonGame();
         });
 
         pauseOverlay.SetActive(false);

@@ -51,8 +51,8 @@ public class PlayerApiService : MonoBehaviour
     {
         var dto = new UpdateProgressionDto
         {
-            CurrentXp = PlayerProgressionSystem.Instance.CurrentXP,
-            CurrentLevel = PlayerProgressionSystem.Instance.CurrentLevel
+            CurrentXp = PlayerProgressionManager.Instance.CurrentXP,
+            CurrentLevel = PlayerProgressionManager.Instance.CurrentLevel
         };
 
         yield return StartCoroutine(ApiClient.Put(

@@ -6,7 +6,7 @@ public class GameHistoryManager : MonoBehaviour
     public static GameHistoryManager Instance { get; private set; }
 
     public List<TurnRecord> History { get; private set; } = new();
-    public Dictionary<int, Event> HistoryRandomEvents { get; private set; } = new();
+    public Dictionary<int, TurnEventRecord> HistoryRandomEvents { get; private set; } = new();
 
     public void Awake()
     {
@@ -20,20 +20,28 @@ public class GameHistoryManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Reset()
+    public void Start()
+    {
+        GameManager.Instance.OnCardPlayedTriggered += RecordTurn;
+        EventManager.Instance.OnEventTriggered += RecordRandomEvent;
+        GameManager.Instance.OnNewGameTriggered += Reset;
+    }
+
+
+    private void Reset()
     {
         History.Clear();
         HistoryRandomEvents.Clear();
     }
 
-    public void RecordRandomEvent(Event randomEvent, int fromTurnDecision)
+    private void RecordRandomEvent(TurnEventRecord randomEvent, int turn)
     {
-        HistoryRandomEvents.Add(fromTurnDecision, randomEvent);
+        if (randomEvent == null) return;
+        HistoryRandomEvents.Add(turn, randomEvent);
     }
 
-    public void RecordTurn(Card card, bool wasSuccess,
-        int motivDelta, int stressDelta, int perfDelta, int turnoverDelta,
-        int motivation, int stress, int performance, int turnover)
+    private void RecordTurn(Card card, bool wasSuccess,
+        int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
     {
         int improved = 0;
         if (motivDelta > 0) improved++;
@@ -47,14 +55,14 @@ public class GameHistoryManager : MonoBehaviour
             CardSlug = card.Slug,
             CardDisplayName = card.DisplayName,
             WasSuccess = wasSuccess,
-            Motivation = motivation,
-            Stress = stress,
-            Performance = performance,
-            Turnover = turnover,
+            Motivation = StatManager.Instance.Motivation,
+            Stress = StatManager.Instance.Stress,
+            Performance = StatManager.Instance.Performance,
+            Turnover = StatManager.Instance.Turnover,
             WasGoodDecision = wasGoodDecision
         });
 
-        PlayerProgressionSystem.Instance.AddXP(wasGoodDecision);
-        EventSystem.Instance.RegisterCardEvents(card);
+        PlayerProgressionManager.Instance.AddXP(wasGoodDecision);
+        EventManager.Instance.RegisterCardEvents(card);
     }
 }

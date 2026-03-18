@@ -3,20 +3,20 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-public class EventSystem : MonoBehaviour
+public class EventManager : MonoBehaviour
 {
-    public static EventSystem Instance { get; private set; }
+    public static EventManager Instance { get; private set; }
 
     // Events for current session
     public Dictionary<string, TurnEventRecord> Events { get; private set; } = new();
 
-    public event Action<Event, int> OnEventTriggered;
+    public event Action<TurnEventRecord, int> OnEventTriggered;
 
     private Func<Event, int, string> BuildDictKey = (ev, week) => $"{ev.Name}_{week}";
 
     public void Awake()
     {
-        Debug.Log("[EventSystem] Awake");
+        Debug.Log("[EventManager] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -26,23 +26,27 @@ public class EventSystem : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Reset()
+    public void Start()
+    {
+        GameManager.Instance.OnNewGameTriggered += Reset;
+    }
+
+    private void Reset()
     {
         Events.Clear();
     }
 
-    public void RollEvent()
+    public (TurnEventRecord, int) RollEvent()
     {
         TurnEventRecord[] events = Events
-            .Where(e => e.Value.IsActiv == true)
+            .Where(e => e.Value.IsActiv)
             .Select(e => e.Value)
-            // TODO Distinct and sum the .Chance for identical events
             .ToArray();
 
         if (events.Length == 0)
         {
             OnEventTriggered?.Invoke(null, 0);
-            return;
+            return (null, 0);
         }
 
         TurnEventRecord randomEvent = events[UnityEngine.Random.Range(0, events.Length)];
@@ -51,12 +55,16 @@ public class EventSystem : MonoBehaviour
 
         if (isTriggered)
         {
-            TriggerEvent(randomEvent);
-            OnEventTriggered?.Invoke(randomEvent.Event, randomEvent.FromTurnDecision);
+            string dictKey = BuildDictKey(randomEvent.Event, randomEvent.FromTurnDecision);
+
+            Events.Remove(dictKey); // Remove the event so it doesn't trigger again in the future
+            OnEventTriggered?.Invoke(randomEvent, GameManager.Instance.CurrentWeek);
+            return (randomEvent, GameManager.Instance.CurrentWeek);
         }
         else
         {
             OnEventTriggered?.Invoke(null, 0);
+            return (null, 0);
         }
     }
 
@@ -84,21 +92,5 @@ public class EventSystem : MonoBehaviour
             var key = BuildDictKey(ev, currentWeek);
             Events[key] = turnEventRecord;
         }
-    }
-
-
-    private static void TriggerEvent(TurnEventRecord randomEvent)
-    {
-        GameHistoryManager.Instance.RecordRandomEvent(randomEvent.Event, randomEvent.FromTurnDecision);
-
-        int level = PlayerProgressionSystem.Instance.LevelThisGame;
-        float negativeMultiplier = 1f + Mathf.Min(0.03f + (level * 0.02f), 0.15f); // 2% par niveau, max 15%
-
-        StatSystem.Instance.ApplyEffects(
-            Mathf.RoundToInt(randomEvent.Event.MotivationDelta * negativeMultiplier),
-            Mathf.RoundToInt(randomEvent.Event.StressDelta * negativeMultiplier),
-            Mathf.RoundToInt(randomEvent.Event.PerformanceDelta * negativeMultiplier),
-            Mathf.RoundToInt(randomEvent.Event.TurnoverDelta * negativeMultiplier)
-        );
     }
 }

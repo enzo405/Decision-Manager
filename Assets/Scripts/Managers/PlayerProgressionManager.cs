@@ -1,9 +1,9 @@
 using UnityEngine;
 using System;
 
-public class PlayerProgressionSystem : MonoBehaviour
+public class PlayerProgressionManager : MonoBehaviour
 {
-    public static PlayerProgressionSystem Instance { get; private set; }
+    public static PlayerProgressionManager Instance { get; private set; }
 
     // XP Settings
     private int XpPerTurn;
@@ -21,7 +21,7 @@ public class PlayerProgressionSystem : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("[PlayerProgressionSystem] Awake");
+        Debug.Log("[PlayerProgressionManager] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -29,10 +29,7 @@ public class PlayerProgressionSystem : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-    }
 
-    public void Start()
-    {
         // Charger les paramètres de progression depuis les Thresholds
         Thresholds thresholds = ConfigApiService.Instance.Thresholds;
         BaseXp = thresholds.BaseXp;
@@ -40,9 +37,16 @@ public class PlayerProgressionSystem : MonoBehaviour
         XpPerTurn = thresholds.XpPerTurn;
         XpBonusGoodDecision = thresholds.XpBonusGoodDecision;
         MaxLevel = thresholds.MaxLevel;
+    }
 
-        // Valeur initiale
-        NewGame();
+    public void Start()
+    {
+        GameManager.Instance.OnEndGameTriggered += EndGame;
+        GameManager.Instance.OnNewGameTriggered += InitStats;
+        GameManager.Instance.OnGameAbandonedTriggered += AbandonCurrentGameProgression;
+
+        // Initial load of player progression
+        InitStats();
     }
 
     public void AddXP(bool wasGoodDecision)
@@ -54,7 +58,7 @@ public class PlayerProgressionSystem : MonoBehaviour
         OnProgressionChanged?.Invoke();
     }
 
-    public void NewGame()
+    private void InitStats()
     {
         CurrentXP = PlayerPrefs.GetInt("PlayerXP", 0);
         CheckLevelUp();
@@ -78,7 +82,7 @@ public class PlayerProgressionSystem : MonoBehaviour
         return (float)(CurrentXP - levelStart) / (levelEnd - levelStart);
     }
 
-    public void EndGame()
+    private void EndGame()
     {
         // Backup call: Making sure we don't save a wrong Level
         CheckLevelUp();
