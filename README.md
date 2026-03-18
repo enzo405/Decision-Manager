@@ -8,13 +8,22 @@ Built with Unity for Android, Decision Manager puts you in the role of a newly a
 
 ## Screenshots
 
-> _Screenshots coming soon_
+<div align="center">
 
-<!-- 
-| Main Game | Feedback Popup | Game Over |
-|---|---|---|
-| ![Main Game](screenshots/main_game.png) | ![Feedback](screenshots/feedback.png) | ![Game Over](screenshots/game_over.png) |
--->
+| Loading | Menu | How To Play |
+|:---:|:---:|:---:|
+| <img src="./Docs/Screenshots/Loading.jpg" width="200"> | <img src="./Docs/Screenshots/Menu.jpg" width="200"> | <img src="./Docs/Screenshots/HowToPlay.jpg" width="200"> |
+
+| Card Selection | Decision + Event | Collection |
+|:---:|:---:|:---:|
+| <img src="./Docs/Screenshots/CardSelection.jpg" width="200"> | <img src="./Docs/Screenshots/DecisionWithEvent.jpg" width="200"> | <img src="./Docs/Screenshots/Collection.jpg" width="200"> |
+
+| Collection (Low) | Collection (High) | Game Over |
+|:---:|:---:|:---:|
+| <img src="./Docs/Screenshots/CollectionLowCard.jpg" width="200"> | <img src="./Docs/Screenshots/CollectionHigh.jpg" width="200"> | <img src="./Docs/Screenshots/GameOverWin.jpg" width="200"> |
+
+</div>
+
 
 ---
 
@@ -49,7 +58,7 @@ Random events can occur each turn. Difficulty scales with the player's level —
 - **Language** : C#
 - **Platform** : Android
 - **Orientation** : Portrait
-- **Backend** : [DecisionManager API](https://github.com/enzo405/Decision-Manager-API) (ASP.NET Core 9 + PostgreSQL)
+- **Backend** : [DecisionManager API](https://github.com/enzo405/Decision-Manager-API) (ASP.NET Core 10 + PostgreSQL)
 
 ---
 
@@ -77,7 +86,7 @@ Random events can occur each turn. Difficulty scales with the player's level —
 - **Poor performance** — performance too low
 
 ### Difficulty Scaling
-Thresholds tighten as the player levels up — the same decisions become riskier at higher levels. Negative effects on failed cards and triggered events are amplified by 2% per level, up to a maximum of 20%.
+Thresholds tighten as the player levels up. Negative effects on failed cards are amplified by 5% per level.
 
 ---
 
@@ -90,7 +99,7 @@ For example, playing *Transformation Agile* at week 3 might trigger *"La résist
 Each event has :
 - A **week range** (relative to when the card was played)
 - A **chance** of triggering
-- **Stat effects** (amplified by player level)
+- **Stat effects**
 
 This system simulates the delayed and compounding consequences of managerial decisions.
 
@@ -116,20 +125,12 @@ This system simulates the delayed and compounding consequences of managerial dec
 
 ## Cards
 
-30 decision cards spread across 5 unlock levels :
-
-| Level | Examples |
-|---|---|
-| 1 | Réunion d'équipe, Formation professionnelle, Gestion de crise |
-| 2 | Session de mentorat, Programme bien-être, Entretien annuel |
-| 3 | Transformation Agile, Séminaire stratégique, Développement du leadership |
-| 4 | Intégration post-fusion, Laboratoire d'innovation, Plan de succession |
-| 5 | Coaching exécutif, Analyse prédictive RH, Stratégie orientée sens |
+40 decision cards spread across 5 unlock levels :
 
 Each card has :
 - A success probability
 - Primary effects on success
-- Secondary (often negative) effects on failure
+- Secondary effects on failure
 - A risk level (Low / Medium / High)
 - A pedagogical feedback message
 - Deferred events with delayed stat consequences
