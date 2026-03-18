@@ -37,7 +37,7 @@ public class FeedbackUI : MonoBehaviour
     public TextMeshProUGUI eventName;
     public TextMeshProUGUI eventMessageText;
     public GameObject eventEffectPrefab;
-    public GameObject eventEffectContainer;
+    public Transform eventEffectContainer;
 
     public void Start()
     {
@@ -105,10 +105,21 @@ public class FeedbackUI : MonoBehaviour
             eventMessageText.text = $"Événement déclenché par \"{originCard}\" (tour {randomEvent.FromTurnDecision})\n\n" +
                                     $"{randomEvent.Event.Message}\n\n";
 
-            // TODO: Add event effects display
-            // public GameObject eventEffectPrefab;
-            // public GameObject eventEffectContainer;
+            PopulateEventEffect(randomEvent.Event.MotivationDelta, "Motivation");
+            PopulateEventEffect(randomEvent.Event.StressDelta, "Stress");
+            PopulateEventEffect(randomEvent.Event.PerformanceDelta, "Performance");
+            PopulateEventEffect(randomEvent.Event.TurnoverDelta, "Turnover");
         }
+    }
+
+    private void PopulateEventEffect(float value, string statName)
+    {
+        GameObject item = Instantiate(eventEffectPrefab, eventEffectContainer);
+        TextMeshProUGUI statNameField = item.transform.Find("StatName").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI statValueField = item.transform.Find("StatValue").GetComponent<TextMeshProUGUI>();
+
+        statNameField.text = statName;
+        statValueField.text = value >= 0 ? $"+{value}" : $"{value}";
     }
 
     #region Animation methods
