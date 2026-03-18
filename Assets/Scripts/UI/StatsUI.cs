@@ -18,24 +18,24 @@ public class StatsUI : MonoBehaviour
 
     public void OnDisable()
     {
-        if (StatSystem.Instance != null)
-            StatSystem.Instance.OnStatsChanged -= RefreshUI;
+        if (StatManager.Instance != null)
+            StatManager.Instance.OnStatsChanged -= RefreshUI;
     }
 
     public void Start()
     {
-        StatSystem.Instance.OnStatsChanged += RefreshUI;
+        StatManager.Instance.OnStatsChanged += RefreshUI;
         RefreshUI();
     }
 
     public void RefreshUI()
     {
-        var stats = StatSystem.Instance;
+        var stats = StatManager.Instance;
 
-        motivationBar.value = Normalize(stats.Motivation, StatSystem.GetMinMotivation, StatSystem.GetMaxMotivation);
-        stressBar.value = Normalize(stats.Stress, StatSystem.GetMinStress, StatSystem.GetMaxStress);
-        performanceBar.value = Normalize(stats.Performance, StatSystem.GetMinPerformance, StatSystem.GetMaxPerformance);
-        turnoverBar.value = Normalize(stats.Turnover, StatSystem.GetMinTurnover, StatSystem.GetMaxTurnover);
+        motivationBar.value = Normalize(stats.Motivation, StatManager.GetMinMotivation, StatManager.GetMaxMotivation);
+        stressBar.value = Normalize(stats.Stress, StatManager.GetMinStress, StatManager.GetMaxStress);
+        performanceBar.value = Normalize(stats.Performance, StatManager.GetMinPerformance, StatManager.GetMaxPerformance);
+        turnoverBar.value = Normalize(stats.Turnover, StatManager.GetMinTurnover, StatManager.GetMaxTurnover);
 
         motivationValueText.text = stats.Motivation.ToString();
         stressValueText.text = stats.Stress.ToString();

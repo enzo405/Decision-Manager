@@ -1,9 +1,9 @@
 using UnityEngine;
 using System;
 
-public class PlayerProgressionSystem : MonoBehaviour
+public class PlayerProgressionManager : MonoBehaviour
 {
-    public static PlayerProgressionSystem Instance { get; private set; }
+    public static PlayerProgressionManager Instance { get; private set; }
 
     // XP Settings
     private int XpPerTurn;
@@ -21,7 +21,7 @@ public class PlayerProgressionSystem : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("[PlayerProgressionSystem] Awake");
+        Debug.Log("[PlayerProgressionManager] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

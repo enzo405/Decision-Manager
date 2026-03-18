@@ -165,6 +165,12 @@ public class FeedbackUI : MonoBehaviour
             yield return null;
         }
 
+        // Remove childrens of event effect container to avoid stacking them
+        foreach (Transform child in eventEffectContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
         feedbackUIPanel.SetActive(false);
     }
     #endregion

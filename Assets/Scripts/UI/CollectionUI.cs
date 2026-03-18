@@ -85,7 +85,7 @@ public class CollectionUI : MonoBehaviour
     public void PopulateCollection()
     {
         cardItemMap.Clear();
-        int playerLevel = PlayerProgressionSystem.Instance.CurrentLevel;
+        int playerLevel = PlayerProgressionManager.Instance.CurrentLevel;
 
         foreach (var card in allCards)
         {

@@ -70,9 +70,9 @@ public class GameManager : MonoBehaviour
         OnCardPlayedTriggered?.Invoke(card, wasSuccess,
             motivDelta, stressDelta, perfDelta, turnoverDelta);
 
-        var (randomEvent, turn) = EventSystem.Instance.RollEvent();
+        var (randomEvent, turn) = EventManager.Instance.RollEvent();
 
-        var defeat = StatSystem.Instance.CheckDefeatConditions();
+        var defeat = StatManager.Instance.CheckDefeatConditions();
         if (defeat != DefeatReason.None)
         {
             PreloadEndGame(false, defeat);

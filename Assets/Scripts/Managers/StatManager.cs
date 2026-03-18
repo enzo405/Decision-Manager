@@ -1,9 +1,9 @@
 using UnityEngine;
 using System;
 
-public class StatSystem : MonoBehaviour
+public class StatManager : MonoBehaviour
 {
-    public static StatSystem Instance { get; private set; }
+    public static StatManager Instance { get; private set; }
 
     public int Motivation { get; private set; }
     public int Stress { get; private set; }
@@ -25,7 +25,7 @@ public class StatSystem : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("[StatSystem] Awake");
+        Debug.Log("[StatManager] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -42,7 +42,7 @@ public class StatSystem : MonoBehaviour
         {
             ApplyEffects(motivation, stress, performance, turnover);
         };
-        EventSystem.Instance.OnEventTriggered += (ev, fromTurn) =>
+        EventManager.Instance.OnEventTriggered += (ev, fromTurn) =>
         {
             if (ev == null) return;
             var eventRecord = ev.Event;

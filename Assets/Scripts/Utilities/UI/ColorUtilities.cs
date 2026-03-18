@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ColorUtilities
 {
+    public static Color Blue => new(0.29f, 0.56f, 0.85f);
     public static Color Red => new(0.91f, 0.30f, 0.24f);
     public static Color Green => new(0.18f, 0.80f, 0.44f);
     public static Color Orange => new(0.90f, 0.49f, 0.13f);

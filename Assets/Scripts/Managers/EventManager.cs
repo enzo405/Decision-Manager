@@ -3,9 +3,9 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-public class EventSystem : MonoBehaviour
+public class EventManager : MonoBehaviour
 {
-    public static EventSystem Instance { get; private set; }
+    public static EventManager Instance { get; private set; }
 
     // Events for current session
     public Dictionary<string, TurnEventRecord> Events { get; private set; } = new();
@@ -16,7 +16,7 @@ public class EventSystem : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("[EventSystem] Awake");
+        Debug.Log("[EventManager] Awake");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

@@ -23,7 +23,7 @@ public class GameHistoryManager : MonoBehaviour
     public void Start()
     {
         GameManager.Instance.OnCardPlayedTriggered += RecordTurn;
-        EventSystem.Instance.OnEventTriggered += RecordRandomEvent;
+        EventManager.Instance.OnEventTriggered += RecordRandomEvent;
         GameManager.Instance.OnNewGameTriggered += Reset;
     }
 
@@ -55,14 +55,14 @@ public class GameHistoryManager : MonoBehaviour
             CardSlug = card.Slug,
             CardDisplayName = card.DisplayName,
             WasSuccess = wasSuccess,
-            Motivation = StatSystem.Instance.Motivation,
-            Stress = StatSystem.Instance.Stress,
-            Performance = StatSystem.Instance.Performance,
-            Turnover = StatSystem.Instance.Turnover,
+            Motivation = StatManager.Instance.Motivation,
+            Stress = StatManager.Instance.Stress,
+            Performance = StatManager.Instance.Performance,
+            Turnover = StatManager.Instance.Turnover,
             WasGoodDecision = wasGoodDecision
         });
 
-        PlayerProgressionSystem.Instance.AddXP(wasGoodDecision);
-        EventSystem.Instance.RegisterCardEvents(card);
+        PlayerProgressionManager.Instance.AddXP(wasGoodDecision);
+        EventManager.Instance.RegisterCardEvents(card);
     }
 }

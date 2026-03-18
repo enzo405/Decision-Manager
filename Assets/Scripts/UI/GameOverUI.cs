@@ -63,7 +63,8 @@ public class GameOverUI : MonoBehaviour
             // Random event linked to this turn
             if (GameHistoryManager.Instance.HistoryRandomEvents.TryGetValue(turn, out TurnEventRecord randomEvent))
             {
-                AddDecisionItem(turn, randomEvent.Event.Name, randomEvent.FromTurnDecision, record.CardDisplayName);
+                var cardTrigger = GameHistoryManager.Instance.History[randomEvent.FromTurnDecision - 1];
+                AddDecisionItem(turn, randomEvent.Event.Name, randomEvent.FromTurnDecision, cardTrigger.CardDisplayName);
             }
         }
     }
@@ -83,7 +84,6 @@ public class GameOverUI : MonoBehaviour
 
     private void AddDecisionItem(int turn, string eventName, int fromTurn, string cardName)
     {
-        Debug.Log($"Adding event item for event '{eventName}' linked to card '{cardName}' from turn {fromTurn} at turn {turn}");
         GameObject item = Instantiate(historyEventItemPrefab, decisionsList);
         TextMeshProUGUI turnText = item.transform.Find("TurnNumber").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI msgText = item.transform.Find("LabelGroup/Text").GetComponent<TextMeshProUGUI>();
@@ -105,10 +105,10 @@ public class GameOverUI : MonoBehaviour
         float width = graphContainer.rect.width;
         float height = graphContainer.rect.height;
 
-        DrawCurve(history, r => r.Motivation, StatSystem.GetMaxMotivation, StatSystem.GetMinMotivation, new Color(0.29f, 0.56f, 0.85f), width, height);
-        DrawCurve(history, r => r.Stress, StatSystem.GetMaxStress, StatSystem.GetMinStress, new Color(0.91f, 0.30f, 0.24f), width, height);
-        DrawCurve(history, r => r.Performance, StatSystem.GetMaxPerformance, StatSystem.GetMinPerformance, new Color(0.18f, 0.80f, 0.44f), width, height);
-        DrawCurve(history, r => r.Turnover, StatSystem.GetMaxTurnover, StatSystem.GetMinTurnover, new Color(0.90f, 0.49f, 0.13f), width, height);
+        DrawCurve(history, r => r.Motivation, StatManager.GetMaxMotivation, StatManager.GetMinMotivation, ColorUtilities.Blue, width, height);
+        DrawCurve(history, r => r.Stress, StatManager.GetMaxStress, StatManager.GetMinStress, ColorUtilities.Red, width, height);
+        DrawCurve(history, r => r.Performance, StatManager.GetMaxPerformance, StatManager.GetMinPerformance, ColorUtilities.Green, width, height);
+        DrawCurve(history, r => r.Turnover, StatManager.GetMaxTurnover, StatManager.GetMinTurnover, ColorUtilities.Orange, width, height);
     }
 
     private void DrawCurve(List<TurnRecord> history,
