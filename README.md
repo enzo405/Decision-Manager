@@ -15,7 +15,7 @@ Built with Unity for Android, Decision Manager puts you in the role of a newly a
 | <img src="./Docs/Screenshots/Loading.jpg" width="200"> | <img src="./Docs/Screenshots/Menu.jpg" width="200"> | <img src="./Docs/Screenshots/HowToPlay.jpg" width="200"> |
 
 | Card Selection | Decision + Event |
-|:---:|:---:|:---:|
+|:---:|:---:|
 | <img src="./Docs/Screenshots/CardSelection.jpg" width="200"> | <img src="./Docs/Screenshots/DecisionWithEvent.jpg" width="200"> | 
 
 | Collection (Low) | Collection (High) | Collection |
@@ -24,7 +24,7 @@ Built with Unity for Android, Decision Manager puts you in the role of a newly a
 
 
 | GameOver (Win) | GameOver (defeat) |
-|:---:|:---:|:---:|
+|:---:|:---:|
 | <img src="./Docs/Screenshots/GameOverWin.jpg" width="200"> | <img src="./Docs/Screenshots/GameOverDefeat.jpg" width="200"> |
 
 </div>
