@@ -72,7 +72,7 @@ public class CardDetailsOverlayUI : MonoBehaviour
         riskBadgeText.text = ColorUtilities.GetRiskLabel(card.RiskLevel);
         riskBadgeText.color = ColorUtilities.GetRiskColorText(card.RiskLevel);
         riskBadgeBg.color = ColorUtilities.GetRiskColorBackground(card.RiskLevel);
-        borderImage.color = ColorUtilities.GetRiskColorBackground(card.RiskLevel);
+        borderImage.color = ColorUtilities.GetRiskColorText(card.RiskLevel);
 
         // Probability
         probValue.text = $"{card.SuccessProbability * 100f}%";

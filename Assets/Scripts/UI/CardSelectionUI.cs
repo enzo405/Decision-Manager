@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Collections;
 
 [Serializable]
 public class CardSlot
@@ -16,8 +17,14 @@ public class CardSlot
 
 public class CardSelectionUI : MonoBehaviour
 {
-    public CardSlot[] slots = new CardSlot[3];
+    [Header("Layout")]
+    [SerializeField] private RectTransform cardsContainer;
+
+    [Header("Slots")]
+    [SerializeField] private CardSlot[] slots = new CardSlot[3];
+
     private Card[] unlockedCards;
+
 
     public void Start()
     {
@@ -25,6 +32,8 @@ public class CardSelectionUI : MonoBehaviour
 
         DrawCards(); // Draw cards at the start of the game as well
         GameManager.Instance.OnTurnStarted += DrawCards;
+
+        StartCoroutine(ForceCardWidths());
     }
 
     public void OnDestroy()
@@ -75,5 +84,22 @@ public class CardSelectionUI : MonoBehaviour
         for (int i = 0; i < count; i++)
             result[i] = shuffled[i];
         return result;
+    }
+
+    private IEnumerator ForceCardWidths()
+    {
+        yield return null;
+
+        float containerWidth = cardsContainer.rect.width;
+        float padding = 40f; // left + right padding du HLG
+        float spacing = 32f; // spacing * espaces entre 3 cartes
+        float cardWidth = (containerWidth - padding - spacing) / 3f;
+
+        foreach (CardSlot slot in slots)
+        {
+            LayoutElement le = slot.cardObject.GetComponent<LayoutElement>();
+            le.preferredWidth = cardWidth;
+            le.flexibleWidth = 0;
+        }
     }
 }

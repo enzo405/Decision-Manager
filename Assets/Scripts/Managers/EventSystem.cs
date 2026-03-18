@@ -39,9 +39,8 @@ public class EventSystem : MonoBehaviour
     public (TurnEventRecord, int) RollEvent()
     {
         TurnEventRecord[] events = Events
-            .Where(e => e.Value.IsActiv == true)
+            .Where(e => e.Value.IsActiv)
             .Select(e => e.Value)
-            // TODO Distinct and sum the .Chance for identical events
             .ToArray();
 
         if (events.Length == 0)
