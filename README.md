@@ -1,5 +1,7 @@
 # Decision Manager
 
+[![Download APK](https://img.shields.io/github/v/release/enzo405/Decision-Manager?label=Download%20APK&logo=android)](https://github.com/enzo405/Decision-Manager/releases/latest)
+
 A mobile serious game about managerial decision-making and human resource management under uncertainty.
 
 Built with Unity for Android, Decision Manager puts you in the role of a newly appointed manager responsible for balancing your team's performance and well-being over 12 weeks.
