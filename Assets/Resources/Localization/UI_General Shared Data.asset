@@ -13,8 +13,56 @@ MonoBehaviour:
   m_Name: UI_General Shared Data
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
   m_TableCollectionName: UI_General
-  m_TableCollectionNameGuidString: 00000000000000000000000000000000
-  m_Entries: []
+  m_TableCollectionNameGuidString: fe1fcc1e1d17bb84f850144ef1020a73
+  m_Entries:
+  - m_Id: 10756379160576
+    m_Key: btn.play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10756379160577
+    m_Key: btn.quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10756379160578
+    m_Key: btn.continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10756379160579
+    m_Key: btn.close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10756379160580
+    m_Key: btn.replay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10756379160581
+    m_Key: btn.menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10756379160582
+    m_Key: btn.how_to_play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10756379160583
+    m_Key: btn.resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10756379160584
+    m_Key: btn.abandon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10756379160585
+    m_Key: btn.end_game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10756379160586
+    m_Key: btn.collection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10756379160587
+    m_Key: pause.title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

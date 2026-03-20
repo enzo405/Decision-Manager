@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI_Cards Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: UI_Cards
+  m_TableCollectionNameGuidString: 352a89da58d07534096b07a5263cc6da
+  m_Entries:
+  - m_Id: 1049904066560
+    m_Key: card.risk.low
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049920843776
+    m_Key: card.risk.medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049920843777
+    m_Key: card.risk.high
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049920843778
+    m_Key: card.label.probability
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049920843779
+    m_Key: card.label.effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049920843780
+    m_Key: card.label.level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049920843781
+    m_Key: card.instruction
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 350801829353488606
+  references:
+    version: 2
+    RefIds:
+    - rid: 350801829353488606
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1773938861501

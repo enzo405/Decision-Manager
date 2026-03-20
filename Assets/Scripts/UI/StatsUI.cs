@@ -45,8 +45,6 @@ public class StatsUI : MonoBehaviour
 
     private float Normalize(int value, int min, int max)
     {
-        Debug.Log($"Result: {(float)(value - min) / (max - min)}");
-        Debug.Log($"Value: {value}, Min: {min}, Max: {max}");
         return (float)(value - min) / (max - min);
     }
 }

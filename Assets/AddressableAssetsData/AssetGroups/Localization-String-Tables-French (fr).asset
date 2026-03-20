@@ -14,8 +14,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Localization-String-Tables-French (fr)
   m_GUID: 7470438b1bf5d6b4583582fb2e221a39
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 0ddd906b3102c7345b914716ba934237
+    m_Address: UI_Stats_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d34bf57f7d4e344790f2dfb15800d7a
+    m_Address: UI_Cards_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f508d352f045464b9537972439d160e
+    m_Address: UI_Feedback_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c1e3c6310ab6fe44a2b3ce3a1e0467d
+    m_Address: UI_Progression_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ed1b1ad3c121a140aac875aade80a90
+    m_Address: UI_HowToPlay_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9340bdad815f92a409b21422632a72ae
+    m_Address: UI_Loading_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3986f1bb189f484db2380c00f98de0b
+    m_Address: UI_General_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b81a48e5e2831344d9f57cb39df088f9
+    m_Address: UI_Collection_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ea91c12dbdb0f1842a28ac5aea704e6a
+    m_Address: UI_GameOver_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 64da982b144646b4a955a2955a99be00, type: 2}
   m_SchemaSet:
-    m_Schemas: []
+    m_Schemas:
+    - {fileID: 11400000, guid: a10e0790687fdda449ecd52074ed0002, type: 2}
+    - {fileID: 11400000, guid: b5685f946b6ae9247ae0b9ade42e17c7, type: 2}

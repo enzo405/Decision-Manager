@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization.Settings;
 
 [RequireComponent(typeof(CardApiService))]
 [RequireComponent(typeof(PlayerApiService))]
@@ -17,7 +18,6 @@ public class NetworkServiceManager : MonoBehaviour
 
     [SerializeField] private LoadingUI loadingUI;
 
-
     public string ApiBaseUrl { get; private set; }
     public string ApiKey { get; private set; }
 
@@ -31,6 +31,9 @@ public class NetworkServiceManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        LoadSavedLanguage();
+
         LoadConfig();
 
         _playerService = GetComponent<PlayerApiService>();
@@ -44,12 +47,23 @@ public class NetworkServiceManager : MonoBehaviour
         StartCoroutine(Initialize());
     }
 
+    private void LoadSavedLanguage()
+    {
+        string savedCode = PlayerPrefs.GetString("selected_language", "en");
+        Debug.Log($"[Localization] Loading saved language: {savedCode}");
+        LocalizationSettings.SelectedLocale =
+            LocalizationSettings.AvailableLocales.GetLocale(savedCode);
+    }
+
     private IEnumerator Initialize()
     {
+        // Wait for localization to be ready before using it
+        yield return LocalizationSettings.InitializationOperation;
+
         string deviceId = SystemInfo.deviceUniqueIdentifier;
 
         // 1 — Create or retrieve player
-        loadingUI.SetProgress("Connexion au serveur...", 0f);
+        loadingUI.SetProgress(Loc("loading.step.player"), 0f);
         yield return StartCoroutine(_playerService.CreateOrGetPlayer(
             deviceId,
             onSuccess: player => Debug.Log($"[Network] Player initialized: {player.DeviceId}"),
@@ -57,40 +71,42 @@ public class NetworkServiceManager : MonoBehaviour
         ));
         yield return _waitForSeconds0_5;
 
-        // 2 - Fetch Config
-        loadingUI.SetProgress("Chargement de la configuration...", 0.33f);
+        // 2 — Fetch Config
+        loadingUI.SetProgress(Loc("loading.step.config"), 0.33f);
         yield return StartCoroutine(_configApiService.FetchDefeatConditions(
-            onSuccess: defeatConditions => Debug.Log($"[Network] Fetched and initialized defeat conditions: Motivation={defeatConditions.Motivation.Min}/ {defeatConditions.Motivation.Max}; Stress={defeatConditions.Stress.Min}/ {defeatConditions.Stress.Max}; Performance={defeatConditions.Performance.Min}/ {defeatConditions.Performance.Max}; Turnover={defeatConditions.Turnover.Min}/ {defeatConditions.Turnover.Max}"),
-            onError: error => Debug.LogError($"[Network] FetchDefeatConditions init failed: {error}")
+            onSuccess: defeatConditions => Debug.Log($"[Network] Fetched defeat conditions."),
+            onError: error => Debug.LogError($"[Network] FetchDefeatConditions failed: {error}")
         ));
 
         yield return StartCoroutine(_configApiService.FetchThresholds(
-            onSuccess: thresholds => Debug.Log($"[Network] Fetched and initialized thresholds: BaseXp={thresholds.BaseXp}; Exponent={thresholds.Exponent}; MaxLevel={thresholds.MaxLevel}; XpBonusGoodDecision={thresholds.XpBonusGoodDecision}; XpPerTurn={thresholds.XpPerTurn}"),
-            onError: error => Debug.LogError($"[Network] FetchThresholds init failed: {error}")
+            onSuccess: thresholds => Debug.Log($"[Network] Fetched thresholds."),
+            onError: error => Debug.LogError($"[Network] FetchThresholds failed: {error}")
         ));
 
         yield return StartCoroutine(_configApiService.FetchStatsInit(
-            onSuccess: statsInit => Debug.Log($"[Network] Fetched and initialized initial stats: InitialMotivation={statsInit.InitialMotivation}; InitialPerformance={statsInit.InitialPerformance}; InitialStress={statsInit.InitialStress}; InitialTurnover={statsInit.InitialTurnover}"),
-            onError: error => Debug.LogError($"[Network] FetchStatsInit init failed: {error}")
+            onSuccess: statsInit => Debug.Log($"[Network] Fetched initial stats."),
+            onError: error => Debug.LogError($"[Network] FetchStatsInit failed: {error}")
         ));
         yield return _waitForSeconds0_5;
 
-
-        // 3 - Initialize Cards
-        loadingUI.SetProgress("Chargement des cartes...", 0.66f);
+        // 3 — Initialize Cards
+        loadingUI.SetProgress(Loc("loading.step.cards"), 0.66f);
         yield return StartCoroutine(_cardService.FetchAllCards(
-               onSuccess: cards => Debug.Log($"[Network] Fetched and initialized {cards.Count} cards."),
-               onError: error => Debug.LogError($"[Network] Card init failed: {error}")
-           ));
+            onSuccess: cards => Debug.Log($"[Network] Fetched {cards.Count} cards."),
+            onError: error => Debug.LogError($"[Network] Card init failed: {error}")
+        ));
 
-        Debug.Log("[Network] Initialization complete.");
-        loadingUI.SetProgress("Prêt !", 1f);
-
+        loadingUI.SetProgress(Loc("loading.step.ready"), 1f);
         yield return _waitForSeconds0_5;
+
         loadingUI = null;
         SceneManager.LoadScene("MainMenu");
     }
 
+    private string Loc(string key)
+    {
+        return LocalizationSettings.StringDatabase.GetLocalizedString("UI_Loading", key);
+    }
 
     private void LoadConfig()
     {

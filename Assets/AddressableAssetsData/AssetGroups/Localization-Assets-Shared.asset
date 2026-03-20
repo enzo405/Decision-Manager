@@ -14,8 +14,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Localization-Assets-Shared
   m_GUID: 3e230a1b5c42e5440ae3f0f4a41875cd
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 352a89da58d07534096b07a5263cc6da
+    m_Address: Assets/Resources/Localization/UI_Cards Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3dbc342ef106be342a120f0fb2a81924
+    m_Address: Assets/Resources/Localization/UI_GameOver Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7814402c99778664abf8844bf062ef5c
+    m_Address: Assets/Resources/Localization/UI_HowToPlay Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9a4ea14a139071343b9b51c37f727337
+    m_Address: Assets/Resources/Localization/UI_Feedback Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8aee0e46c8d0574c80bdb0a810dec34
+    m_Address: Assets/Resources/Localization/UI_Collection Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8c61d6f9b802634f91445a4df8dc70b
+    m_Address: Assets/Resources/Localization/UI_Progression Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d9f14acd391f22e4da408d44e3559d58
+    m_Address: Assets/Resources/Localization/UI_Stats Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd38fa235cb82bb49baefac123ad58c1
+    m_Address: Assets/Resources/Localization/UI_Loading Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe1fcc1e1d17bb84f850144ef1020a73
+    m_Address: Assets/Resources/Localization/UI_General Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 64da982b144646b4a955a2955a99be00, type: 2}
   m_SchemaSet:
-    m_Schemas: []
+    m_Schemas:
+    - {fileID: 11400000, guid: 2c1d0da82791bba408f33cfc90271549, type: 2}
+    - {fileID: 11400000, guid: 4de7bcaf5e0da8943a34b12e13734a65, type: 2}

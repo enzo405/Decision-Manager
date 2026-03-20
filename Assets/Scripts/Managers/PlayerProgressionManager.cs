@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.Localization.Settings;
 
 public class PlayerProgressionManager : MonoBehaviour
 {
@@ -114,15 +115,17 @@ public class PlayerProgressionManager : MonoBehaviour
 
     public string LevelTitle()
     {
-        return CurrentLevel switch
+        string key = CurrentLevel switch
         {
-            1 => "Manager Junior",
-            2 or 3 => "Manager",
-            4 or 5 => "Manager Confirmé",
-            6 or 7 => "Manager Senior",
-            8 or 9 or 10 => "Directeur",
-            >= 11 => "Directeur Exécutif",
-            _ => "Manager Junior"
+            1 => "progression.title.1",
+            2 or 3 => "progression.title.2",
+            4 or 5 => "progression.title.4",
+            6 or 7 => "progression.title.6",
+            8 or 9 or 10 => "progression.title.8",
+            >= 11 => "progression.title.default",
+            _ => "progression.title.1"
         };
+
+        return LocalizationSettings.StringDatabase.GetLocalizedString("UI_Progression", key);
     }
 }

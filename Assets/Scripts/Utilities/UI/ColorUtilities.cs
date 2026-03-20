@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class ColorUtilities
 {
@@ -38,12 +39,14 @@ public class ColorUtilities
 
     public static string GetRiskLabel(RiskLevel riskLevel)
     {
-        return riskLevel switch
+        string key = riskLevel switch
         {
-            RiskLevel.Low => "FAIBLE",
-            RiskLevel.Medium => "MOYEN",
-            RiskLevel.High => "ÉLEVÉ",
-            _ => ""
+            RiskLevel.Low => "card.risk.low",
+            RiskLevel.Medium => "card.risk.medium",
+            RiskLevel.High => "card.risk.high",
+            _ => "card.risk.low"
         };
+
+        return LocalizationSettings.StringDatabase.GetLocalizedString("UI_Cards", key);
     }
 }

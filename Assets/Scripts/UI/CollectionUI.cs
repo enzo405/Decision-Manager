@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine.Localization.Settings;
 
 public class CollectionUI : MonoBehaviour
 {
@@ -33,7 +34,11 @@ public class CollectionUI : MonoBehaviour
     {
         allCards = CardApiService.Instance.AllCards.OrderBy(c => c.RequiredLevel).ToArray();
         backButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
-        collectionCount.text = $"{CardApiService.Instance.GetUnlockedCards().Length} / {allCards.Length} cartes débloquées";
+
+        collectionCount.text = LocalizationSettings.StringDatabase.GetLocalizedString(
+            "UI_Collection", "collection.count",
+            new object[] { CardApiService.Instance.GetUnlockedCards().Length, allCards.Length }
+        );
 
         SetupFilters();
         PopulateCollection();
@@ -87,13 +92,15 @@ public class CollectionUI : MonoBehaviour
         cardItemMap.Clear();
         int playerLevel = PlayerProgressionManager.Instance.CurrentLevel;
 
+        string levelFormat = LocalizationSettings.StringDatabase
+            .GetLocalizedString("UI_Cards", "card.label.level");
+
         foreach (var card in allCards)
         {
             GameObject item = Instantiate(cardItemPrefab, cardsGrid);
             cardItemMap[item] = card;
 
             bool isUnlocked = card.RequiredLevel <= playerLevel;
-            Image cardImage = item.GetComponent<Image>();
             Image strip = item.transform.Find("Strip").GetComponent<Image>();
             TextMeshProUGUI nameText = item.transform.Find("CardName").GetComponent<TextMeshProUGUI>();
             Image badgeImage = item.transform.Find("LevelBadge").GetComponent<Image>();
@@ -107,7 +114,7 @@ public class CollectionUI : MonoBehaviour
             {
                 strip.color = riskColorText;
                 nameText.text = card.DisplayName;
-                badgeText.text = $"NIV.{card.RequiredLevel}";
+                badgeText.text = $"{levelFormat}{card.RequiredLevel}";
                 badgeImage.color = riskColorBackground;
                 badgeText.color = riskColorText;
                 lockedOverlay.SetActive(false);
@@ -122,7 +129,7 @@ public class CollectionUI : MonoBehaviour
             {
                 lockedOverlay.SetActive(true);
                 nameText.text = "";
-                badgeText.text = $"NIV.{card.RequiredLevel}";
+                badgeText.text = $"{levelFormat}{card.RequiredLevel}";
                 strip.color = new Color(1, 1, 1, 0.05f);
             }
         }
