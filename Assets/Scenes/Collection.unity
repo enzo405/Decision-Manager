@@ -972,7 +972,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 1
     m_LocalVariables:
-    - name: 0
+    - name: niveau
       variable:
         rid: 350801855706038365
   m_FormatArguments: []
@@ -2950,7 +2950,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 1
     m_LocalVariables:
-    - name: 0
+    - name: niveau
       variable:
         rid: 350801855706038365
   m_FormatArguments: []
@@ -3199,7 +3199,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 1
     m_LocalVariables:
-    - name: 0
+    - name: niveau
       variable:
         rid: 350801855706038365
   m_FormatArguments: []
@@ -4951,7 +4951,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 1
     m_LocalVariables:
-    - name: 0
+    - name: niveau
       variable:
         rid: 350801855706038365
   m_FormatArguments: []
@@ -5786,7 +5786,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 1
     m_LocalVariables:
-    - name: 0
+    - name: niveau
       variable:
         rid: 350801855706038365
   m_FormatArguments: []

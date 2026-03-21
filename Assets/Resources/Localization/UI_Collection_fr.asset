@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: fr
   m_SharedData: {fileID: 11400000, guid: c8aee0e46c8d0574c80bdb0a810dec34, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 350801855706038379
   m_TableData:
   - m_Id: 707334287360
     m_Localized: Collection
@@ -31,13 +32,20 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 707355258882
-    m_Localized: Niv.{0}
+    m_Localized: Niv.{niveau}
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 350801855706038379
   - m_Id: 707355258883
     m_Localized: "Verrouill\xE9"
     m_Metadata:
       m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 350801855706038379
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 707355258882

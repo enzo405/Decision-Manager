@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.Localization.Settings;
+using System.Collections;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -26,29 +27,41 @@ public class MainMenuUI : MonoBehaviour
         howToPlayButton.onClick.AddListener(() => howToPlayPanel.SetActive(true));
         closeButton.onClick.AddListener(() => howToPlayPanel.SetActive(false));
         quitButton.onClick.AddListener(() => Application.Quit());
+        switchLanguageButton.onClick.AddListener(() => ToggleLanguage());
+
+        GameManager.Instance.OnChangeLanguageTriggered += OnLanguageChanged;
 
         UpdateLanguageButton();
-        switchLanguageButton.onClick.AddListener(ToggleLanguage);
 
         RefreshUI();
 
         howToPlayPanel.SetActive(false);
     }
 
+    public void OnDestroy()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnChangeLanguageTriggered -= OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged(string newCode)
+    {
+        UpdateLanguageButton();
+        RefreshUI();
+        StartCoroutine(RefetchCards());
+    }
+
+    private IEnumerator RefetchCards()
+    {
+        yield return StartCoroutine(CardApiService.Instance.FetchAllCards(
+            onSuccess: _ => Debug.Log("[MainMenuUI] Cards refetched in new language."),
+            onError: err => Debug.LogError($"[MainMenuUI] Card refetch failed: {err}")
+        ));
+    }
+
     private void ToggleLanguage()
     {
-        string currentCode = LocalizationSettings.SelectedLocale.Identifier.Code;
-        string newCode = currentCode == "fr" ? "en" : "fr";
-
-        LocalizationSettings.SelectedLocale =
-            LocalizationSettings.AvailableLocales.GetLocale(newCode);
-
-        PlayerPrefs.SetString("selected_language", newCode);
-        PlayerPrefs.Save();
-
-        RefreshUI();
-
-        UpdateLanguageButton();
+        GameManager.Instance.ToggleLanguage();
     }
 
     private void RefreshUI()
