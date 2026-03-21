@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization.Settings;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     public event Action OnNewGameTriggered;
     public event Action OnEndGameTriggered;
     public event Action OnGameAbandonedTriggered;
+    public event Action<string> OnChangeLanguageTriggered;
 
     public void Awake()
     {
@@ -64,6 +66,21 @@ public class GameManager : MonoBehaviour
         OnGameAbandonedTriggered?.Invoke();
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void ToggleLanguage()
+    {
+        string currentCode = LocalizationSettings.SelectedLocale.Identifier.Code;
+        string newCode = currentCode == "fr" ? "en" : "fr";
+
+        LocalizationSettings.SelectedLocale =
+            LocalizationSettings.AvailableLocales.GetLocale(newCode);
+
+        PlayerPrefs.SetString("selected_language", newCode);
+        PlayerPrefs.Save();
+
+        OnChangeLanguageTriggered?.Invoke(newCode);
+    }
+
 
     private void OnCardPlayed(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta)
     {

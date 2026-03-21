@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Localization.Settings;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -37,17 +38,22 @@ public class GameOverUI : MonoBehaviour
         bool isVictory = GameOverData.IsVictory;
         DefeatReason reason = GameOverData.Reason;
 
-        titleText.text = isVictory ? "Victoire" : "Défaite";
+        titleText.text = LocalizationSettings.StringDatabase.GetLocalizedString(
+            "UI_GameOver", isVictory ? "gameover.title.victory" : "gameover.title.defeat"
+        );
         titleText.color = isVictory ? ColorUtilities.Green : ColorUtilities.Red;
         titleIcon.color = titleText.color;
         titleIcon2.color = titleText.color;
-        reasonText.text = reason switch
+
+        string reasonKey = reason switch
         {
-            DefeatReason.Burnout => "Ton équipe a atteint le burn-out. Le stress était trop élevé.",
-            DefeatReason.MassiveDepartures => "Trop de départs. Le turnover a détruit l'équipe.",
-            DefeatReason.PoorPerformance => "La performance est tombée trop bas. Objectifs non atteints.",
-            _ => "Tu as maintenu l'équilibre sur 12 semaines. Bien joué !"
+            DefeatReason.Burnout => "gameover.reason.burnout",
+            DefeatReason.MassiveDepartures => "gameover.reason.turnover",
+            DefeatReason.PoorPerformance => "gameover.reason.performance",
+            _ => "gameover.reason.victory"
         };
+        reasonText.text = LocalizationSettings.StringDatabase
+            .GetLocalizedString("UI_GameOver", reasonKey);
     }
 
     private void SetupDecisions()
@@ -90,8 +96,16 @@ public class GameOverUI : MonoBehaviour
         TextMeshProUGUI subTitleText = item.transform.Find("LabelGroup/SubTitleText").GetComponent<TextMeshProUGUI>();
 
         turnText.text = turn.ToString();
-        msgText.text = $"Événement : {eventName}";
-        subTitleText.text = $"Déclenché par : {cardName} (tour {fromTurn})";
+
+        msgText.text = LocalizationSettings.StringDatabase.GetLocalizedString(
+            "UI_GameOver", "gameover.history.event",
+            new object[] { eventName }
+        );
+
+        subTitleText.text = LocalizationSettings.StringDatabase.GetLocalizedString(
+            "UI_GameOver", "gameover.history.triggered_by",
+            new object[] { cardName, fromTurn }
+        );
         subTitleText.fontStyle = FontStyles.Italic;
     }
 

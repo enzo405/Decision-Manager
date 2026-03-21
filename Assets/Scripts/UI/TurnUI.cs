@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.Localization.Settings;
 
 public class TurnUI : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class TurnUI : MonoBehaviour
 
     public void RefreshUI()
     {
-        turnText.text = $"Semaine {GameManager.Instance.CurrentWeek} / {GameManager.Instance.totalWeeks}";
+        turnText.text = LocalizationSettings.StringDatabase.GetLocalizedString(
+            "UI_Progression", "progression.week",
+            new object[] { GameManager.Instance.CurrentWeek, GameManager.Instance.totalWeeks }
+        );
     }
 }

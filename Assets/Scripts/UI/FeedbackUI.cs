@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class FeedbackUI : MonoBehaviour
@@ -74,20 +75,26 @@ public class FeedbackUI : MonoBehaviour
     private void Populate(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta, TurnEventRecord randomEvent, int turn)
     {
         stripImage.color = wasSuccess ? ColorUtilities.SuccessColor : ColorUtilities.FailColor;
-        resultText.text = wasSuccess ? "Succès" : "Échec";
+
+        resultText.text = LocalizationSettings.StringDatabase.GetLocalizedString(
+            "UI_Feedback", wasSuccess ? "feedback.result.success" : "feedback.result.fail"
+        );
         resultText.color = wasSuccess ? ColorUtilities.Green : ColorUtilities.Red;
 
         var softBg = wasSuccess ? ColorUtilities.SoftGreen : ColorUtilities.SoftRed;
         successBadge.color = softBg;
         successBadgeIcon.sprite = wasSuccess ? checkMarkSprite : xMarkSprite;
+
         if (GameManager.Instance.IsGameOver)
         {
-            continueButton.GetComponentInChildren<TextMeshProUGUI>().text = "Terminer partie";
+            continueButton.GetComponentInChildren<TextMeshProUGUI>().text =
+                LocalizationSettings.StringDatabase.GetLocalizedString("UI_General", "btn.end_game");
         }
 
         cardNameText.text = card.DisplayName;
         cardMessageBox.color = softBg;
         cardMessageText.text = wasSuccess ? card.SuccessMessage : card.FailureMessage;
+
         SetStatValue(statsPerfChangesText, perfDelta, "Performance");
         SetStatValue(statsTurnoverChangesText, turnoverDelta, "Turnover");
         SetStatValue(statsMotivChangesText, motivDelta, "Motivation");
@@ -102,8 +109,11 @@ public class FeedbackUI : MonoBehaviour
             eventBody.SetActive(true);
             var originCard = GameHistoryManager.Instance.History[randomEvent.FromTurnDecision - 1].CardDisplayName;
             eventName.text = randomEvent.Event.Name;
-            eventMessageText.text = $"Événement déclenché par \"{originCard}\" (tour {randomEvent.FromTurnDecision})\n\n" +
-                                    $"{randomEvent.Event.Message}\n\n";
+
+            eventMessageText.text = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "UI_Feedback", "feedback.event.triggered_by",
+                new object[] { originCard, randomEvent.FromTurnDecision }
+            ) + $"\n\n{randomEvent.Event.Message}\n\n";
 
             PopulateEventEffect(randomEvent.Event.MotivationDelta, "Motivation");
             PopulateEventEffect(randomEvent.Event.StressDelta, "Stress");
@@ -118,7 +128,16 @@ public class FeedbackUI : MonoBehaviour
         TextMeshProUGUI statNameField = item.transform.Find("StatName").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI statValueField = item.transform.Find("StatValue").GetComponent<TextMeshProUGUI>();
 
-        statNameField.text = statName;
+        // Localize stat name
+        string statKey = statName switch
+        {
+            "Motivation" => "stat.motivation",
+            "Stress" => "stat.stress",
+            "Performance" => "stat.performance",
+            "Turnover" => "stat.turnover",
+            _ => statName
+        };
+        statNameField.text = LocalizationSettings.StringDatabase.GetLocalizedString("UI_Stats", statKey);
         statValueField.text = value >= 0 ? $"+{value}" : $"{value}";
     }
 
@@ -174,8 +193,6 @@ public class FeedbackUI : MonoBehaviour
         feedbackUIPanel.SetActive(false);
     }
     #endregion
-
-    private static string Signed(int v) => v >= 0 ? $"+{v}" : $"{v}";
 
     private void SetStatValue(TextMeshProUGUI label, int value, string statName)
     {

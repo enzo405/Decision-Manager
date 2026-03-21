@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_HowToPlay_fr
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 7814402c99778664abf8844bf062ef5c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 320271331328
+    m_Localized: Comment jouer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320292302848
+    m_Localized: "<b>Objectif</b>\nMaintenir l'\xE9quilibre de ton \xE9quipe sur
+      12 semaines.\n\n<b>Chaque tour</b>\nChoisis une carte parmi 3 d\xE9cisions
+      disponibles. Chaque carte a une probabilit\xE9 de succ\xE8s et affecte tes
+      4 statistiques.\n\n<b>Statistiques</b>\n\u2022 Motivation \u2014 l'engagement
+      de l'\xE9quipe\n\u2022 Stress \u2014 la pression ressentie\n\u2022 Performance
+      \u2014 la productivit\xE9 globale\n\u2022 Turnover \u2014 le risque de d\xE9parts\n\n<b>D\xE9faite
+      si...</b>\n\u2022 Le stress devient trop \xE9lev\xE9 (burn-out)\n\u2022 Le
+      turnover est incontr\xF4lable\n\u2022 La performance chute trop bas\n\n<b>Victoire</b>\nSurvivre
+      12 semaines en gardant l'\xE9quipe \xE9quilibr\xE9e."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

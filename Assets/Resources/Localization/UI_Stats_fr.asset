@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_Stats_fr
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: d9f14acd391f22e4da408d44e3559d58, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 52242722816
+    m_Localized: Motivation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52263694336
+    m_Localized: Stress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52263694337
+    m_Localized: Performance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52263694338
+    m_Localized: Turnover
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52263694339
+    m_Localized: MOT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52263694340
+    m_Localized: STR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52263694341
+    m_Localized: PERF
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52263694342
+    m_Localized: TURN
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

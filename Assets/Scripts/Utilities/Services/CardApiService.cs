@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class CardApiService : MonoBehaviour
 {
@@ -23,14 +24,16 @@ public class CardApiService : MonoBehaviour
 
     public IEnumerator FetchAllCards(Action<List<Card>> onSuccess = null, Action<string> onError = null)
     {
+        string locale = LocalizationSettings.SelectedLocale.Identifier.Code;
+
         yield return StartCoroutine(ApiClient.Get<List<Card>>(
-            "/api/cards",
+            $"/api/cards?locale={locale}",
             cards =>
             {
                 AllCards = cards;
                 onSuccess?.Invoke(cards);
             },
-            (err) => onError?.Invoke(err)
+            err => onError?.Invoke(err)
         ));
     }
 

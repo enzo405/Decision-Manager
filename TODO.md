@@ -8,3 +8,4 @@
 - **Effets sonores** — retour audio sur les clics de boutons, la sélection de cartes et les résultats de décision
 - **Ambiance sonore** — musique de fond pour renforcer l'atmosphère du jeu
 - **Animations stats & XP** — transitions visuelles lors des modifications de statistiques ou de points d'expérience
+- **Etat de l'équipe** - ajouter un text d'état de l'équipe actuel pour donner un meilleur point de vue sur l'état de l'équipe

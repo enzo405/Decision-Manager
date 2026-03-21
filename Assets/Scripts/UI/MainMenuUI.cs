@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Localization.Settings;
+using System.Collections;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class MainMenuUI : MonoBehaviour
     public Button playButton;
     public Button collectionButton;
     public Button howToPlayButton;
+    public Button switchLanguageButton;
+    public TextMeshProUGUI switchLanguageText;
     public Button quitButton;
 
     [Header("How To Play")]
@@ -23,30 +27,52 @@ public class MainMenuUI : MonoBehaviour
         howToPlayButton.onClick.AddListener(() => howToPlayPanel.SetActive(true));
         closeButton.onClick.AddListener(() => howToPlayPanel.SetActive(false));
         quitButton.onClick.AddListener(() => Application.Quit());
+        switchLanguageButton.onClick.AddListener(() => ToggleLanguage());
 
-        howToPlayText.text =
-            "<b>Objectif</b>\n" +
-            "Maintenir l'équilibre de ton équipe sur 12 semaines.\n\n" +
-            "<b>Les 4 stats</b>\n" +
-            "Motivation — l'engagement de l'équipe\n" +
-            "Stress — la pression ressentie\n" +
-            "Performance — la productivité\n" +
-            "Turnover — le risque de départs\n\n" +
-            "<b>Les cartes</b>\n" +
-            "Chaque tour, choisis une carte parmi 3.\n" +
-            "Chaque carte a une probabilité de succès.\n" +
-            "Le hasard simule l'imprévisibilité du monde professionnel.\n\n" +
-            "<b>Événements aléatoires</b>\n" +
-            "Des événements imprévus peuvent survenir chaque tour.\n" +
-            "Plus ton niveau est élevé, plus ils sont fréquents et impactants.\n\n" +
-            "<b>Difficulté</b>\n" +
-            "Les seuils de défaite se resserrent avec ton niveau.\n" +
-            "Les erreurs sont plus coûteuses au fil de ta progression.\n\n" +
-            "<b>Victoire</b>\n" +
-            "Survivre 12 semaines sans burn-out ni départs massifs.\n\n" +
-            "<b>Défaite</b>\n" +
-            "Stress trop élevé, trop de départs, ou performance effondrée.";
+        GameManager.Instance.OnChangeLanguageTriggered += OnLanguageChanged;
+
+        UpdateLanguageButton();
+
+        RefreshUI();
 
         howToPlayPanel.SetActive(false);
+    }
+
+    public void OnDestroy()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnChangeLanguageTriggered -= OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged(string newCode)
+    {
+        UpdateLanguageButton();
+        RefreshUI();
+        StartCoroutine(RefetchCards());
+    }
+
+    private IEnumerator RefetchCards()
+    {
+        yield return StartCoroutine(CardApiService.Instance.FetchAllCards(
+            onSuccess: _ => Debug.Log("[MainMenuUI] Cards refetched in new language."),
+            onError: err => Debug.LogError($"[MainMenuUI] Card refetch failed: {err}")
+        ));
+    }
+
+    private void ToggleLanguage()
+    {
+        GameManager.Instance.ToggleLanguage();
+    }
+
+    private void RefreshUI()
+    {
+        howToPlayText.text = LocalizationSettings.StringDatabase
+            .GetLocalizedString("UI_HowToPlay", "howtoplay.body");
+    }
+
+    private void UpdateLanguageButton()
+    {
+        string currentCode = LocalizationSettings.SelectedLocale.Identifier.Code;
+        switchLanguageText.text = currentCode == "fr" ? "EN" : "FR";
     }
 }

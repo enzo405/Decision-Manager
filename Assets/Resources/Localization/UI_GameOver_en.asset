@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_GameOver_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 3dbc342ef106be342a120f0fb2a81924, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 451045535744
+    m_Localized: Victory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507264
+    m_Localized: Defeat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507265
+    m_Localized: Game Over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507266
+    m_Localized: Your team burned out. Stress was too high.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507267
+    m_Localized: Too many team members left. Turnover was out of control.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507268
+    m_Localized: Your team's performance was too low.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507269
+    m_Localized: Your team reached its goals. Congratulations Manager.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507270
+    m_Localized: Decisions history
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507271
+    m_Localized: 'Event: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507272
+    m_Localized: 'Triggered by: {0} (week {1})'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507273
+    m_Localized: Stats evolution
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_GameOver_fr
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 3dbc342ef106be342a120f0fb2a81924, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 451045535744
+    m_Localized: Victoire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507264
+    m_Localized: "D\xE9faite"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507265
+    m_Localized: Fin de partie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507266
+    m_Localized: "Ton \xE9quipe a atteint le burn-out. Le stress \xE9tait trop \xE9lev\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507267
+    m_Localized: "Trop de membres ont quitt\xE9 l'\xE9quipe. Le turnover \xE9tait
+      incontr\xF4lable."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507268
+    m_Localized: "Les performances de l'\xE9quipe \xE9taient insuffisantes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507269
+    m_Localized: "Ton \xE9quipe a atteint ses objectifs. F\xE9licitations Manager."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507270
+    m_Localized: "Historique des d\xE9cisions"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507271
+    m_Localized: "\xC9v\xE9nement : {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507272
+    m_Localized: "D\xE9clench\xE9 par : {0} (tour {1})"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451066507273
+    m_Localized: "\xC9volution des stats"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

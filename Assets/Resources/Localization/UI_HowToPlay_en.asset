@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_HowToPlay_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 7814402c99778664abf8844bf062ef5c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 320271331328
+    m_Localized: How to play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320292302848
+    m_Localized: "<b>Objective</b>\nKeep your team balanced over 12 weeks.\n\n<b>Each
+      turn</b>\nChoose one card from 3 available decisions. Each card has a success
+      probability and affects your 4 stats.\n\n<b>Stats</b>\n\u2022 Motivation \u2014
+      team engagement\n\u2022 Stress \u2014 pressure felt by the team\n\u2022 Performance
+      \u2014 overall productivity\n\u2022 Turnover \u2014 risk of team members leaving\n\n<b>Defeat
+      if...</b>\n\u2022 Stress gets too high (burnout)\n\u2022 Turnover is out of
+      control\n\u2022 Performance drops too low\n\n<b>Victory</b>\nSurvive 12 weeks
+      while keeping the team balanced."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
