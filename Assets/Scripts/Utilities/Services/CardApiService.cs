@@ -37,9 +37,8 @@ public class CardApiService : MonoBehaviour
         ));
     }
 
-    public Card[] GetUnlockedCards()
+    public Card[] GetUnlockedCards(int level)
     {
-        int level = PlayerProgressionManager.Instance.LevelThisGame;
         return AllCards
             .Where(card => card.RequiredLevel <= level)
             .ToArray();

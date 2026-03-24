@@ -35,9 +35,11 @@ public class CollectionUI : MonoBehaviour
         allCards = CardApiService.Instance.AllCards.OrderBy(c => c.RequiredLevel).ToArray();
         backButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
 
+        int level = PlayerProgressionManager.Instance.CurrentLevel;
+
         collectionCount.text = LocalizationSettings.StringDatabase.GetLocalizedString(
             "UI_Collection", "collection.count",
-            new object[] { CardApiService.Instance.GetUnlockedCards().Length, allCards.Length }
+            new object[] { CardApiService.Instance.GetUnlockedCards(level).Length, allCards.Length }
         );
 
         SetupFilters();

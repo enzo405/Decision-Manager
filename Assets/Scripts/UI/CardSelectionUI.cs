@@ -25,10 +25,10 @@ public class CardSelectionUI : MonoBehaviour
 
     private Card[] unlockedCards;
 
-
     public void Start()
     {
-        unlockedCards = CardApiService.Instance.GetUnlockedCards();
+        int level = PlayerProgressionManager.Instance.LevelThisGame;
+        unlockedCards = CardApiService.Instance.GetUnlockedCards(level);
 
         DrawCards(); // Draw cards at the start of the game as well
         GameManager.Instance.OnTurnStarted += DrawCards;
