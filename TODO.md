@@ -1,5 +1,4 @@
 # A Faire sur le Client:
-- **Malus liés aux stats** — les chances de réussite sont pénalisées lorsque certaines stats atteignent des seuils critiques (trop hautes ou trop basses, additif quand plusieurs seuils touché)
 - **Combos de cartes** — certaines combinaisons de cartes déclenchent des événements à haut risque et fort impact
 - **Pool de carte intelligent** - filtrer les cartes disponibles selon les cartes jouée durant les tours qui précède
 

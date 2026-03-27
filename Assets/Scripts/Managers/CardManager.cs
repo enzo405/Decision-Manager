@@ -21,7 +21,8 @@ public class CardManager : MonoBehaviour
 
     public void PlayCard(Card card)
     {
-        bool success = UnityEngine.Random.value <= card.SuccessProbability;
+        float probability = CalculateSuccessProbability(card);
+        bool success = UnityEngine.Random.value <= probability;
         int level = PlayerProgressionManager.Instance.LevelThisGame;
         float negativeMultiplier = 1f + (level * 0.05f); // +5% par niveau
 
@@ -43,5 +44,25 @@ public class CardManager : MonoBehaviour
         }
 
         OnCardResolved?.Invoke(card, success, motiv, stress, perf, turnover);
+    }
+
+    private float CalculateSuccessProbability(Card card)
+    {
+        float prob = card.SuccessProbability;
+
+        foreach (CardStatThreshold threshold in card.StatThresholds)
+        {
+            int statValue = StatManager.Instance.GetStatValue(threshold.StatName);
+            bool isThresholdExceeded = threshold.Condition == ConditionTreshold.Above
+                ? statValue >= threshold.Threshold
+                : statValue < threshold.Threshold;
+
+            if (isThresholdExceeded)
+            {
+                prob -= (float)threshold.PenaltyAmount;
+            }
+        }
+
+        return prob;
     }
 }

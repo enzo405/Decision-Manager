@@ -92,4 +92,15 @@ public class StatManager : MonoBehaviour
         if (Stress > 80)
             Turnover = Mathf.Clamp(Turnover + 3, GetMinTurnover, GetMaxTurnover);
     }
+
+    public int GetStatValue(string name)
+    {
+        return name.ToLower() switch {
+            "stress" => Stress,
+            "motivation" => Motivation,
+            "performance" => Performance,
+            "turnover" => Turnover,
+            _ => Stress
+        };
+    }
 }
