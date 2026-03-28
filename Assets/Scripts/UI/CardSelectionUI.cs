@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 [Serializable]
 public class CardSlot
@@ -23,13 +24,9 @@ public class CardSelectionUI : MonoBehaviour
     [Header("Slots")]
     [SerializeField] private CardSlot[] slots = new CardSlot[3];
 
-    private Card[] unlockedCards;
 
     public void Start()
     {
-        int level = PlayerProgressionManager.Instance.LevelThisGame;
-        unlockedCards = CardApiService.Instance.GetUnlockedCards(level);
-
         DrawCards(); // Draw cards at the start of the game as well
         GameManager.Instance.OnTurnStarted += DrawCards;
 
@@ -44,8 +41,7 @@ public class CardSelectionUI : MonoBehaviour
 
     private void DrawCards()
     {
-        // Mélange et pioche 3 cartes aléatoires
-        Card[] picked = PickRandomCards(3);
+        List<Card> picked = CardManager.Instance.PickRandomCards(3);
 
         for (int i = 0; i < slots.Length; i++)
         {
@@ -67,23 +63,6 @@ public class CardSelectionUI : MonoBehaviour
             slot.cardButton.onClick.RemoveAllListeners();
             slot.cardButton.onClick.AddListener(() => CardManager.Instance.PlayCard(capturedCard));
         }
-    }
-
-    private Card[] PickRandomCards(int count)
-    {
-        Card[] shuffled = (Card[])unlockedCards.Clone();
-
-        // Fisher-Yates shuffle
-        for (int i = shuffled.Length - 1; i > 0; i--)
-        {
-            int j = UnityEngine.Random.Range(0, i + 1);
-            (shuffled[i], shuffled[j]) = (shuffled[j], shuffled[i]);
-        }
-
-        Card[] result = new Card[count];
-        for (int i = 0; i < count; i++)
-            result[i] = shuffled[i];
-        return result;
     }
 
     private IEnumerator ForceCardWidths()

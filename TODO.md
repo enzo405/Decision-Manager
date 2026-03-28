@@ -1,6 +1,5 @@
 # A Faire sur le Client:
 - **Combos de cartes** — certaines combinaisons de cartes déclenchent des événements à haut risque et fort impact
-- **Pool de carte intelligent** - filtrer les cartes disponibles selon les cartes jouée durant les tours qui précède
 
 # Must have :
 - **Effets sonores** — retour audio sur les victoire, défaites, réussit d'une carte, échec d'une carte, apparition d'évent

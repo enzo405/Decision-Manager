@@ -6,6 +6,7 @@ using UnityEngine.Localization.Settings;
 [RequireComponent(typeof(CardApiService))]
 [RequireComponent(typeof(PlayerApiService))]
 [RequireComponent(typeof(ConfigApiService))]
+[RequireComponent(typeof(CardComboApiService))]
 public class NetworkServiceManager : MonoBehaviour
 {
     private static WaitForSeconds _waitForSeconds0_5 = new WaitForSeconds(0.5f);

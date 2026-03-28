@@ -1,5 +1,7 @@
 using UnityEngine;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 public class CardManager : MonoBehaviour
 {
@@ -44,6 +46,37 @@ public class CardManager : MonoBehaviour
         }
 
         OnCardResolved?.Invoke(card, success, motiv, stress, perf, turnover);
+    }
+
+    public List<Card> PickRandomCards(int count)
+    {
+        var playedCardsSlug = GameHistoryManager.Instance.History
+            .Select(t => t.CardSlug)
+            .ToHashSet();
+
+        var currentLevel = PlayerProgressionManager.Instance.CurrentLevel;
+        var availableCards = CardApiService.Instance
+            .GetUnlockedCards(currentLevel)
+            // Exclude already played cards
+            .Where(card => !playedCardsSlug.Contains(card.Slug))
+            .ToList();
+
+        var smartPool = availableCards
+            .Where(card => card.RequiredCardSlugs.Any(req => playedCardsSlug.Contains(req)))
+            .ToList();
+
+        if (smartPool.Count == count)
+            return smartPool.Shuffle().ToList();
+        else if (smartPool.Count >= count)
+            return smartPool.Shuffle().Take(count).ToList();
+
+        var remaining = count - smartPool.Count;
+
+        var fallbackCards = availableCards
+            .Shuffle()
+            .Take(remaining);
+
+        return smartPool.Concat(fallbackCards).Shuffle().ToList();
     }
 
     private float CalculateSuccessProbability(Card card)

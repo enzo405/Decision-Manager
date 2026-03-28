@@ -38,18 +38,18 @@ public class EventManager : MonoBehaviour
 
     public (TurnEventRecord, int) RollEvent()
     {
-        TurnEventRecord[] events = Events
+        List<TurnEventRecord> events = Events
             .Where(e => e.Value.IsActiv)
             .Select(e => e.Value)
-            .ToArray();
+            .ToList();
 
-        if (events.Length == 0)
+        if (events.Count == 0)
         {
             OnEventTriggered?.Invoke(null, 0);
             return (null, 0);
         }
 
-        TurnEventRecord randomEvent = events[UnityEngine.Random.Range(0, events.Length)];
+        TurnEventRecord randomEvent = events[UnityEngine.Random.Range(0, events.Count)];
 
         bool isTriggered = UnityEngine.Random.value <= randomEvent.Event.Chance;
 

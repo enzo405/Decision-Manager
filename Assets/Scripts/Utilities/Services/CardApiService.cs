@@ -37,10 +37,10 @@ public class CardApiService : MonoBehaviour
         ));
     }
 
-    public Card[] GetUnlockedCards(int level)
+    public List<Card> GetUnlockedCards(int level)
     {
         return AllCards
             .Where(card => card.RequiredLevel <= level)
-            .ToArray();
+            .ToList();
     }
 }
