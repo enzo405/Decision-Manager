@@ -18,18 +18,18 @@ The API connected to the game is here: [DecisionManager API](https://github.com/
 |:---:|:---:|:---:|
 | <img src="./Docs/Screenshots/Loading.jpg" width="200"> | <img src="./Docs/Screenshots/Menu.jpg" width="200"> | <img src="./Docs/Screenshots/HowToPlay.jpg" width="200"> |
 
-| Card Selection | Decision + Event |
-|:---:|:---:|
-| <img src="./Docs/Screenshots/CardSelection.jpg" width="200"> | <img src="./Docs/Screenshots/DecisionWithEvent.jpg" width="200"> | 
+| Card Selection | Decision + Event | Decision + Combo |
+|:---:|:---:|:---:|
+| <img src="./Docs/Screenshots/CardSelection.jpg" width="200"> | <img src="./Docs/Screenshots/DecisionWithEvent.jpg" width="200"> | <img src="./Docs/Screenshots/DecisionWithCombo.jpg" width="200"> | 
 
 | Collection (Low) | Collection (High) | Collection |
 |:---:|:---:|:---:|
 | <img src="./Docs/Screenshots/CollectionLowCard.jpg" width="200"> | <img src="./Docs/Screenshots/CollectionHigh.jpg" width="200"> | <img src="./Docs/Screenshots/Collection.jpg" width="200"> |
 
 
-| GameOver (Win) | GameOver (defeat) |
-|:---:|:---:|
-| <img src="./Docs/Screenshots/GameOverWin.jpg" width="200"> | <img src="./Docs/Screenshots/GameOverDefeat.jpg" width="200"> |
+| GameOver (Win) | GameOver (defeat) | GameOver (combo) |
+|:---:|:---:|:---:|
+| <img src="./Docs/Screenshots/GameOverWin.jpg" width="200"> | <img src="./Docs/Screenshots/GameOverDefeat.jpg" width="200"> | <img src="./Docs/Screenshots/GameOverWithCombo.jpg" width="200"> |
 
 </div>
 
