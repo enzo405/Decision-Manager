@@ -59,6 +59,10 @@ MonoBehaviour:
     m_Key: gameover.stats.label
     m_Metadata:
       m_Items: []
+  - m_Id: 3576731569532928
+    m_Key: gameover.history.combo
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

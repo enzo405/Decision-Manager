@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver { get; private set; } = false;
 
     public event Action OnTurnStarted;
-    public event Action<Card, bool, int, int, int, int, TurnEventRecord, int> OnTurnResolved;
+    public event Action<Card, bool, int, int, int, int, TurnEventRecord, CardCombo, int> OnTurnResolved;
     public event Action<Card, bool, int, int, int, int> OnCardPlayedTriggered;
     public event Action OnNewGameTriggered;
     public event Action OnEndGameTriggered;
     public event Action OnGameAbandonedTriggered;
     public event Action<string> OnChangeLanguageTriggered;
+    public event Action<TurnEventRecord, int> OnEventTriggered;
+    public event Action<CardCombo, int> OnCardComboTriggered;
 
     public void Awake()
     {
@@ -87,7 +89,21 @@ public class GameManager : MonoBehaviour
         OnCardPlayedTriggered?.Invoke(card, wasSuccess,
             motivDelta, stressDelta, perfDelta, turnoverDelta);
 
-        var (randomEvent, turn) = EventManager.Instance.RollEvent();
+        var cardComboResult = CardComboManager.Instance.CheckForCombo(card);
+
+        TurnEventRecord randomEvent = null;
+        int turn = 0;
+
+        if (cardComboResult != null)
+        {
+            OnCardComboTriggered?.Invoke(cardComboResult, CurrentWeek);
+        }
+        else
+        {
+            (randomEvent, turn) = EventManager.Instance.RollEvent();
+            if (randomEvent != null)
+                OnEventTriggered?.Invoke(randomEvent, CurrentWeek);
+        }
 
         var defeat = StatManager.Instance.CheckDefeatConditions();
         if (defeat != DefeatReason.None)
@@ -107,6 +123,7 @@ public class GameManager : MonoBehaviour
             perfDelta,
             turnoverDelta,
             randomEvent,
+            cardComboResult,
             turn
         );
     }

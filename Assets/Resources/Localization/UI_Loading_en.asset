@@ -42,6 +42,10 @@ MonoBehaviour:
     m_Localized: Ready!
     m_Metadata:
       m_Items: []
+  - m_Id: 2957778304413696
+    m_Localized: Loading card combos...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

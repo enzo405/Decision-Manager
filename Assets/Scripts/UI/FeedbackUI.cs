@@ -40,6 +40,13 @@ public class FeedbackUI : MonoBehaviour
     public GameObject eventEffectPrefab;
     public Transform eventEffectContainer;
 
+    [Header("Card Combo Elements")]
+    public GameObject comboBody;
+    public TextMeshProUGUI comboName;
+    public TextMeshProUGUI comboMessageText;
+    public GameObject comboEffectPrefab;
+    public Transform comboEffectContainer;
+
     public void Start()
     {
         continueButton.onClick.AddListener(() =>
@@ -64,15 +71,15 @@ public class FeedbackUI : MonoBehaviour
         }
     }
 
-    public void Open(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta, TurnEventRecord randomEvent, int turn)
+    public void Open(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta, TurnEventRecord randomEvent, CardCombo cardCombo, int turn)
     {
         feedbackUIPanel.SetActive(true);
-        Populate(card, wasSuccess, motivDelta, stressDelta, perfDelta, turnoverDelta, randomEvent, turn);
+        Populate(card, wasSuccess, motivDelta, stressDelta, perfDelta, turnoverDelta, randomEvent, cardCombo, turn);
 
         StartCoroutine(AnimateOpenDelayed());
     }
 
-    private void Populate(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta, TurnEventRecord randomEvent, int turn)
+    private void Populate(Card card, bool wasSuccess, int motivDelta, int stressDelta, int perfDelta, int turnoverDelta, TurnEventRecord randomEvent, CardCombo cardCombo, int turn)
     {
         stripImage.color = wasSuccess ? ColorUtilities.SuccessColor : ColorUtilities.FailColor;
 
@@ -100,13 +107,11 @@ public class FeedbackUI : MonoBehaviour
         SetStatValue(statsMotivChangesText, motivDelta, "Motivation");
         SetStatValue(statsStressChangesText, stressDelta, "Stress");
 
-        if (randomEvent == null)
-        {
-            eventBody.SetActive(false);
-        }
-        else
+        if (randomEvent != null && cardCombo is null)
         {
             eventBody.SetActive(true);
+            comboBody.SetActive(false);
+
             var originCard = GameHistoryManager.Instance.History[randomEvent.FromTurnDecision - 1].CardDisplayName;
             eventName.text = randomEvent.Event.Name;
 
@@ -120,11 +125,48 @@ public class FeedbackUI : MonoBehaviour
             PopulateEventEffect(randomEvent.Event.PerformanceDelta, "Performance");
             PopulateEventEffect(randomEvent.Event.TurnoverDelta, "Turnover");
         }
+        else if (randomEvent is null && cardCombo != null)
+        {
+            eventBody.SetActive(false);
+            comboBody.SetActive(true);
+
+            comboName.text = cardCombo.Name;
+            comboMessageText.text = cardCombo.Message;
+
+            PopulateCardComboEffect(cardCombo.MotivationDelta, "Motivation");
+            PopulateCardComboEffect(cardCombo.StressDelta, "Stress");
+            PopulateCardComboEffect(cardCombo.PerformanceDelta, "Performance");
+            PopulateCardComboEffect(cardCombo.TurnoverDelta, "Turnover");
+        }
+        else
+        {
+            eventBody.SetActive(false);
+            comboBody.SetActive(false);
+        }
     }
 
     private void PopulateEventEffect(float value, string statName)
     {
         GameObject item = Instantiate(eventEffectPrefab, eventEffectContainer);
+        TextMeshProUGUI statNameField = item.transform.Find("StatName").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI statValueField = item.transform.Find("StatValue").GetComponent<TextMeshProUGUI>();
+
+        // Localize stat name
+        string statKey = statName switch
+        {
+            "Motivation" => "stat.motivation",
+            "Stress" => "stat.stress",
+            "Performance" => "stat.performance",
+            "Turnover" => "stat.turnover",
+            _ => statName
+        };
+        statNameField.text = LocalizationSettings.StringDatabase.GetLocalizedString("UI_Stats", statKey);
+        statValueField.text = value >= 0 ? $"+{value}" : $"{value}";
+    }
+    
+    private void PopulateCardComboEffect(float value, string statName)
+    {
+        GameObject item = Instantiate(comboEffectPrefab, comboEffectContainer);
         TextMeshProUGUI statNameField = item.transform.Find("StatName").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI statValueField = item.transform.Find("StatValue").GetComponent<TextMeshProUGUI>();
 

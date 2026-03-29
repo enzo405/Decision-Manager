@@ -6,6 +6,7 @@ using UnityEngine.Localization.Settings;
 [RequireComponent(typeof(CardApiService))]
 [RequireComponent(typeof(PlayerApiService))]
 [RequireComponent(typeof(ConfigApiService))]
+[RequireComponent(typeof(CardComboApiService))]
 public class NetworkServiceManager : MonoBehaviour
 {
     private static WaitForSeconds _waitForSeconds0_5 = new WaitForSeconds(0.5f);
@@ -15,6 +16,7 @@ public class NetworkServiceManager : MonoBehaviour
     private PlayerApiService _playerService;
     private CardApiService _cardService;
     private ConfigApiService _configApiService;
+    private CardComboApiService _cardComboApiService;
 
     [SerializeField] private LoadingUI loadingUI;
 
@@ -39,6 +41,7 @@ public class NetworkServiceManager : MonoBehaviour
         _playerService = GetComponent<PlayerApiService>();
         _cardService = GetComponent<CardApiService>();
         _configApiService = GetComponent<ConfigApiService>();
+        _cardComboApiService = GetComponent<CardComboApiService>();
     }
 
     public void Start()
@@ -72,7 +75,7 @@ public class NetworkServiceManager : MonoBehaviour
         yield return _waitForSeconds0_5;
 
         // 2 — Fetch Config
-        loadingUI.SetProgress(Loc("loading.step.config"), 0.33f);
+        loadingUI.SetProgress(Loc("loading.step.config"), 0.25f);
         yield return StartCoroutine(_configApiService.FetchDefeatConditions(
             onSuccess: defeatConditions => Debug.Log($"[Network] Fetched defeat conditions."),
             onError: error => Debug.LogError($"[Network] FetchDefeatConditions failed: {error}")
@@ -90,10 +93,17 @@ public class NetworkServiceManager : MonoBehaviour
         yield return _waitForSeconds0_5;
 
         // 3 — Initialize Cards
-        loadingUI.SetProgress(Loc("loading.step.cards"), 0.66f);
+        loadingUI.SetProgress(Loc("loading.step.cards"), 0.50f);
         yield return StartCoroutine(_cardService.FetchAllCards(
             onSuccess: cards => Debug.Log($"[Network] Fetched {cards.Count} cards."),
             onError: error => Debug.LogError($"[Network] Card init failed: {error}")
+        ));
+
+        // 4 — Initialize CardCombos
+        loadingUI.SetProgress(Loc("loading.step.cardCombo"), 0.75f);
+        yield return StartCoroutine(_cardComboApiService.FetchAllCardCombos(
+            onSuccess: combos => Debug.Log($"[Network] Fetched {combos.Count} card combos."),
+            onError: error => Debug.LogError($"[Network] CardCombos init failed: {error}")
         ));
 
         loadingUI.SetProgress(Loc("loading.step.ready"), 1f);

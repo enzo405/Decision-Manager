@@ -7,7 +7,7 @@ public class Event
     /// Range de tour entre lequel l'évenement pourra se déclencher
     /// Le premier élément du tuple représente le tour minimum après que la carte soit joué, et le second élément représente le tour maximum après que la carte soit joué.
     /// </summary>
-    public WeekRangeDto WeekRange { get; set; }
+    public WeekRange WeekRange { get; set; }
 
     /// <summary>
     /// Message affiché lorsque l'évenement est déclenché
@@ -31,7 +31,7 @@ public class Event
 }
 
 
-public class WeekRangeDto
+public class WeekRange
 {
     public int Min { get; set; }
     public int Max { get; set; }

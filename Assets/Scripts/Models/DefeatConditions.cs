@@ -1,13 +1,13 @@
 public class DefeatConditions
 {
-    public MinMaxDto Stress { get; set; }
-    public MinMaxDto Turnover { get; set; }
-    public MinMaxDto Performance { get; set; }
-    public MinMaxDto Motivation { get; set; }
+    public MinMax Stress { get; set; }
+    public MinMax Turnover { get; set; }
+    public MinMax Performance { get; set; }
+    public MinMax Motivation { get; set; }
 }
 
 
-public class MinMaxDto
+public class MinMax
 {
     public int Min { get; set; }
     public int Max { get; set; }

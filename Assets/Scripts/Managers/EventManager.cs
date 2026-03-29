@@ -10,8 +10,6 @@ public class EventManager : MonoBehaviour
     // Events for current session
     public Dictionary<string, TurnEventRecord> Events { get; private set; } = new();
 
-    public event Action<TurnEventRecord, int> OnEventTriggered;
-
     private Func<Event, int, string> BuildDictKey = (ev, week) => $"{ev.Name}_{week}";
 
     public void Awake()
@@ -38,18 +36,17 @@ public class EventManager : MonoBehaviour
 
     public (TurnEventRecord, int) RollEvent()
     {
-        TurnEventRecord[] events = Events
+        List<TurnEventRecord> events = Events
             .Where(e => e.Value.IsActiv)
             .Select(e => e.Value)
-            .ToArray();
+            .ToList();
 
-        if (events.Length == 0)
+        if (events.Count == 0)
         {
-            OnEventTriggered?.Invoke(null, 0);
             return (null, 0);
         }
 
-        TurnEventRecord randomEvent = events[UnityEngine.Random.Range(0, events.Length)];
+        TurnEventRecord randomEvent = events[UnityEngine.Random.Range(0, events.Count)];
 
         bool isTriggered = UnityEngine.Random.value <= randomEvent.Event.Chance;
 
@@ -58,12 +55,10 @@ public class EventManager : MonoBehaviour
             string dictKey = BuildDictKey(randomEvent.Event, randomEvent.FromTurnDecision);
 
             Events.Remove(dictKey); // Remove the event so it doesn't trigger again in the future
-            OnEventTriggered?.Invoke(randomEvent, GameManager.Instance.CurrentWeek);
             return (randomEvent, GameManager.Instance.CurrentWeek);
         }
         else
         {
-            OnEventTriggered?.Invoke(null, 0);
             return (null, 0);
         }
     }

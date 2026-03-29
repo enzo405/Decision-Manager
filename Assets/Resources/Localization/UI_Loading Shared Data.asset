@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: loading.step.ready
     m_Metadata:
       m_Items: []
+  - m_Id: 2957778304413696
+    m_Key: loading.step.cardCombo
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

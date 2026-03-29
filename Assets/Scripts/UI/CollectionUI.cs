@@ -26,20 +26,18 @@ public class CollectionUI : MonoBehaviour
     private static readonly Color FilterActiveColor = new Color(0.55f, 0.36f, 0.96f); // #8B5CF6
     private static readonly Color FilterInactiveColor = new Color(0.06f, 0.09f, 0.16f); // #0F1628
     private int activeFilter = 0; // 0 = all, 1-5 = level
-    private Card[] allCards;
+    private List<Card> allCards;
 
     private Dictionary<GameObject, Card> cardItemMap = new Dictionary<GameObject, Card>();
 
     public void Start()
     {
-        allCards = CardApiService.Instance.AllCards.OrderBy(c => c.RequiredLevel).ToArray();
+        allCards = CardApiService.Instance.AllCards.OrderBy(c => c.RequiredLevel).ToList();
         backButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
-
-        int level = PlayerProgressionManager.Instance.CurrentLevel;
 
         collectionCount.text = LocalizationSettings.StringDatabase.GetLocalizedString(
             "UI_Collection", "collection.count",
-            new object[] { CardApiService.Instance.GetUnlockedCards(level).Length, allCards.Length }
+            new object[] { CardApiService.Instance.GetUnlockedCards().Count, allCards.Count }
         );
 
         SetupFilters();

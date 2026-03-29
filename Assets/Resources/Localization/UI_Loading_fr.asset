@@ -42,6 +42,10 @@ MonoBehaviour:
     m_Localized: "Pr\xEAt !"
     m_Metadata:
       m_Items: []
+  - m_Id: 2957778304413696
+    m_Localized: Chargement des combos de carte...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -42,7 +42,7 @@ public class StatManager : MonoBehaviour
         {
             ApplyEffects(motivation, stress, performance, turnover);
         };
-        EventManager.Instance.OnEventTriggered += (ev, fromTurn) =>
+        GameManager.Instance.OnEventTriggered += (ev, fromTurn) =>
         {
             if (ev == null) return;
             var eventRecord = ev.Event;
@@ -91,5 +91,16 @@ public class StatManager : MonoBehaviour
         // High stress increases turnover risk
         if (Stress > 80)
             Turnover = Mathf.Clamp(Turnover + 3, GetMinTurnover, GetMaxTurnover);
+    }
+
+    public int GetStatValue(string name)
+    {
+        return name.ToLower() switch {
+            "stress" => Stress,
+            "motivation" => Motivation,
+            "performance" => Performance,
+            "turnover" => Turnover,
+            _ => Stress
+        };
     }
 }

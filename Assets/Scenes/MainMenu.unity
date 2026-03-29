@@ -2413,6 +2413,7 @@ GameObject:
   - component: {fileID: 1180958917}
   - component: {fileID: 1180958921}
   - component: {fileID: 1180958922}
+  - component: {fileID: 1180958923}
   m_Layer: 0
   m_Name: _Managers
   m_TagString: Untagged
@@ -2508,6 +2509,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29bc7b7d83b9ca64fbce985bdacc6939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameHistoryManager
+--- !u!114 &1180958923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180958914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb20f1a167fd886488174ee2ede91da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardComboManager
 --- !u!1 &1222363124
 GameObject:
   m_ObjectHideFlags: 0
