@@ -26,8 +26,10 @@ public class CardComboManager : MonoBehaviour
             .ToList();
 
         var allCardCombos = CardComboApiService.Instance.AllCombos;
+        var historyCombo = GameHistoryManager.Instance.HistoryCombo.Values;
 
         return allCardCombos
+            .Where(c => !historyCombo.Contains(c)) // Exclure les combos déjà passé
             .FirstOrDefault(c => c.TriggerSlugs.All(t => cardsHistorySlug.Contains(t)));
     }
 }

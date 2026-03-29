@@ -3034,6 +3034,7 @@ MonoBehaviour:
   decisionsList: {fileID: 1556510075}
   historyItemPrefab: {fileID: 660686641018504196, guid: 02493999652681c4cbb10ec74ddd9e99, type: 3}
   historyEventItemPrefab: {fileID: 660686641018504196, guid: 120b4023b46601842914a08eb387e2d9, type: 3}
+  historyComboItemPrefab: {fileID: 660686641018504196, guid: 16d3fccb5125004408d45872dd773a17, type: 3}
   graphContainer: {fileID: 58407458}
 --- !u!1 &1095815797
 GameObject:

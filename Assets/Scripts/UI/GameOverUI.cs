@@ -20,6 +20,7 @@ public class GameOverUI : MonoBehaviour
     public Transform decisionsList;
     public GameObject historyItemPrefab;
     public GameObject historyEventItemPrefab;
+    public GameObject historyComboItemPrefab;
 
     [Header("Graph")]
     public RectTransform graphContainer;
@@ -66,11 +67,16 @@ public class GameOverUI : MonoBehaviour
             // Decision item
             AddDecisionItem(turn, record.CardDisplayName, record.WasGoodDecision);
 
+            // Card Combo linked to this turn
+            if (GameHistoryManager.Instance.HistoryCombo.TryGetValue(turn, out CardCombo cardCombo))
+            {
+                AddDecisionComboItem(turn, cardCombo.Name);
+            }
             // Random event linked to this turn
             if (GameHistoryManager.Instance.HistoryRandomEvents.TryGetValue(turn, out TurnEventRecord randomEvent))
             {
                 var cardTrigger = GameHistoryManager.Instance.History[randomEvent.FromTurnDecision - 1];
-                AddDecisionItem(turn, randomEvent.Event.Name, randomEvent.FromTurnDecision, cardTrigger.CardDisplayName);
+                AddDecisionEventItem(turn, randomEvent.Event.Name, randomEvent.FromTurnDecision, cardTrigger.CardDisplayName);
             }
         }
     }
@@ -88,7 +94,21 @@ public class GameOverUI : MonoBehaviour
         msgText.color = wasGood ? ColorUtilities.Green : ColorUtilities.Red;
     }
 
-    private void AddDecisionItem(int turn, string eventName, int fromTurn, string cardName)
+    private void AddDecisionComboItem(int turn, string name)
+    {
+        GameObject item = Instantiate(historyComboItemPrefab, decisionsList);
+        TextMeshProUGUI turnText = item.transform.Find("TurnNumber").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI msgText = item.transform.Find("LabelGroup/Text").GetComponent<TextMeshProUGUI>();
+
+        turnText.text = turn.ToString();
+
+        msgText.text = LocalizationSettings.StringDatabase.GetLocalizedString(
+            "UI_GameOver", "gameover.history.combo",
+            new object[] { name }
+        );
+    }
+
+    private void AddDecisionEventItem(int turn, string eventName, int fromTurn, string cardName)
     {
         GameObject item = Instantiate(historyEventItemPrefab, decisionsList);
         TextMeshProUGUI turnText = item.transform.Find("TurnNumber").GetComponent<TextMeshProUGUI>();
