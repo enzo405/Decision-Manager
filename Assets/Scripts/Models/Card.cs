@@ -8,6 +8,7 @@ public class Card
     public string Slug { get; set; }
     public string DisplayName { get; set; }
     public string Description { get; set; }
+    public CardType Type { get; set; }
     public int RequiredLevel { get; set; }
     public float SuccessProbability { get; set; }
     public int MotivationEffect { get; set; }

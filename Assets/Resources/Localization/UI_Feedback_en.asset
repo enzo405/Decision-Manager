@@ -31,11 +31,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 592360026114
-    m_Localized: Card combo
+    m_Localized: Cards combo
     m_Metadata:
       m_Items: []
   - m_Id: 592360026115
     m_Localized: Event triggered by "{0}" (week {1})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3667312765349888
+    m_Localized: Random event
     m_Metadata:
       m_Items: []
   references:

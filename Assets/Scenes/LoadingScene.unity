@@ -659,7 +659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Simulation Manag\xE9riale"
+  m_text: "SIMULATION MANAG\xC9RIALE"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d7f5e590958a1574a8a156ad745c2871, type: 2}
   m_sharedMaterial: {fileID: -2793625994195106283, guid: d7f5e590958a1574a8a156ad745c2871, type: 2}

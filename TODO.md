@@ -1,6 +1,3 @@
-# A Faire sur le Client:
-- **Combos de cartes** — certaines combinaisons de cartes déclenchent des événements à haut risque et fort impact
-
 # Must have :
 - **Effets sonores** — retour audio sur les victoire, défaites, réussit d'une carte, échec d'une carte, apparition d'évent
 - **Ambiance sonore** — musique de fond d'une partie pour renforcer l'atmosphère du jeu

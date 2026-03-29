@@ -38,6 +38,10 @@ MonoBehaviour:
     m_Localized: "\xC9v\xE9nement d\xE9clench\xE9 par \"{0}\" (tour {1})"
     m_Metadata:
       m_Items: []
+  - m_Id: 3667312765349888
+    m_Localized: "\xC9v\xE9nement al\xE9atoire"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

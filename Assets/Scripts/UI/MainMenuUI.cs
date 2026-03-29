@@ -49,6 +49,7 @@ public class MainMenuUI : MonoBehaviour
         UpdateLanguageButton();
         RefreshUI();
         StartCoroutine(RefetchCards());
+        StartCoroutine(RefetchCombos());
     }
 
     private IEnumerator RefetchCards()
@@ -56,6 +57,14 @@ public class MainMenuUI : MonoBehaviour
         yield return StartCoroutine(CardApiService.Instance.FetchAllCards(
             onSuccess: _ => Debug.Log("[MainMenuUI] Cards refetched in new language."),
             onError: err => Debug.LogError($"[MainMenuUI] Card refetch failed: {err}")
+        ));
+    }
+    
+    private IEnumerator RefetchCombos()
+    {
+        yield return StartCoroutine(CardComboApiService.Instance.FetchAllCardCombos(
+            onSuccess: _ => Debug.Log("[MainMenuUI] Combos refetched in new language."),
+            onError: err => Debug.LogError($"[MainMenuUI] Combo refetch failed: {err}")
         ));
     }
 

@@ -2105,7 +2105,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:9a4ea14a139071343b9b51c37f727337
     m_TableEntryReference:
-      m_KeyId: 592360026114
+      m_KeyId: 3667312765349888
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 1
@@ -10443,7 +10443,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "CHOISISSEZ UNE D\xC9CISION"
+  m_text: "Choisissez une d\xE9cision"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d7f5e590958a1574a8a156ad745c2871, type: 2}
   m_sharedMaterial: {fileID: -2793625994195106283, guid: d7f5e590958a1574a8a156ad745c2871, type: 2}

@@ -37,6 +37,10 @@ MonoBehaviour:
     m_Key: feedback.event.triggered_by
     m_Metadata:
       m_Items: []
+  - m_Id: 3667312765349888
+    m_Key: feedback.section.event
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

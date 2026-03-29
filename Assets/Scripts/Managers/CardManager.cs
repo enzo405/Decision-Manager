@@ -64,11 +64,11 @@ public class CardManager : MonoBehaviour
             .ToList();
 
         var smartPool = availableCards
-            .Where(card =>
-                card.RequiredCardSlugs.Any(req => recentSlugs.Contains(req))
-            )
+            .Where(card => IsCardUnlocked(card, allPlayedSlugs, recentSlugs))
             .Distinct()
             .ToList();
+
+        Debug.Log($"[CardManager] Available: {availableCards.Count}, SmartPool: {smartPool.Count}");
 
         if (smartPool.Count == count)
             return smartPool.Shuffle().ToList();
@@ -103,5 +103,35 @@ public class CardManager : MonoBehaviour
         }
 
         return prob;
+    }
+
+    private bool IsCardUnlocked(Card card, HashSet<string> allPlayedSlugs, HashSet<string> recentSlugs)
+    {
+        switch (card.Type)
+        {
+            case CardType.Universal:
+                // Always available (no requirements check needed)
+                return true;
+
+            case CardType.Reactive:
+                // Unlocks if ANY requirement met in last 3 turns
+                if (card.RequiredCardSlugs.Count == 0)
+                    return true;
+                return card.RequiredCardSlugs.Any(req => recentSlugs.Contains(req));
+
+            case CardType.Foundation:
+                // Unlocks if ALL requirements met in full history
+                if (card.RequiredCardSlugs.Count == 0)
+                    return true;
+                return card.RequiredCardSlugs.All(req => allPlayedSlugs.Contains(req));
+
+            case CardType.Emergency:
+                if (card.RequiredCardSlugs.Count == 0)
+                    return true;
+                return card.RequiredCardSlugs.Any(req => recentSlugs.Contains(req));
+
+            default:
+                return false;
+        }
     }
 }
