@@ -18,17 +18,17 @@ public class CardComboManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public CardCombo CheckForCombos()
+    public CardCombo CheckForCombo(Card playedCard)
     {
         List<string> cardsHistorySlug = GameHistoryManager.Instance.History
             .Where(card => card.WasSuccess)
             .Select(c => c.CardSlug)
             .ToList();
 
-        var allCardCombos = CardComboApiService.Instance.AllCombos;
         var historyCombo = GameHistoryManager.Instance.HistoryCombo.Values;
 
-        return allCardCombos
+        return CardComboApiService.Instance.AllCombos
+            .Where(c => c.TriggerSlugs.Contains(playedCard.Slug))
             .Where(c => !historyCombo.Contains(c)) // Exclure les combos déjà passé
             .FirstOrDefault(c => c.TriggerSlugs.All(t => cardsHistorySlug.Contains(t)));
     }

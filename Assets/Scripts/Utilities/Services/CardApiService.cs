@@ -37,10 +37,12 @@ public class CardApiService : MonoBehaviour
         ));
     }
 
-    public List<Card> GetUnlockedCards(int level)
+    public List<Card> GetUnlockedCards()
     {
+        var currentLevel = PlayerProgressionManager.Instance.CurrentLevel;
+
         return AllCards
-            .Where(card => card.RequiredLevel <= level)
+            .Where(card => card.RequiredLevel <= currentLevel)
             .ToList();
     }
 }

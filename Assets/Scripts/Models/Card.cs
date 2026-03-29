@@ -1,5 +1,6 @@
 
 
+using System;
 using System.Collections.Generic;
 
 public class Card
@@ -23,4 +24,17 @@ public class Card
     public List<Event> Events { get; set; }
     public List<CardStatThreshold> StatThresholds { get; set; }
     public List<string> RequiredCardSlugs { get; set; }
+
+
+    public override bool Equals(object obj)
+    {
+        if (obj is Card other)
+            return Slug == other.Slug;
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Slug);
+    }
 }

@@ -54,21 +54,20 @@ public class CardManager : MonoBehaviour
             .Select(t => t.CardSlug)
             .ToHashSet();
 
-        var recentSlugs = GameHistoryManager.Instance.History
+        var recentSlugs = allPlayedSlugs
             .TakeLast(3)  // ← Last 3 turns to avoid repetition
-            .Select(t => t.CardSlug)
             .ToHashSet();
 
-        var currentLevel = PlayerProgressionManager.Instance.CurrentLevel;
         var availableCards = CardApiService.Instance
-            .GetUnlockedCards(currentLevel)
-            .Where(card => !allPlayedSlugs.Contains(card.Slug))
+            .GetUnlockedCards()
+            .Where(c => !allPlayedSlugs.Contains(c.Slug))
             .ToList();
 
         var smartPool = availableCards
-            .Where(card => 
+            .Where(card =>
                 card.RequiredCardSlugs.Any(req => recentSlugs.Contains(req))
             )
+            .Distinct()
             .ToList();
 
         if (smartPool.Count == count)
@@ -79,6 +78,7 @@ public class CardManager : MonoBehaviour
         var remaining = count - smartPool.Count;
 
         var fallbackCards = availableCards
+            .Except(smartPool)
             .Shuffle()
             .Take(remaining);
 

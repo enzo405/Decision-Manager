@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         OnCardPlayedTriggered?.Invoke(card, wasSuccess,
             motivDelta, stressDelta, perfDelta, turnoverDelta);
 
-        var cardComboResult = CardComboManager.Instance.CheckForCombos();
+        var cardComboResult = CardComboManager.Instance.CheckForCombo(card);
 
         TurnEventRecord randomEvent = null;
         int turn = 0;
