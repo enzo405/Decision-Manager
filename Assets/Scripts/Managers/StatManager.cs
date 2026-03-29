@@ -42,7 +42,7 @@ public class StatManager : MonoBehaviour
         {
             ApplyEffects(motivation, stress, performance, turnover);
         };
-        EventManager.Instance.OnEventTriggered += (ev, fromTurn) =>
+        GameManager.Instance.OnEventTriggered += (ev, fromTurn) =>
         {
             if (ev == null) return;
             var eventRecord = ev.Event;

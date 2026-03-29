@@ -28,7 +28,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 592360026114
-    m_Key: feedback.section.event
+    m_Key: 'feedback.section.cardCombo
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 592360026115

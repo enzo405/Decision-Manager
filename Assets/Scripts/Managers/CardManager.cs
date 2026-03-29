@@ -50,19 +50,25 @@ public class CardManager : MonoBehaviour
 
     public List<Card> PickRandomCards(int count)
     {
-        var playedCardsSlug = GameHistoryManager.Instance.History
+        var allPlayedSlugs = GameHistoryManager.Instance.History
+            .Select(t => t.CardSlug)
+            .ToHashSet();
+
+        var recentSlugs = GameHistoryManager.Instance.History
+            .TakeLast(3)  // ← Last 3 turns to avoid repetition
             .Select(t => t.CardSlug)
             .ToHashSet();
 
         var currentLevel = PlayerProgressionManager.Instance.CurrentLevel;
         var availableCards = CardApiService.Instance
             .GetUnlockedCards(currentLevel)
-            // Exclude already played cards
-            .Where(card => !playedCardsSlug.Contains(card.Slug))
+            .Where(card => !allPlayedSlugs.Contains(card.Slug))
             .ToList();
 
         var smartPool = availableCards
-            .Where(card => card.RequiredCardSlugs.Any(req => playedCardsSlug.Contains(req)))
+            .Where(card => 
+                card.RequiredCardSlugs.Any(req => recentSlugs.Contains(req))
+            )
             .ToList();
 
         if (smartPool.Count == count)

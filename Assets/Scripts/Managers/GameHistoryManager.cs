@@ -7,6 +7,7 @@ public class GameHistoryManager : MonoBehaviour
 
     public List<TurnRecord> History { get; private set; } = new();
     public Dictionary<int, TurnEventRecord> HistoryRandomEvents { get; private set; } = new();
+    public Dictionary<int, CardCombo> HistoryCombo { get; private set; } = new();
 
     public void Awake()
     {
@@ -23,7 +24,8 @@ public class GameHistoryManager : MonoBehaviour
     public void Start()
     {
         GameManager.Instance.OnCardPlayedTriggered += RecordTurn;
-        EventManager.Instance.OnEventTriggered += RecordRandomEvent;
+        GameManager.Instance.OnEventTriggered += RecordRandomEvent;
+        GameManager.Instance.OnCardComboTriggered += RecordCardCombo;
         GameManager.Instance.OnNewGameTriggered += Reset;
     }
 
@@ -38,6 +40,12 @@ public class GameHistoryManager : MonoBehaviour
     {
         if (randomEvent == null) return;
         HistoryRandomEvents.Add(turn, randomEvent);
+    }
+
+    private void RecordCardCombo(CardCombo combo, int turn)
+    {
+        if (combo == null) return;
+        HistoryCombo.Add(turn, combo);
     }
 
     private void RecordTurn(Card card, bool wasSuccess,
