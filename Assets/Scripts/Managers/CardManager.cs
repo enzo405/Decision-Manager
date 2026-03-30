@@ -89,17 +89,15 @@ public class CardManager : MonoBehaviour
     {
         float prob = card.SuccessProbability;
 
-        foreach (CardStatThreshold threshold in card.StatThresholds)
+        foreach (var threshold in card.StatThresholdsRisk)
         {
             int statValue = StatManager.Instance.GetStatValue(threshold.StatName);
-            bool isThresholdExceeded = threshold.Condition == ConditionTreshold.Above
+            bool isThresholdExceeded = threshold.Condition == ConditionThreshold.Above
                 ? statValue >= threshold.Threshold
                 : statValue < threshold.Threshold;
 
             if (isThresholdExceeded)
-            {
                 prob -= (float)threshold.PenaltyAmount;
-            }
         }
 
         return prob;
@@ -107,31 +105,44 @@ public class CardManager : MonoBehaviour
 
     private bool IsCardUnlocked(Card card, HashSet<string> allPlayedSlugs, HashSet<string> recentSlugs)
     {
+        if (card.StatThresholdsUnlock != null && card.StatThresholdsUnlock.Count > 0)
+        {
+            bool statConditionMet = card.StatThresholdsUnlock.Any(unlock => IsStatConditionMet(unlock));
+            
+            if (statConditionMet)
+                return true;
+        }
+        
         switch (card.Type)
         {
             case CardType.Universal:
-                // Always available (no requirements check needed)
                 return true;
-
+            
             case CardType.Reactive:
-                // Unlocks if ANY requirement met in last 3 turns
-                if (card.RequiredCardSlugs.Count == 0)
-                    return true;
-                return card.RequiredCardSlugs.Any(req => recentSlugs.Contains(req));
-
-            case CardType.Foundation:
-                // Unlocks if ALL requirements met in full history
-                if (card.RequiredCardSlugs.Count == 0)
-                    return true;
-                return card.RequiredCardSlugs.All(req => allPlayedSlugs.Contains(req));
-
             case CardType.Emergency:
                 if (card.RequiredCardSlugs.Count == 0)
                     return true;
                 return card.RequiredCardSlugs.Any(req => recentSlugs.Contains(req));
-
+            
+            case CardType.Foundation:
+                if (card.RequiredCardSlugs.Count == 0)
+                    return true;
+                return card.RequiredCardSlugs.All(req => allPlayedSlugs.Contains(req));
+            
             default:
                 return false;
         }
+    }
+
+    private bool IsStatConditionMet(CardUnlockStatThreshold unlock)
+    {
+        int statValue = StatManager.Instance.GetStatValue(unlock.StatName);
+        
+        return unlock.Condition switch
+        {
+            ConditionThreshold.Above => statValue > unlock.Threshold,
+            ConditionThreshold.Below => statValue < unlock.Threshold,
+            _ => false
+        };
     }
 }

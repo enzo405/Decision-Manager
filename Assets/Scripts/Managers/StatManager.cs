@@ -100,7 +100,7 @@ public class StatManager : MonoBehaviour
             "motivation" => Motivation,
             "performance" => Performance,
             "turnover" => Turnover,
-            _ => Stress
+            _ => 0
         };
     }
 }

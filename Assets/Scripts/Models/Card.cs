@@ -23,7 +23,8 @@ public class Card
     public string SuccessMessage { get; set; }
     public string FailureMessage { get; set; }
     public List<Event> Events { get; set; }
-    public List<CardStatThreshold> StatThresholds { get; set; }
+    public List<CardRiskStatThreshold> StatThresholdsRisk { get; set; }
+    public List<CardUnlockStatThreshold> StatThresholdsUnlock { get; set; }
     public List<string> RequiredCardSlugs { get; set; }
 
 
