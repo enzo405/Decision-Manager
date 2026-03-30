@@ -38,33 +38,32 @@ The API connected to the game is here: [DecisionManager API](https://github.com/
 
 ## Concept
 
-Each turn, the player chooses one of three decision cards — such as organizing a team meeting, setting ambitious goals, or launching a training program. Every decision has a success probability and affects four key statistics:
+Each turn, the player chooses one of three decision cards — such as organizing a team meeting, setting ambitious goals, or launching a training program. Every decision has a success probability that can be modified by your team's current state, and affects four key statistics:
 
 - **Motivation** — team engagement
 - **Stress** — pressure felt by the team
 - **Performance** — overall productivity
 - **Turnover** — risk of team members leaving
 
-**Decision chains and smart card pool** — Your recent choices shape future options. The game features a sophisticated card pool system that adapts to your playstyle, creating unique narratives each playthrough.
+**Adaptive card pool** — The game features a sophisticated card pool system that responds to both your recent decisions and your team's current state. Cards unlock based on multiple factors: some appear after playing specific prerequisite cards, others emerge when your team faces crises (high stress, low motivation), and advanced strategic cards require sustained investment across your entire game. This creates unique narratives where early choices shape available options, while the game adapts dynamically to success and failure.
 
 **Card combos** — Successfully executing specific combinations of decisions triggers special synergy events with unique consequences. These combo events replace random events when they occur, rewarding strategic planning across multiple turns.
 
-Each card may also carry **deferred events** — consequences that trigger in the turns following the decision, simulating the delayed and unpredictable nature of managerial choices.
-
-Random events can occur each turn (unless a combo is triggered). Difficulty scales with the player's level — thresholds tighten and negative effects become more impactful.
+**Random events** — Each card can trigger delayed consequences that may occur 1-7 weeks after the decision. For example, launching an Agile transformation might trigger resistance 2-5 weeks later. Each event has a probability of occurring within its defined week range, simulating the unpredictable ripple effects of managerial decisions.
 
 ---
 
 ## Pedagogical Goals
 
 - Understand the human consequences of managerial decisions
-- Learn to manage risk and uncertainty
+- Learn to manage risk and uncertainty under changing conditions
 - Identify the fragile balance between performance and well-being
-- Experience the delayed consequences of decisions
+- Experience the delayed and unpredictable consequences of decisions
 - Develop a medium to long-term strategic vision
 - Recognize how early decisions constrain or enable future options
 - Discover synergies between complementary management practices
 - Balance reactive firefighting with proactive strategic investments
+- Adapt decision-making to team state and context
 
 ---
 
@@ -82,55 +81,40 @@ Random events can occur each turn (unless a combo is triggered). Difficulty scal
 ## Gameplay
 
 ### Core Loop
-1. Player selects one of three decision cards from a **smart pool** that adapts to recent decisions and playstyle
-2. A probability roll determines success or failure
+1. Player selects one of three decision cards from an **adaptive pool** based on recent decisions, team state, and unlock requirements
+2. A probability roll determines success or failure (modified by stat-based penalties if team is struggling)
 3. Stats update immediately
 4. Combo detection — the game checks if the successful decision completes a card combo
-5. Deferred events from previously played cards are evaluated
-6. A random event may trigger (only if no combo was triggered)
-7. Feedback popup explains what happened and why
-8. Player clicks Continue — next turn begins
+5. Random events from previously played cards may trigger based on their week range and probability
+6. Feedback popup explains what happened and why
+7. Player clicks Continue — next turn begins
 
 ### Adaptive Card Pool System
 
-The game features a **multi-tiered card pool** that creates unique narratives by adapting to your decisions:
+The game features a **multi-tiered card pool** that creates unique narratives by adapting to your decisions and team state:
 
 **Card Types:**
 
-- **Universal Cards (15 cards)** — Always available foundation-building options. These Level 1 cards form the basis of all strategies and have no unlock requirements. Think: Team Meeting, One-on-One, Skills Audit, Conflict Mediation.
+- **Universal Cards (15 cards)** — Always available foundation-building options with no unlock requirements. These Level 1 cards form the basis of all strategies. Examples: Team Meeting, One-on-One, Skills Audit, Conflict Mediation.
 
-- **Reactive Cards (14 cards)** — Unlock based on your **last 3 decisions**, creating immediate narrative continuity. Playing "Team Meeting" makes "Team Charter" and "Internal Communication" available next turn. These represent tactical follow-ups and course corrections.
+- **Reactive Cards (14 cards)** — Unlock based on your **last 3 decisions**, creating immediate narrative continuity. Playing "Team Meeting" makes "Team Charter" and "Internal Communication" available in subsequent turns. These represent tactical follow-ups and course corrections. Examples: Mentoring Session, Performance Review, Delegation Plan.
 
-- **Emergency Cards (4 cards)** — Crisis intervention options that unlock based on recent context. Appear when you need firefighting solutions like "Crisis Management" after major setbacks or "Wellness Program" when team pressure builds.
+- **Emergency Cards (4 cards)** — Crisis intervention options TODO
 
-- **Foundation Cards (11 cards)** — Rare strategic achievements requiring sustained effort across multiple turns. These Level 4-5 cards unlock only when you've successfully played **all** their prerequisites throughout your game. Think: Culture Revamp (requires Team Charter + Strategic Retreat + Wellness Program), or Predictive Analytics (requires Performance Review + Skills Audit + Process Optimization). **Foundation cards are aspirational** — most games won't unlock them, but they reward consistent long-term planning.
+- **Foundation Cards (11 cards)** — Rare strategic achievements requiring sustained effort. These Level 4-5 cards unlock only when you've successfully played **all** their prerequisites throughout your entire game history. Examples: Culture Revamp (requires Team Charter + Strategic Retreat + Wellness Program), Predictive Analytics (requires Performance Review + Skills Audit + Process Optimization). **Foundation cards are aspirational** — most 12-turn games won't unlock them, but they reward consistent long-term planning.
 
-**How it works:**
 
-Turn 1: Only Universal cards available → choose your foundational approach
+### Stat-Based Difficulty
 
-Turn 2-4: Reactive cards begin appearing based on Turn 1-3 choices → narrative branches emerge
+Success probability is **not fixed** — it adapts to your team's state through stat-based penalties:
 
-Turn 5-8: Smart pool expands with more Reactive options → your playstyle becomes clearer
+**Examples:**
+- Attempting "Agile Transformation" when Stress > 75 → -15% success chance
+- Playing "Team Charter" when Motivation < 40 → -10% success chance
+- Trying "Delegation Plan" when Performance < 50 → -10% success chance
+- Launching "Team Restructuring" when Turnover > 60 → -15% success chance
 
-Turn 9-12: Foundation cards *might* unlock if you've met all prerequisites → strategic payoff
-
-**Example progression:**
-
-**People-First Path:**
-- Turn 1: Play "One-on-One" (Universal)
-- Turn 2: "Mentoring Session" (Reactive) unlocks → play it
-- Turn 4: "Leadership Development" (Reactive) unlocks → play it
-- Turn 8: "Succession Planning" (Foundation) unlocks if you've also played other prerequisites
-
-**Process-Driven Path:**
-- Turn 1: Play "Ambitious Goals" (Universal)
-- Turn 3: "Process Optimization" (Reactive) unlocks → play it
-- Turn 5: "Agile Transformation" (Reactive) unlocks → play it
-- Turn 10: "Predictive Analytics" (Foundation) unlocks if prerequisites met
-
-The smart pool creates **emergent storytelling** where your early choices guide which options become available, without forcing a single "correct" path. Multiple playstyles can succeed, each unlocking different advanced cards.
-
+This creates realistic management challenges: risky decisions become even riskier when your team is struggling. The game punishes poor timing and rewards situational awareness.
 
 ### Card Combos
 
@@ -166,27 +150,26 @@ Thresholds tighten as the player levels up. Negative effects on failed cards are
 
 ---
 
-## Event System
+## Random Events
 
-The game features two types of events that can occur during gameplay:
+Each card carries **random events** — delayed consequences that may trigger in the weeks following your decision.
 
-### Random Events
-Each card can carry one or more **events** — consequences that may trigger in a defined week range after the card is played.
-Only one random event can occur per turn.
+**How random events work:**
+- Each card has 0-3 events attached to it
+- When you play a card, its events enter a queue
+- Each event has:
+  - A **week range** (e.g., triggers 2-5 weeks after the card was played)
+  - A **probability** of occurring (e.g., 40% chance)
+- Every turn, the game checks all queued events within their week range and rolls for each
+- **Only one event can trigger per turn** (unless a combo triggers, which replaces random events)
 
-For example, playing *Agile Transformation* at week 3 might trigger *"Resistance to change resurfaces"* between weeks 2 and 7 after the initial decision.
+**Example:**
+- Turn 2: You play "Agile Transformation"
+- Turn 4-7: Event "Resistance to change resurfaces" can trigger (30% chance each turn)
+- Turn 5: Event triggers → Team stress increases, motivation drops
+- The event is removed from the queue (can't trigger again)
 
-Each deferred event has:
-- A **week range** (relative to when the card was played)
-- A **chance** of triggering
-- **Stat effects**
-
-This system simulates the delayed and compounding consequences of managerial decisions.
-
-### Combo Events
-Special synergy events that trigger when you successfully complete a card combination. **Combo events replace random events** — when a combo triggers, no random event occurs that turn. Each combo can only trigger once per game, creating unique moments that reward strategic planning.
-
-This layered event system simulates the delayed, compounding, and synergistic consequences of managerial decisions.
+This simulates the **delayed, unpredictable ripple effects** of managerial decisions. A decision that seemed successful can create problems weeks later.
 
 ---
 
@@ -195,7 +178,7 @@ This layered event system simulates the delayed, compounding, and synergistic co
 The game is fully bilingual (English / French):
 - All card names, descriptions, success/failure messages
 - All UI labels and instructions
-- All deferred event messages
+- All random event messages
 - All combo event messages
 - Language can be switched from the main menu
 - Player's language preference is saved and persists across sessions
@@ -225,21 +208,29 @@ The game is fully bilingual (English / French):
 40 decision cards spread across 5 unlock levels and 4 card types.
 
 Each card has:
-- A success probability
+- A base success probability modified by stat-based penalties
 - Primary effects on success
 - Secondary effects on failure
 - A risk level (Low / Medium / High)
-- A **card type** (Universal / Reactive / Emergency / Foundation)
+- A card type (Universal / Reactive / Emergency / Foundation) indicating primary unlock method
+- Card requirements (optional) — prerequisite cards that must be played
+- Stat unlock thresholds (optional) — team state conditions that unlock the card (works on ANY card type)
+- Stat risk penalties (optional) — success probability penalties when team stats are poor
+- Combo participation (optional) — cards may be part of one or more combo triggers
+- Random events (0-3 per card) — delayed consequences with week ranges and probabilities
 - Bilingual pedagogical feedback messages (EN/FR)
-- **Card requirements** — conditions that must be met for the card to appear in the smart pool
-- **Combo participation** — cards may be part of one or more combo triggers
-- Deferred events with delayed stat consequences
 
-**Card Types:**
-- **Universal (15)** — Foundation-building cards, always available
-- **Reactive (14)** — Unlock when ANY prerequisite was played in the last 3 turns
-- **Emergency (4)** — Crisis intervention cards unlocking based on recent context
-- **Foundation (11)** — Strategic achievements unlocking when ALL prerequisites are met across the full game
+Card Unlock System:
+- Cards can unlock through multiple paths (stat thresholds OR requirements)
+- Stat thresholds are checked FIRST for all card types
+- If no stat conditions met, falls back to type-specific logic
+- This creates adaptive gameplay where cards appear/disappear based on both decisions and team state
+
+Card Types:
+- Universal (15) — Foundation-building cards, always available
+- Reactive (14) — Unlock when ANY prerequisite was played in the last 3 turns
+- Emergency (4) — Crisis intervention cards unlocking based on recent context
+- Foundation (11) — Strategic achievements unlocking when ALL prerequisites are met across the full game
 
 ---
 
@@ -248,8 +239,9 @@ Each card has:
 Decision Manager connects to the [DecisionManager API](https://github.com/enzo405/Decision-Manager-API) to:
 - Persist player progression across game sessions
 - Dynamically fetch cards and their associated events based on selected language
-- **Deliver card types and requirements** for the adaptive card pool system
-- **Provide card combo definitions** and trigger conditions
+- Deliver card types, requirements, and stat unlock thresholds for the adaptive card pool
+- Provide stat-based probability penalties for dynamic difficulty
+- Provide card combo definitions and trigger conditions
 - Remotely configure game settings and defeat conditions without a game update
 
 Player identity is based on `SystemInfo.deviceUniqueIdentifier` — no login required.
